@@ -1,0 +1,29 @@
+{
+  "name": "groceryapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MokoPolo/GroceryApp.git"
+  },
+  "author": "Marc Cueto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MokoPolo/GroceryApp/issues"
+  },
+  "homepage": "https://github.com/MokoPolo/GroceryApp#readme",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  }
+}
