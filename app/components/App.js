@@ -1,17 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const App = (props) => {
-    //const tasks = ["Get Milk", "Sleep", "Drive to work"];
-      return (
-        <div>
-          <h1>Hello how are you</h1>
-        </div>
-      );   
-  };
-/*function H1(props) {
+const HelloWorld = () => {
   return (
-    <h1 className={styles.heading1} {...props} />
+    <div>
+      Hello World
+    </div>
   );
-}*/
+};
+
+// Stateless component
+const App = (props) => {
+  return (
+    <Comp />
+  );   
+};
+
+class Comp extends Component {
+  render() {
+    return <HelloWorld/>;
+  }
+}
 
 export default App;
