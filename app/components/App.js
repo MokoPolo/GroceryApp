@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-const HelloWorld = () => {
+/*const HelloWorld = () => {
   return (
     <div>
       Hello World
     </div>
   );
-};
+};*/
 
 // Stateless component
 const App = (props) => {
@@ -17,7 +17,11 @@ const App = (props) => {
 
 class Comp extends Component {
   render() {
-    return <HelloWorld/>;
+    // return <HelloWorld/>;
+    return (    
+      <div>
+        Hello World
+      </div>);
   }
 }
 

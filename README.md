@@ -6,4 +6,5 @@ https://www.codecademy.com/articles/react-setup-iii
 https://www.codecademy.com/articles/react-setup-iv
 https://www.codecademy.com/articles/react-setup-v
 
+npm install
 npm run build
