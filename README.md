@@ -8,3 +8,4 @@ https://www.codecademy.com/articles/react-setup-v
 
 npm install
 npm run build
+npm run lint-watch
