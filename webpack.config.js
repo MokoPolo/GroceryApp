@@ -1,5 +1,5 @@
-//let HTMLWebpackPlugin = require('html-webpack-plugin');
-
+let HTMLWebpackPlugin = require('html-webpack-plugin');
+// don't know what is going on here code won't work
 let HTMLWebpackPlugin = new
 HTMLWebpackPlugin({
     template: __dirname + '/app/index.html', 

@@ -22082,13 +22082,13 @@ module.exports = ReactDOMInvalidARIAHook;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
 
-const HelloWorld = () => {
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-    'div',
-    null,
-    'Hello World'
+/*const HelloWorld = () => {
+  return (
+    <div>
+      Hello World
+    </div>
   );
-};
+};*/
 
 // Stateless component
 const App = props => {
@@ -22097,7 +22097,12 @@ const App = props => {
 
 class Comp extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
   render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(HelloWorld, null);
+    // return <HelloWorld/>;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      'Hello World'
+    );
   }
 }
 

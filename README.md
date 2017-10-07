@@ -11,21 +11,21 @@ npm install
 npm run build
 npm run lint-watch
 
-Tasks
-Display recipe (and items)
-Display grocery list
 
-Show recipes
+Tasks
+Display recipe (and items) Oct 7
+Display grocery list Oct 8
+
+Show recipes list Oct 8
 Select recipes
 
 Show grocery list with all grocery items
 
-
 Add remove grocery items
-
 Add remove recipe names
-
 Add remove grocery items
+
+
 
 Service API
 http://webapiservices20171007054548.azurewebsites.net/Help
