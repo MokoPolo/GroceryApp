@@ -1,6 +1,6 @@
 let HTMLWebpackPlugin = require('html-webpack-plugin');
-// don't know what is going on here code won't work
-let HTMLWebpackPlugin = new
+
+let HTMLWebpackPluginConfig = new
 HTMLWebpackPlugin({
     template: __dirname + '/app/index.html', 
     filename: 'index.html',
@@ -22,5 +22,5 @@ module.exports = {
         filename: 'transformed.js',
         path: __dirname + '/build'
     },
-    plugins: [HTMLWebpackPlugin]
+    plugins: [HTMLWebpackPluginConfig]
 };
