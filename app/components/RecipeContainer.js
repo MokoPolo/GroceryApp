@@ -1,23 +1,21 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
+
+import RecipeItems from './RecipeItems';
 
 class RecipeContainer extends Component {
     render() {
-        // return <HelloWorld/>;
         return (    
         <div>
-            <h2>Recipe name</h2>
-            <ul>
-                <li>item1</li>
-                <li>item2</li>
-                <li>item3</li>
-                <li>item4</li>
-            </ul>
+            
+            <h2>Recipe name: {this.props.recipe.Name}</h2>
+            <RecipeItems ingredients={this.props.recipe.Ingredients}/>
         </div>);
     }
 }
 
-function Foo ()
-{
-    return "hello";
-}
+RecipeContainer.propTypes = {
+    recipe: React.PropTypes.object,
+    name: React.PropTypes.string
+};
+
 export default RecipeContainer;

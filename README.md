@@ -10,7 +10,7 @@ Commands
 npm install
 npm run build
 npm run lint-watch
-
+npm run start-all
 
 Tasks
 Display recipe (and items) Oct 7

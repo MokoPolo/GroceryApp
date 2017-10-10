@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import RecipeContainer from './RecipeContainer';
+import GroceryContainer from './GroceryContainer';
 
-let tempRecipe = {
+const tempRecipe = {
   "Name": "sample string 1",
   "Ingredients": [
-    "sample string 1",
-    "sample string 2"
+    "ingredient 1",
+    "ingredient 2"
+  ]
+};
+const tempGrocery = {
+  "Ingredients": [
+    "ingredient 1",
+    "ingredient 2"
   ]
 };
 
@@ -19,11 +26,15 @@ const HelloWorld = () => {
 
 // Stateless component
 const App = (props) => {
+debugger;
   return (
-    <RecipeContainer recipe="tempRecipe"  />
+    <div>
+      
+      <GroceryContainer groceryList={tempGrocery}  />
+    </div>
   );   
 };
 
 
-
+// <RecipeContainer recipe={tempRecipe}  />
 export default App;
