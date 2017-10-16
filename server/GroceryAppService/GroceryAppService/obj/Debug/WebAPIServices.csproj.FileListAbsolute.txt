@@ -70,3 +70,11 @@ C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\Microsoft
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\Microsoft.AI.Web.xml
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\GroceryAppService.dll
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\GroceryAppService.pdb
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Bson.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.Core.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Bson.xml
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.xml
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.Core.xml
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\WebAPIServices.csprojResolveAssemblyReference.cache
