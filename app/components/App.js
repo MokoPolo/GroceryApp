@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import RecipeContainer from './RecipeContainer';
 import GroceryContainer from './GroceryContainer';
+import RecipeList from './RecipeList';
 
 const tempRecipe = {
-  "Name": "sample string 1",
+  "Name": "Awesome steak",
   "Ingredients": [
-    "ingredient 1",
-    "ingredient 2"
+    "rib steak",
+    "rosemary"
   ]
 };
 const tempGrocery = {
@@ -15,6 +16,12 @@ const tempGrocery = {
     "ingredient 2"
   ]
 };
+
+const tempRecipeList = 
+  [
+    "recipe 1",
+    "recipe 2"
+  ];
 
 const HelloWorld = () => {
   return (
@@ -26,11 +33,11 @@ const HelloWorld = () => {
 
 // Stateless component
 const App = (props) => {
-debugger;
   return (
     <div>
-      
       <GroceryContainer groceryList={tempGrocery}  />
+      <RecipeContainer recipe={tempRecipe}  />
+      <RecipeList listofRecipes={tempRecipeList}  />
     </div>
   );   
 };

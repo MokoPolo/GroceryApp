@@ -4,16 +4,16 @@ import GroceryItems from './GroceryItems';
 
 class GroceryContainer extends Component {
     render() {
-        debugger;
         return (    
         <div>
+            <h2>Grocery List</h2>
             <GroceryItems ingredients={this.props.groceryList.Ingredients}/>
         </div>);
     }
 }
 
 GroceryContainer.propTypes = {
-    groceryList: React.PropTypes.array,
+    groceryList: React.PropTypes.object,
 };
 
 export default GroceryContainer;

@@ -12,18 +12,22 @@ npm run build
 npm run lint-watch
 npm run start-all
 
-Tasks
-Display recipe (and items) Oct 7
-Display grocery list Oct 8
+TODO
+Display single recipe (and items) -- done
+Display grocery list -- done
 
-Show recipes list Oct 8
-Select recipes
+Show all recipes in a list -- done
+Select recipes from list and ingredients to grocery list
 
 Show grocery list with all grocery items
 
 Add remove grocery items
 Add remove recipe names
 Add remove grocery items
+
+
+
+
 
 
 

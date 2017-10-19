@@ -3,9 +3,8 @@ import React, {Component, PropTypes} from 'react';
 class GroceryItems extends Component {
     //alert("hi");
     render() {
-        debugger;
         const GroceryItems = this.props.ingredients.map((ingredient) =>
-            <li key={ingredient.toString()} item={ingredient}>{ingredient}</li>
+            <li key={ingredient.toString()}>{ingredient}</li>
         );
         return (    
         <ul>

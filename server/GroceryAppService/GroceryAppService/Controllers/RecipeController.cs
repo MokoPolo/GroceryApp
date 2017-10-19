@@ -27,19 +27,22 @@ namespace GroceryAppService.Controllers
             };
         }
 
-        // POST: api/Recipe
-        public void Post([FromBody]string value)
+        // POST: api/Recipe I think this is the way to go
+        public IHttpActionResult Post([FromBody]Recipe value)
         {
+            // Here we have a recipe
+            return Ok();
         }
 
         // PUT: api/Recipe/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
 
         // DELETE: api/Recipe/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            return NotFound();
         }
     }
 }

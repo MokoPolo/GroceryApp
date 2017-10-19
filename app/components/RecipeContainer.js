@@ -6,7 +6,6 @@ class RecipeContainer extends Component {
     render() {
         return (    
         <div>
-            
             <h2>Recipe name: {this.props.recipe.Name}</h2>
             <RecipeItems ingredients={this.props.recipe.Ingredients}/>
         </div>);
@@ -15,7 +14,7 @@ class RecipeContainer extends Component {
 
 RecipeContainer.propTypes = {
     recipe: React.PropTypes.object,
-    name: React.PropTypes.string
+    //name: React.PropTypes.string
 };
 
 export default RecipeContainer;
