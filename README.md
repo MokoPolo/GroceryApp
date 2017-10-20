@@ -6,6 +6,10 @@ https://www.codecademy.com/articles/react-setup-iii
 https://www.codecademy.com/articles/react-setup-iv
 https://www.codecademy.com/articles/react-setup-v
 
+https://mongodb-documentation.readthedocs.io/en/latest/ecosystem/tutorial/use-linq-queries-with-csharp-driver.html
+http://mongodb.github.io/mongo-csharp-driver/1.11/linq/
+http://mongodb.github.io/mongo-csharp-driver/2.4/getting_started/quick_tour/
+https://www.codeproject.com/Articles/1151842/Using-MongoDB-NET-Driver-with-NET-Core-WebAPI
 Commands
 npm install
 npm run build
@@ -18,6 +22,8 @@ Display grocery list -- done
 
 Show all recipes in a list -- done
 Select recipes from list and ingredients to grocery list
+    - this feature will receive recipe id from client. then it will do a query to fetch ingredients. then i will insert ingredients to grocery list. maybe get 
+    ingredients from grocery list and do distinct or something
 
 Show grocery list with all grocery items
 
