@@ -78,3 +78,7 @@ C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.B
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.xml
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\MongoDB.Driver.Core.xml
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\WebAPIServices.csprojResolveAssemblyReference.cache
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\EntityFramework.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\EntityFramework.SqlServer.dll
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\EntityFramework.xml
+C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\bin\EntityFramework.SqlServer.xml

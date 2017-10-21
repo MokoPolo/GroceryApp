@@ -11,27 +11,124 @@ namespace GroceryAppService.Controllers
     public class RecipeController : ApiController
     {
         // GET: api/Recipe
-        public IEnumerable<Recipe> Get()
+        /// <summary>
+        /// Get all recipes
+        /// </summary>
+        /// <returns></returns>
+        public IHttpActionResult Get()
         {
-            return null;
+            using (var context = new MarcDbEntities())
+            {
+                //context.Configuration.ProxyCreationEnabled = false;
+                if (context.Recipes.Any())
+                {
+                    var recipes = (context.Recipes
+                        .Select(r => new SimpleRecipe
+                        {
+                            Name = r.Name,
+                            Id = r.Id,
+                            Ingredients = r.RecipeIngredients
+                                .Select(i => new SimpleIngredient
+                                {
+                                    Id = i.Ingredient.Id,
+                                    Name = i.Ingredient.Name
+                                })
+                        })).ToList();
+                    return Ok(recipes);
+                }
+                else
+
+                {
+                    return NotFound();
+                }
+            }
         }
 
         // GET: api/Recipe/5
-        public Recipe Get(int id)
+        /// <summary>
+        /// Get recipe by id.
+        /// </summary>
+        /// <param name="recipeId"></param>
+        /// <returns></returns>
+        public IHttpActionResult Get(int id)
         {
-            Recipe asdf = new Recipe();
+            int recipeId = id;
+            using (var context = new MarcDbEntities())
+            {
+                //context.Configuration.ProxyCreationEnabled = false;
+                if (context.Recipes.Any(r => r.Id == recipeId))
+                {
+                    var recipe = (context.Recipes.Where(r => r.Id == recipeId)
+                        .Select(r => new SimpleRecipe
+                        {
+                            Name = r.Name,
+                            Id = r.Id,
+                            Ingredients = r.RecipeIngredients
+                                .Select(i => new SimpleIngredient
+                                {
+                                    Id = i.Ingredient.Id,
+                                    Name = i.Ingredient.Name
+                                })
+                        })).FirstOrDefault();
+                    return Ok(recipe);
+                }
+                else
 
-            return new Recipe() {
-                Name = "Steak",
-                Ingredients = new List<string> { "Rib steak", "Rosemary", "Butter" }
-            };
+                {
+                    return NotFound();
+                }
+            }
         }
 
         // POST: api/Recipe I think this is the way to go
-        public IHttpActionResult Post([FromBody]Recipe value)
+        /// <summary>
+        /// Add ingredients to a recipe.
+        /// </summary>
+        /// <param name="recipe"></param>
+        /// <returns></returns>
+        public IHttpActionResult Post([FromBody]SimpleRecipe recipe)
         {
-            // Here we have a recipe
-            return Ok();
+            using (var context = new MarcDbEntities())
+            {
+                if (!context.Recipes.Any(r => r.Id == recipe.Id))
+                    return NotFound();
+
+                var recipeInDB = context.Recipes.FirstOrDefault(r => r.Id == recipe.Id);
+
+                List<RecipeIngredient> listOfRecipeIngredients = new List<RecipeIngredient>();
+
+                // Wipe out all ingredients for the recipe
+                foreach (var recipeIngredient in recipeInDB.RecipeIngredients)
+                {
+                    listOfRecipeIngredients.Add(recipeIngredient);
+                }
+
+                foreach (var recipeIngredient in listOfRecipeIngredients)
+                {
+                    context.RecipeIngredients.Remove(recipeIngredient); 
+                }
+
+                context.SaveChanges();
+
+                foreach (var ingredient in recipe.Ingredients)
+                {
+                    Ingredient ingredientInDB = context.Ingredients.FirstOrDefault(r => r.Id == ingredient.Id);
+
+                    if (ingredientInDB == null)
+                    {
+                        ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredientInDB.Name });
+                    }
+
+                    //if (!recipeInDB.RecipeIngredients.Any(i => i.IngredientId == ingredientInDB.Id))
+                    //{
+                        recipeInDB.RecipeIngredients.Add(new RecipeIngredient() { Ingredient = ingredientInDB });
+                    //}
+                }
+
+                context.SaveChanges();
+
+                return Ok();
+            }
         }
 
         // PUT: api/Recipe/5
@@ -40,9 +137,24 @@ namespace GroceryAppService.Controllers
         //}
 
         // DELETE: api/Recipe/5
+        /// <summary>
+        /// Delete recipe by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IHttpActionResult Delete(int id)
         {
-            return NotFound();
+            using (var context = new MarcDbEntities())
+            {
+                if (!context.Recipes.Any(r => r.Id == id))
+                {
+                    return NotFound();
+                }
+
+                context.Recipes.Remove(context.Recipes.FirstOrDefault(r => r.Id == id));
+
+                return Ok();
+            }
         }
     }
 }
