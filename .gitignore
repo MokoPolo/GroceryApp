@@ -7,6 +7,6 @@ lib
 coverage
 es
 
-bin/
-obj/
+--bin/
+--obj/
 ConnectionStrings.config
