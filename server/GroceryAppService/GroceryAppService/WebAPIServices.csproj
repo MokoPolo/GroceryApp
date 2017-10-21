@@ -288,6 +288,9 @@
     <Content Include="Models\GroceryModel.edmx.diagram">
       <DependentUpon>GroceryModel.edmx</DependentUpon>
     </Content>
+    <Content Include="ConnectionStrings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\GroceryAppService20171007053142 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebAPIServices20171007054548 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\WebAPIServices20171007063236 - Web Deploy.pubxml" />

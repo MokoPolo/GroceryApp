@@ -3,12 +3,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GroceryAppService.Models;
 using System.Linq;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace UnitTestProject1
 {
     [TestClass]
     public class UnitTest1
     {
+        [TestMethod]
+        public void sadf()
+        {
+            var asdf = ConfigurationManager.ConnectionStrings;
+        }
         [TestMethod]
         public void GetRecipe()
         {
