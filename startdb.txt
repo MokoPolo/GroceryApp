@@ -1,1 +1,1 @@
-C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe --dbpath "C:\Dev\Repos\GroceryApp\data"
+"C:\Program Files\MongoDB\Server\3.4\bin\mongod.exe" --dbpath "C:\Dev\Repos\GroceryApp\data"
