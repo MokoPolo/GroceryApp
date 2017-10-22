@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using GroceryAppService.Models;
+using System.Web.Http.Cors;
 
 namespace GroceryAppService.Controllers
 {
+    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
     public class RecipeController : ApiController
     {
         // GET: api/Recipe

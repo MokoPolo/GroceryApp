@@ -39,7 +39,7 @@ http://flatfull.com/themes/todo/index.html
 lookup bootstrap themes
 
 
-
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
 
 
 

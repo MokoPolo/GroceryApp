@@ -13,10 +13,13 @@ class RecipeContainer extends Component {
                 //const foo = data;
                 this.setState({ Recipe: data })
             }
-            );
+            )            
+            .catch(e => {
+                console.log(e)
+                return e;
+            });
     }
     render() {
-        debugger;
         if (this.state && this.state.Recipe) {
             return (
                 <div>

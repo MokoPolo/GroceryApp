@@ -14,7 +14,11 @@ class GroceryContainer extends Component {
             })
             .then(data =>
                 this.setState({ Ingredients: data.Ingredients })
-            );
+            )
+            .catch(e => {
+                console.log(e)
+                return e;
+            });
     }
 
     render() {

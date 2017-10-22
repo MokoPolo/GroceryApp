@@ -14,6 +14,10 @@ class RecipeList extends Component {
             })
             .then(data => {
                 this.setState({ Names: data.map(recipe => recipe.Name) })
+            })
+            .catch(e => {
+                console.log(e)
+                return e;
             });
     }    
     render() {
