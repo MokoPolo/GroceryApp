@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import RecipeContainer from './RecipeContainer';
 import GroceryContainer from './GroceryContainer';
 import RecipeList from './RecipeList';
@@ -10,34 +10,34 @@ const tempRecipe = {
     "rosemary"
   ]
 };
-const tempGrocery = {
+/*const tempGrocery = {
   "Ingredients": [
     "ingredient 1",
     "ingredient 2"
   ]
-};
+};*/
 
-const tempRecipeList = 
+/*const tempRecipeList = 
   [
     "recipe 1",
     "recipe 2"
-  ];
+  ];*/
 
-const HelloWorld = () => {
+/*const HelloWorld = () => {
   return (
     <div>
       Hello World
     </div>
   );
-};
+};*/
 
 // Stateless component
 const App = (props) => {
   return (
     <div>
-      <GroceryContainer groceryList={tempGrocery}  />
+      <GroceryContainer />
       <RecipeContainer recipe={tempRecipe}  />
-      <RecipeList listofRecipes={tempRecipeList}  />
+      <RecipeList />
     </div>
   );   
 };

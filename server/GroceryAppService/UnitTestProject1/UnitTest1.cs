@@ -42,10 +42,10 @@ namespace UnitTestProject1
         {
             using (var context = new MarcDbEntities())
             {
-                var rosemary = context.Ingredients.FirstOrDefault(r => r.Name == "Rosemary");
-                var butter = context.Ingredients.FirstOrDefault(r => r.Name == "Butter");
+                var rosemary = context.Ingredients.FirstOrDefault(r => r.Name == "Butter");
+                var butter = context.Ingredients.FirstOrDefault(r => r.Name == "Meatballs");
 
-                var newRecipe = context.Recipes.Add(new Recipe() { Name = "Awesome steak" });
+                var newRecipe = context.Recipes.Add(new Recipe() { Name = "Butter Balls" });
 
                 context.RecipeIngredients.Add(new RecipeIngredient() { Recipe = newRecipe, Ingredient = rosemary });
                 context.RecipeIngredients.Add(new RecipeIngredient() { Recipe = newRecipe, Ingredient = butter });

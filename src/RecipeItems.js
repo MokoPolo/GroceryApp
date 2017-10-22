@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class RecipeItems extends Component {
-    //alert("hi");
     render() {
         const recipeItems = this.props.ingredients.map((ingredient) =>
-            <li key={ingredient.toString()}>{ingredient}</li>
+            <li key={ingredient.Name.toString()}>{ingredient.Name}</li>
         );
         return (    
         <ul>
