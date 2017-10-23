@@ -6,3 +6,7 @@ lib
 .nyc_output
 coverage
 es
+
+bin/
+obj/
+ConnectionStrings.config

@@ -1,0 +1,62 @@
+# GroceryApp
+
+
+
+TODO
+1) Display single recipe (and items) -- done
+2) Display grocery list -- done
+3) Show all recipes in a list -- done
+4) All the components done already access real data -- done
+    - might have to install state management - not yet
+5) Show grocery list with all grocery items -- done
+6) Add more recipes. Then have button to add recipe from recipe list to grocery list
+7) Select recipes from list and ingredients to grocery list
+    - this feature will receive recipe id from client. then it will do a query to fetch ingredients. then i will insert ingredients to grocery list. maybe get 
+    ingredients from grocery list and do distinct or something
+
+8) style in bootstrap
+
+
+Add remove grocery items
+Add remove recipe names
+Add remove grocery items
+
+Commands
+npm run start
+
+
+
+Site address
+http://localhost:3000/
+
+Service API
+http://webapiservices20171007054548.azurewebsites.net/Help
+http://localhost:64755/Api/grocery
+
+
+Themes
+http://flatfull.com/themes/todo/index.html
+lookup bootstrap themes
+
+
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+
+
+
+Old notes
+
+Source of initial setup
+https://www.codecademy.com/articles/react-setup-ii
+https://www.codecademy.com/articles/react-setup-iii
+https://www.codecademy.com/articles/react-setup-iv
+https://www.codecademy.com/articles/react-setup-v
+
+https://mongodb-documentation.readthedocs.io/en/latest/ecosystem/tutorial/use-linq-queries-with-csharp-driver.html
+http://mongodb.github.io/mongo-csharp-driver/1.11/linq/
+http://mongodb.github.io/mongo-csharp-driver/2.4/getting_started/quick_tour/
+https://www.codeproject.com/Articles/1151842/Using-MongoDB-NET-Driver-with-NET-Core-WebAPI
+Commands
+npm install
+npm run build
+npm run lint-watch
+npm run start-all

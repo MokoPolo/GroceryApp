@@ -1,58 +1,92 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GroceryAppService.Models;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using MongoDB.Bson;
+using System.Linq;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace UnitTestProject1
 {
     [TestClass]
     public class UnitTest1
     {
-        class Person
+        [TestMethod]
+        public void sadf()
         {
-            public string Name { get; set; }
-
-            public int Age { get; set; }
-
-            public IEnumerable<Pet> Pets { get; set; }
-
-            public int[] FavoriteNumbers { get; set; }
-
-            public HashSet<string> FavoriteNames { get; set; }
-
-            public DateTime CreatedAtUtc { get; set; }
+            var asdf = ConfigurationManager.ConnectionStrings;
         }
-
-        class Pet
+        [TestMethod]
+        public void GetRecipe()
         {
-            public string Name { get; set; }
-        }
-        public class Entity
-        {
-            public ObjectId Id { get; set; }
-
-            public string Name { get; set; }
+            using (var context = new MarcDbEntities())
+            {
+                var coo = context.Recipes.Count();
+                var adfhgdsg = context.Recipes.FirstOrDefault(r => r.Id == 1);
+            }
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void InsertIngredient()
         {
-            Recipe recipe = new Recipe();
-            recipe.ConnectToDB();
+            using (var context = new MarcDbEntities())
+            {
+                context.Ingredients.Add(new Ingredient() { Name = "Rosemary" });
+                context.Ingredients.Add(new Ingredient() { Name = "Butter" });
+
+                context.SaveChanges();
+            }
         }
 
         [TestMethod]
-        public void InsertToDB()
+        public void InsertRecipe()
         {
-            var collection = db.GetCollection<Person>("people");
-            var queryable = collection.AsQueryable();
+            using (var context = new MarcDbEntities())
+            {
+                var rosemary = context.Ingredients.FirstOrDefault(r => r.Name == "Butter");
+                var butter = context.Ingredients.FirstOrDefault(r => r.Name == "Meatballs");
 
-            var query = from p in collection.AsQueryable()
-                        where p.Age > 21
-                        select new { p.Name, p.Age };
+                var newRecipe = context.Recipes.Add(new Recipe() { Name = "Butter Balls" });
+
+                context.RecipeIngredients.Add(new RecipeIngredient() { Recipe = newRecipe, Ingredient = rosemary });
+                context.RecipeIngredients.Add(new RecipeIngredient() { Recipe = newRecipe, Ingredient = butter });
+
+                context.SaveChanges();
+            }
+        }
+
+        [TestMethod]
+        public void InsertGroceryList()
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var list = context.GroceryLists.Add(new GroceryList() { Name = "Main" });
+
+                context.SaveChanges();
+            }
+        }
+
+        [TestMethod]
+        public void InsertRecipeToGroceryList()
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var recipe = context.Recipes.FirstOrDefault(r => r.Id == 1);
+
+                var ingredients = recipe.RecipeIngredients.Select(r => r.Ingredient);
+
+                var groceryList = context.GroceryLists.FirstOrDefault();
+
+                foreach (var ingredient in ingredients)
+                {
+                    if (!groceryList.GroceryIngredients.Any(i => i.Ingredient.Id == ingredient.Id))
+                    {
+                        groceryList.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
+                    }
+                    
+                }
+
+                context.SaveChanges();
+            }
         }
     }
 }
