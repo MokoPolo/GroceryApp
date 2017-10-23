@@ -16,6 +16,16 @@ TODO
 
 8) style in bootstrap
 
+in container click add
+fire onclick
+bubbles up. app adds to grocery list
+then gets grocery list and feeds to grocery list props and reloads component
+
+
+I'd want to click add recipe to grocery list and update grocery list
+a few changes:
+1) will receive a recipe list in props and load. no api calls
+2) will receive a grocerylist. no api calls
 
 Add remove grocery items
 Add remove recipe names
