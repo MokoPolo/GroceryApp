@@ -42,8 +42,9 @@ namespace GroceryAppService.Controllers
 // Need to be able to add ingredient id
 
         // POST: api/Grocery
-        public IHttpActionResult Post([FromBody]int recipeId)
+        public IHttpActionResult Post([FromBody]int id)
         {
+            var recipeId = id;
             using (var context = new MarcDbEntities())
             {
                 var recipe = context.Recipes.FirstOrDefault(r => r.Id == recipeId);

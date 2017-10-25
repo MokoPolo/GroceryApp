@@ -5,7 +5,9 @@ import GroceryItems from './GroceryItems';
 class GroceryContainer extends Component {
     constructor() {
         super();
-        this.state = {};
+        this.state = {
+            Ingredients: []
+        };
     }
     componentDidMount() {
         fetch("http://localhost:64755/Api/grocery") 
@@ -19,7 +21,7 @@ class GroceryContainer extends Component {
     }
 
     render() {
-        if(!this.state.Ingredients){
+        if(!this.state.Ingredients.length === 0){
             return <div>Loading...</div>
         }  
         return (  
