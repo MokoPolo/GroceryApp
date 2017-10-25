@@ -5,8 +5,6 @@ class RecipeList extends Component {
     constructor() {
         super();
         this.state = { Names: [] };
-
-        this.handleClick = this.handleClick.bind(this);
     } 
 
     componentDidMount() {
@@ -18,12 +16,6 @@ class RecipeList extends Component {
                 this.setState({ Names: data })
             });
     }  
-
-    handleClick(id) {
-        debugger;
-        console.log(id);
-        //this.props.onclick();
-      }
 
     render() {
         const recipeListItems = this.state.Names.map((recipeName) =>
