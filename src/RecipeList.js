@@ -5,7 +5,9 @@ class RecipeList extends Component {
     constructor() {
         super();
         this.state = { Names: [] };
-    }
+
+        this.handleClick = this.handleClick.bind(this);
+    } 
 
     componentDidMount() {
         fetch("http://localhost:64755/Api/recipe")
@@ -13,16 +15,19 @@ class RecipeList extends Component {
                 return result.json();
             })
             .then(data => {
-                this.setState({ Names: data.map(recipe => recipe.Name) })
-            })
-            .catch(e => {
-                console.log(e)
-                return e;
+                this.setState({ Names: data })
             });
-    }    
+    }  
+
+    handleClick(id) {
+        debugger;
+        console.log(id);
+        //this.props.onclick();
+      }
+
     render() {
         const recipeListItems = this.state.Names.map((recipeName) =>
-            <li key={recipeName.toString()} item={recipeName}>{recipeName}</li>
+            <li key={recipeName.Name.toString()} item={recipeName.Name}>{recipeName.Name}<button onClick={() => (this.props.onclick(recipeName.Id))}>Add</button></li>
         );
         return (
             <div>
@@ -36,7 +41,8 @@ class RecipeList extends Component {
 };
 
 RecipeList.propTypes = {
-    listofRecipes: PropTypes.array
+    listofRecipes: PropTypes.array,
+    onclick: PropTypes.func
 };
 
 export default RecipeList;

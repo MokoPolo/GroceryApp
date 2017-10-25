@@ -5,24 +5,24 @@ import GroceryItems from './GroceryItems';
 class GroceryContainer extends Component {
     constructor() {
         super();
-        this.state = { Ingredients: [] };
+        this.state = {};
     }
     componentDidMount() {
         fetch("http://localhost:64755/Api/grocery") 
             .then(result=> {
                 return result.json();
             })
-            .then(data =>
-                this.setState({ Ingredients: data.Ingredients })
-            )
-            .catch(e => {
-                console.log(e)
-                return e;
-            });
+            .then(data =>{
+                const arr = data.Ingredients;
+                this.setState({ Ingredients: arr })}
+            );
     }
 
     render() {
-        return (    
+        if(!this.state.Ingredients){
+            return <div>Loading...</div>
+        }  
+        return (  
         <div>
             <h2>Grocery List</h2>
             <GroceryItems ingredients={this.state.Ingredients}/>
