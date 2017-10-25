@@ -16,6 +16,9 @@ TODO
 
 8) style in bootstrap
 
+good todo sample
+https://scotch.io/tutorials/create-a-simple-to-do-app-with-react
+
 in container click add
 fire onclick
 bubbles up. app adds to grocery list
