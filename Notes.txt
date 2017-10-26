@@ -9,12 +9,19 @@ TODO
 4) All the components done already access real data -- done
     - might have to install state management - not yet
 5) Show grocery list with all grocery items -- done
-6) Add more recipes. Then have button to add recipe from recipe list to grocery list
-7) Select recipes from list and ingredients to grocery list
+6) Have button to add recipe from recipe list to grocery list -- done
+7) Select recipes from list and ingredients to grocery list -- done
     - this feature will receive recipe id from client. then it will do a query to fetch ingredients. then i will insert ingredients to grocery list. maybe get 
     ingredients from grocery list and do distinct or something
+8) Ability to add recipes
+9) Ability to clear grocerylist
+10) Ability to make item as checked
 
-8) style in bootstrap
+
+?) split the grocery list into meat/veggies/other
+?) tags for recipes
+?) filters/search/auto complete for recipes
+?) style in bootstrap
 
 good todo sample
 https://scotch.io/tutorials/create-a-simple-to-do-app-with-react

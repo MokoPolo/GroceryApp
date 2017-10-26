@@ -3,15 +3,21 @@ import PropTypes from 'prop-types';
 
 class RecipeItems extends Component {
     render() {
+        debugger;
+
+        if (!this.props.ingredients || this.props.ingredients.length === 0){
+            return <div>Loading...</div>
+        }
         const recipeItems = this.props.ingredients.map((ingredient) =>
-            <li key={ingredient.Name.toString()}>{ingredient.Name}</li>
-        );
+        <li key={ingredient.Name.toString()}>{ingredient.Name}</li>
+    );
         return (    
         <ul>
             {recipeItems}
         </ul>
         );
     }
+    
 }
 
 

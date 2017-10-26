@@ -6,7 +6,6 @@ class RecipeList extends Component {
         super();
         this.state = { Names: [] };
 
-        //this.handleClick = this.handleClick.bind(this);
     } 
 
     componentDidMount() {
@@ -19,15 +18,12 @@ class RecipeList extends Component {
             });
     }  
 
-    /*handleClick(id) {
-        debugger;
-        console.log(id);
-        //this.props.onclick();
-      }*/
-
     render() {
         const recipeListItems = this.state.Names.map((recipeName) =>
-            <li key={recipeName.Name.toString()} item={recipeName.Name}>{recipeName.Name}<button onClick={() => (this.props.onclick(recipeName.Id))}>Add</button></li>
+            <li key={recipeName.Name.toString()} item={recipeName.Name}>{recipeName.Name}
+            <button onClick={() => (this.props.addclick(recipeName.Id))}>Add to grocery list</button>
+            <button onClick={() => (this.props.viewclick(recipeName.Id))}>View recipe</button>
+            </li>
         );
         return (
             <div>
@@ -42,7 +38,8 @@ class RecipeList extends Component {
 
 RecipeList.propTypes = {
     listofRecipes: PropTypes.array,
-    onclick: PropTypes.func
+    addclick: PropTypes.func,
+    viewclick: PropTypes.func
 };
 
 export default RecipeList;

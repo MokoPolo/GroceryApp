@@ -3,33 +3,25 @@ import PropTypes from 'prop-types';
 import RecipeItems from './RecipeItems';
 
 class RecipeContainer extends Component {
-    componentDidMount() {
-        fetch("http://localhost:64755/Api/recipe/1")
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-
-                //const foo = data;
-                this.setState({ Recipe: data })
-            }
-            )            
-            .catch(e => {
-                console.log(e)
-                return e;
-            });
+    constructor() {
+        super();
+        this.state = {
+        };
     }
+
     render() {
-        if (this.state && this.state.Recipe) {
+        console.log('in recipecontainer render');
+        console.log(this.props.recipe);
+        if (this.props.recipe) {
             return (
                 <div>
-                    <h2>Recipe name: {this.state.Recipe.Name}</h2>
-                    <RecipeItems ingredients={this.state.Recipe.Ingredients} />
+                    <h2>Recipe name: {this.props.recipe.Name}</h2>
+                    <RecipeItems ingredients={this.props.recipe.Ingredients} />
                 </div>);
         }
         else {
             return (
-                <div>Loading...</div>
+                <div></div>
             )
         }
     }
