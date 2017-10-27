@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GroceryItems from './GroceryItems';
+import { Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
+import './App.css';
 
 class GroceryContainer extends Component {
     constructor() {
@@ -10,25 +12,31 @@ class GroceryContainer extends Component {
         };
     }
     componentDidMount() {
-        fetch("http://localhost:64755/Api/grocery") 
-            .then(result=> {
+        fetch("http://localhost:64755/Api/grocery")
+            .then(result => {
                 return result.json();
             })
-            .then(data =>{
+            .then(data => {
                 const arr = data.Ingredients;
-                this.setState({ Ingredients: arr })}
+                this.setState({ Ingredients: arr })
+            }
             );
     }
 
     render() {
-        if(!this.state.Ingredients.length === 0){
+        if (!this.state.Ingredients.length === 0) {
             return <div>Loading...</div>
-        }  
-        return (  
-        <div>
-            <h2>Grocery List</h2>
-            <GroceryItems ingredients={this.state.Ingredients}/>
-        </div>);
+        }
+        return (
+            <div>
+                <Card>
+                    <CardHeader className="color1">Grocery List</CardHeader>
+                    <CardBody>
+                        <CardText><GroceryItems ingredients={this.state.Ingredients} /></CardText>
+                    </CardBody>
+                </Card>
+
+            </div >);
     }
 }
 
