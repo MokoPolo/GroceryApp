@@ -1,0 +1,3 @@
+remove jumbotron
+maybe black toolbar up top
+put gradient
