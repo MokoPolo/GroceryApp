@@ -22,7 +22,31 @@
   font-size: large;
 }
 
+.jumbotron {
+  background-color: #682666 !important;
+  color: rgb(253, 253, 253);
+  background-image: url("./images/food-salad-restaurant-person.jpg");
+  height: 100%; 
+  
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+.color1 {
+  background-color: #CF0A2C !important;
+}
+.color2 {
+  background-color: #E73E51 !important;
+}
+.color3 {
+  background-color: #FFCE00 !important;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+body {
+
 }

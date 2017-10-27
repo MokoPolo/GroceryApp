@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import RecipeContainer from './RecipeContainer';
 import GroceryContainer from './GroceryContainer';
 import RecipeList from './RecipeList';
+import { Jumbotron, Container, Row, Col } from 'reactstrap';
+import './App.css';
 
 /*const tempRecipe = {
   "Name": "Awesome steak",
@@ -104,9 +106,32 @@ class App extends Component {
     console.log(this.state.Recipe);
     return (
       <div>
-        <GroceryContainer />
-        <RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} />
-        <RecipeContainer recipe={this.state.Recipe} />
+        <Jumbotron className="pageheader">
+          {/* <h1 className="display-3">Hello, world!</h1>
+        <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+        <hr className="my-2" />
+        <p>It uses utility classes for typgraphy and spacing to space content out within the larger container.</p> */}
+        </Jumbotron>
+        <Container fluid>
+          <Row>
+            <Col xs="2"></Col>
+            <Col xs="8"><GroceryContainer /></Col>
+            <Col xs="2"></Col>
+          </Row>
+          <Row>
+            <Col xs="2"></Col>
+            <Col xs="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} /></Col>
+            <Col xs="2"></Col>
+          </Row>
+          <Row>
+            <Col xs="2"></Col>
+            <Col xs="8"><RecipeContainer recipe={this.state.Recipe} /></Col>
+            <Col xs="2"></Col>
+          </Row>
+        </Container>
+        
+        
+        
       </div>
     );
   }

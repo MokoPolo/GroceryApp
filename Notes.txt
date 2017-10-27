@@ -61,7 +61,14 @@ lookup bootstrap themes
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
 
+bootstrap
+https://reactstrap.github.io/
 
+color scheme
+#682666
+#CF0A2C
+#E73E51
+#FFCE00
 
 Old notes
 

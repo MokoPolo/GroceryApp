@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RecipeItems from './RecipeItems';
+import { Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
 
 class RecipeContainer extends Component {
     constructor() {
@@ -15,8 +16,14 @@ class RecipeContainer extends Component {
         if (this.props.recipe) {
             return (
                 <div>
-                    <h2>Recipe name: {this.props.recipe.Name}</h2>
-                    <RecipeItems ingredients={this.props.recipe.Ingredients} />
+                <Card>
+                    <CardHeader className="color2">Recipe name: {this.props.recipe.Name}</CardHeader>
+                    <CardBody>
+                        <CardText>
+                        <RecipeItems ingredients={this.props.recipe.Ingredients} />
+                        </CardText>
+                    </CardBody>
+                </Card>
                 </div>);
         }
         else {
