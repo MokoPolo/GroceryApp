@@ -58,6 +58,33 @@ class GroceryContainer extends Component {
             console.log(err);
         });
     }
+    clearListHandler = () => {
+        console.log("in clearListHandler");
+
+
+/*         fetch(settings.RestServerLocation + "/Api/grocery", {
+            method: "POST",
+            headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(
+              id
+            ) */
+
+
+            const settings = appConfig;
+            const id = 9999;
+        fetch(settings.RestServerLocation + "/Api/grocery/"+id, {
+            method: "DELETE",
+            headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+    }
     render() {
         if (this.state.Ingredients === 0) {
             return <div>Loading...</div>
@@ -79,7 +106,7 @@ class GroceryContainer extends Component {
                                 </Col>
                                 <Col sm="4" className="float-right">
                                     <Button>Add reoccurring items</Button>
-                                    <Button>Clear list</Button>
+                                    <Button onClick={() => this.clearListHandler}>Clear list</Button>
                                 </Col>
                             </Row>
                         </CardText>
