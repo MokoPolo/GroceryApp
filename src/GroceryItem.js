@@ -14,6 +14,24 @@ class GroceryItem extends Component {
         let newIngredient = {...this.state.ingredient};
         newIngredient.Done = !this.state.ingredient.Done;
         this.setState({ingredient:newIngredient});
+        let booboo = {
+            ingredient: {...this.state.ingredient},Done:!this.state.ingredient.Done
+        }
+
+console.log(booboo);
+/*         this.setState((previousState) => {
+            return {
+                ingredient: {...this.prevstate.ingredient},Done:!this.prevstate.ingredient.Done
+            }
+        }); */
+/*         this.setState((previousState) => {
+            return {
+                ingredient: {
+                    ingredient: {...this.state.ingredient},Done:!this.state.ingredient.Done
+                }
+            }
+        }); */
+
         this.props.toggleItemClick(this.state.ingredient.Id, newIngredient.Done)
     }
     componentDidMount() {
