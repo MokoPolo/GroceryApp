@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 
 namespace GroceryAppService.Controllers
 {
-    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GroceryController : ApiController
     {
         // GET: api/Grocery
@@ -26,7 +26,8 @@ namespace GroceryAppService.Controllers
                                 .Select(i => new SimpleIngredient
                                 {
                                     Id = i.Ingredient.Id,
-                                    Name = i.Ingredient.Name
+                                    Name = i.Ingredient.Name,
+                                    Done = i.Done.HasValue ? i.Done.Value : false
                                 })
                     })).FirstOrDefault();
                 return Ok(data);
@@ -39,7 +40,7 @@ namespace GroceryAppService.Controllers
         //    return "value";
         //}
 
-// Need to be able to add ingredient id
+        // Need to be able to add ingredient id
 
         // POST: api/Grocery
         public IHttpActionResult Post([FromBody]int id)
@@ -71,14 +72,55 @@ namespace GroceryAppService.Controllers
         // post is to create
         // put is to create or update
 
-        // PUT: api/Grocery/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
+        /// <summary>
+        /// Mark ingredient as done or not.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        public IHttpActionResult Put(int id, [FromBody]bool value)
+        {
+            var recipeId = id;
+            using (var context = new MarcDbEntities())
+            {
+                var groceryIngredients = context.GroceryIngredients.Where(g => g.GroceryId == 1);
+
+                if (groceryIngredients.Any())
+                {
+                    var ingredient = groceryIngredients.FirstOrDefault(i => i.IngredientId == id);
+                    ingredient.Done = value;
+
+                    context.SaveChanges();
+
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
 
         // DELETE: api/Grocery/5
-        //public void Delete(int id)
-        //{
-        //}
+        public IHttpActionResult Delete(int id)
+        {
+            if (id == 9999)
+            {
+                using (var context = new MarcDbEntities())
+                {
+                    var ids = context.GroceryIngredients.Where(g => g.GroceryId == 1).Select(g => g.Id).ToList();
+
+                    foreach (var tempId in ids)
+                    {
+                        context.GroceryIngredients.Remove(context.GroceryIngredients.FirstOrDefault(r => r.Id == tempId));
+                    }
+
+                    context.SaveChanges();
+                }
+
+                return Ok();
+            }
+
+            return NotFound();
+        }
     }
 }

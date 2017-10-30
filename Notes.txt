@@ -13,14 +13,13 @@ TODO
 7) Select recipes from list and ingredients to grocery list -- done
     - this feature will receive recipe id from client. then it will do a query to fetch ingredients. then i will insert ingredients to grocery list. maybe get 
     ingredients from grocery list and do distinct or something
-8) Ability to add recipes
-9) Ability to clear grocerylist
+8) Ability to add recipes -- done
+9) Ability to clear grocerylist -- done backend
 10) Ability to make item as checked
 11) style in bootstrap -- done
-
-upcoming tasks
-12) grocery list mark done
-13) add items to grocery list
+12) grocery list -- done
+13) add items to grocery list -- done
+??) clear button on form
 14) filter on done
 15) separate by meat/fruits/veggies/and other stuff
     -in db
@@ -31,8 +30,11 @@ show tag to say what recipe ingredient is for
 be able to swipe to mark done (ios)
 use gliphicons for delete etc
 have reoccurring items. so i'd have to put a new button to add reocurring items
-
-
+show estimate for grocery cost
+??) Put spinning thing when updating grocery list cause it takes long
+??) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
+??) For recipe list you can star items so they always show up first
+??) For recipe list you can put tags on recipes so when you search it can search on tags
 auto complete for recipes
 
 

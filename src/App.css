@@ -22,16 +22,41 @@
   font-size: large;
 }
 
+.container-fluid {
+  height: 100%;
+}
+html{
+  width:100%;
+  height:100%;
+}
+body {
+
+  height: 100%;
+  }
+.Main {
+  background: url("./images/katie-smith-104748.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 2000px;
+}
+.borderless{
+  border: none !important;
+}
+.strike{
+  text-decoration: line-through;
+}
+.nostrike{
+  text-decoration: none;
+}
+.btn {
+  margin: 4px;
+}
 .jumbotron {
-  background-color: #682666 !important;
-  color: rgb(253, 253, 253);
-  background-image: url("./images/food-salad-restaurant-person.jpg");
-  height: 100%; 
-  
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+  margin:0 !important;
+  background-color: rgba(90, 90, 82, 0.4) !important;
+  color: white;
 }
 .color1 {
   background-color: #CF0A2C !important;
@@ -41,6 +66,17 @@
 }
 .color3 {
   background-color: #FFCE00 !important;
+}
+.card-modified {
+  background-color: rgba(100, 87, 50, 0.6) !important;
+  color: white;
+}
+.TransparentBackground
+{
+  background-color: rgba(100, 87, 50, 0.0) !important;
+}
+.NoBorders {
+  border: none !important;
 }
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

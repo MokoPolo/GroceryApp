@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RecipeItems from './RecipeItems';
-import { Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardText, CardHeader } from 'reactstrap';
 
 class RecipeContainer extends Component {
     constructor() {
@@ -11,13 +11,11 @@ class RecipeContainer extends Component {
     }
 
     render() {
-        console.log('in recipecontainer render');
-        console.log(this.props.recipe);
         if (this.props.recipe) {
             return (
                 <div>
-                <Card>
-                    <CardHeader className="color2">Recipe name: {this.props.recipe.Name}</CardHeader>
+                <Card className="card-modified">
+                    <CardHeader >Recipe name: {this.props.recipe.Name}</CardHeader>
                     <CardBody>
                         <CardText>
                         <RecipeItems ingredients={this.props.recipe.Ingredients} />

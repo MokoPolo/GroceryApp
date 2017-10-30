@@ -9,7 +9,7 @@ class RecipeItems extends Component {
             return <div>Loading...</div>
         }
         const recipeItems = this.props.ingredients.map((ingredient) =>
-        <li key={ingredient.Name.toString()}>{ingredient.Name}</li>
+        <li key={ingredient.Name}>{ingredient.Name}</li>
     );
         return (    
         <ul>

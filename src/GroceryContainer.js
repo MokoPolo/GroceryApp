@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GroceryItems from './GroceryItems';
-import { Card, CardBody, CardTitle, CardText, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardText, CardHeader, Row, Col, Button } from 'reactstrap';
 import './App.css';
+import appConfig from './settings.json';
 
 class GroceryContainer extends Component {
     constructor() {
@@ -10,9 +11,13 @@ class GroceryContainer extends Component {
         this.state = {
             Ingredients: []
         };
+
+        
     }
-    componentDidMount() {
-        fetch("http://localhost:64755/Api/grocery")
+    componentWillReceiveProps() {
+        const settings = appConfig;
+        
+        fetch(settings.RestServerLocation + "/Api/grocery")
             .then(result => {
                 return result.json();
             })
@@ -20,19 +25,38 @@ class GroceryContainer extends Component {
                 const arr = data.Ingredients;
                 this.setState({ Ingredients: arr })
             }
-            );
+            ).catch(err => {
+                console.log(err);
+            });
     }
-
+    groceryItemClickHandler = (id) => {
+        console.log("in groceryclickhandler");
+    }
     render() {
-        if (!this.state.Ingredients.length === 0) {
+        if (this.state.Ingredients === 0) {
             return <div>Loading...</div>
         }
         return (
             <div>
-                <Card>
-                    <CardHeader className="color1">Grocery List</CardHeader>
+                <Card className="card-modified">
+                    <CardHeader >Grocery List</CardHeader>
                     <CardBody>
-                        <CardText><GroceryItems ingredients={this.state.Ingredients} /></CardText>
+                        <CardText>
+                            <Row>
+                                <Col sm="12">
+                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} />
+                                </Col>
+
+                            </Row>
+                            <Row>
+                                <Col sm="7">
+                                </Col>
+                                <Col sm="4" className="float-right">
+                                    <Button>Add reoccurring items</Button>
+                                    <Button>Clear list</Button>
+                                </Col>
+                            </Row>
+                        </CardText>
                     </CardBody>
                 </Card>
 
@@ -41,7 +65,10 @@ class GroceryContainer extends Component {
 }
 
 GroceryContainer.propTypes = {
-    groceryList: PropTypes.object,
+    groceryList: PropTypes.array,
+};
+GroceryContainer.defaultProps = {
+    Ingredients: []
 };
 
 export default GroceryContainer;

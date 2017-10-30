@@ -9,7 +9,7 @@ using System.Web.Http.Cors;
 
 namespace GroceryAppService.Controllers
 {
-    [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class RecipeController : ApiController
     {
         // GET: api/Recipe
@@ -93,7 +93,11 @@ namespace GroceryAppService.Controllers
             using (var context = new MarcDbEntities())
             {
                 if (!context.Recipes.Any(r => r.Id == recipe.Id))
-                    return NotFound();
+                {
+                    var temp = context.Recipes.Add(new Recipe() { Name = recipe.Name });
+                    context.SaveChanges();
+                    recipe.Id = temp.Id;
+                }
 
                 var recipeInDB = context.Recipes.FirstOrDefault(r => r.Id == recipe.Id);
 
@@ -114,7 +118,22 @@ namespace GroceryAppService.Controllers
 
                 foreach (var ingredient in recipe.Ingredients)
                 {
-                    Ingredient ingredientInDB = context.Ingredients.FirstOrDefault(r => r.Id == ingredient.Id);
+                    Ingredient ingredientInDB;
+
+                    // If no id supplied, try to find by name or create a new entry in db
+                    if (ingredient.Id == -1)
+                    {
+                        ingredientInDB = context.Ingredients.FirstOrDefault(r => r.Name.ToLower() == ingredient.Name.ToLower());
+
+                        if (ingredientInDB == null)
+                        {
+                            ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredient.Name });
+                        }
+                    }
+                    else
+                    {
+                        ingredientInDB = context.Ingredients.FirstOrDefault(r => r.Id == ingredient.Id);
+                    }
 
                     if (ingredientInDB == null)
                     {
