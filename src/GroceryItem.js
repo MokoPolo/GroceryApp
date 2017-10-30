@@ -11,7 +11,10 @@ class GroceryItem extends Component {
     }
 
     toggle() {
-        this.props.toggleItemClick(this.state.ingredient.Id)
+        let newIngredient = {...this.state.ingredient};
+        newIngredient.Done = !this.state.ingredient.Done;
+        this.setState({ingredient:newIngredient});
+        this.props.toggleItemClick(this.state.ingredient.Id, newIngredient.Done)
     }
     componentDidMount() {
         this.setState({ ingredient: this.props.ingredient });
@@ -33,7 +36,7 @@ class GroceryItem extends Component {
 
         return (
             <ListGroupItem key={this.state.ingredient.Id} className={itemClass}>
-                <Input type="checkbox" onChange={this.toggle.bind(this)} /> {this.state.ingredient.Name}
+                <Input type="checkbox" defaultChecked={this.state.ingredient.Done} onChange={this.toggle.bind(this)} /> {this.state.ingredient.Name}
             </ListGroupItem>)
     }
 }

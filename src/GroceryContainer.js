@@ -29,8 +29,34 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
-    groceryItemClickHandler = (id) => {
+    groceryItemClickHandler = (id, isDone) => {
         console.log("in groceryclickhandler");
+
+
+/*         fetch(settings.RestServerLocation + "/Api/grocery", {
+            method: "POST",
+            headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(
+              id
+            ) */
+
+
+            const settings = appConfig;
+        fetch(settings.RestServerLocation + "/Api/grocery/"+id, {
+            method: "PUT",
+            headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(
+                isDone
+            )
+        }).catch(err => {
+            console.log(err);
+        });
     }
     render() {
         if (this.state.Ingredients === 0) {
