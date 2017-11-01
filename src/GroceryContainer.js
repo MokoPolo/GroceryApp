@@ -12,11 +12,11 @@ class GroceryContainer extends Component {
             Ingredients: []
         };
 
-        
+
     }
     componentWillReceiveProps() {
         const settings = appConfig;
-        
+
         fetch(settings.RestServerLocation + "/Api/grocery")
             .then(result => {
                 return result.json();
@@ -33,23 +33,23 @@ class GroceryContainer extends Component {
         console.log("in groceryclickhandler");
 
 
-/*         fetch(settings.RestServerLocation + "/Api/grocery", {
-            method: "POST",
-            headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify(
-              id
-            ) */
+        /*         fetch(settings.RestServerLocation + "/Api/grocery", {
+                    method: "POST",
+                    headers: {
+                      "Accept": 'application/JSON',
+                      "Content-Type": "application/JSON"
+                    },
+                    body: JSON.stringify(
+                      id
+                    ) */
 
 
-            const settings = appConfig;
-        fetch(settings.RestServerLocation + "/Api/grocery/"+id, {
+        const settings = appConfig;
+        fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
             method: "PUT",
             headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
+                "Accept": 'application/JSON',
+                "Content-Type": "application/JSON"
             },
             body: JSON.stringify(
                 isDone
@@ -62,28 +62,41 @@ class GroceryContainer extends Component {
         console.log("in clearListHandler");
 
 
-/*         fetch(settings.RestServerLocation + "/Api/grocery", {
-            method: "POST",
-            headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify(
-              id
-            ) */
+        /*         fetch(settings.RestServerLocation + "/Api/grocery", {
+                    method: "POST",
+                    headers: {
+                      "Accept": 'application/JSON',
+                      "Content-Type": "application/JSON"
+                    },
+                    body: JSON.stringify(
+                      id
+                    ) */
 
 
-            const settings = appConfig;
-            const id = 9999;
-        fetch(settings.RestServerLocation + "/Api/grocery/"+id, {
+        const settings = appConfig;
+        const id = 9999;
+        fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
             method: "DELETE",
             headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
+                "Accept": 'application/JSON',
+                "Content-Type": "application/JSON"
             }
-        }).catch(err => {
-            console.log(err);
-        });
+        }).then(() => {
+            fetch(settings.RestServerLocation + "/Api/grocery")
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    const arr = data.Ingredients;
+                    this.setState({ Ingredients: arr })
+                }
+                ).catch(err => {
+                    console.log(err);
+                });
+        })
+            .catch(err => {
+                console.log(err);
+            });
     }
     render() {
         if (this.state.Ingredients === 0) {
@@ -106,7 +119,7 @@ class GroceryContainer extends Component {
                                 </Col>
                                 <Col sm="4" className="float-right">
                                     <Button>Add reoccurring items</Button>
-                                    <Button onClick={() => this.clearListHandler}>Clear list</Button>
+                                    <Button onClick={this.clearListHandler.bind(this)}>Clear list</Button>
                                 </Col>
                             </Row>
                         </CardText>
