@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import GroceryItem from './GroceryItem';
 
 const GroceryItems = ({ toggleItemClick, ingredients, title }) => {
-    /*     const GroceryItems = ingredients.map((ingredient) =>
-            <li key={ingredient.Name}>{ingredient.Name}</li>
-        ); */
 
     const GroceryItems2 = ingredients.map((ingredient) => {
         return (

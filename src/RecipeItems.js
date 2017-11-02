@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 class RecipeItems extends Component {
     render() {
-        debugger;
-
         if (!this.props.ingredients || this.props.ingredients.length === 0){
             return <div>Loading...</div>
         }

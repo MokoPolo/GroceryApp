@@ -100,6 +100,30 @@ namespace GroceryAppService.Controllers
             }
         }
 
+        public IHttpActionResult Put(string name)
+        {
+            var recipeId = 5;
+            //using (var context = new MarcDbEntities())
+            //{
+            //    var groceryIngredients = context.GroceryIngredients.Where(g => g.GroceryId == 1);
+
+            //    if (groceryIngredients.Any())
+            //    {
+            //        var ingredient = groceryIngredients.FirstOrDefault(i => i.IngredientId == id);
+            //        ingredient.Done = value;
+
+            //        context.SaveChanges();
+
+            //        return Ok();
+            //    }
+            //    else
+            //    {
+            //        return NotFound();
+            //    }
+            //}
+            return InternalServerError();
+        }
+
         // DELETE: api/Grocery/5
         public IHttpActionResult Delete(int id)
         {
