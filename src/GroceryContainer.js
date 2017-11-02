@@ -109,10 +109,15 @@ class GroceryContainer extends Component {
                     <CardBody>
                         <CardText>
                             <Row>
-                                <Col sm="12">
-                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} />
+                                <Col sm="4">
+                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
                                 </Col>
-
+                                <Col sm="4">
+                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Fruits/Vegetables"/>
+                                </Col>
+                                <Col sm="4">
+                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Other"/>
+                                </Col>
                             </Row>
                             <Row>
                                 <Col sm="7">

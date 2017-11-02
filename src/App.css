@@ -73,7 +73,7 @@ body {
 }
 .TransparentBackground
 {
-  background-color: rgba(100, 87, 50, 0.0) !important;
+  background-color: rgba(100, 87, 50, 0.2) !important;
 }
 .NoBorders {
   border: none !important;

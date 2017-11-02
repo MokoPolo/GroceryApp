@@ -19,20 +19,23 @@ TODO
 11) style in bootstrap -- done
 12) grocery list -- done
 13) add items to grocery list -- done
-??) clear button on form
-14) filter on done
+14) clear button on form -- done
 15) separate by meat/fruits/veggies/and other stuff
     -in db
     -on grocery list
-16) work on UI, put gradients etc
+16) Be able to add items
+17) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
+??) Add tags next to ingredients which will be what recipe it belongs to
+??) work on UI, put gradients etc
 filter on dept and can combine filters
 show tag to say what recipe ingredient is for
 be able to swipe to mark done (ios)
 use gliphicons for delete etc
 have reoccurring items. so i'd have to put a new button to add reocurring items
 show estimate for grocery cost
+??) filter on done
 ??) Put spinning thing when updating grocery list cause it takes long
-??) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
+
 ??) For recipe list you can star items so they always show up first
 ??) For recipe list you can put tags on recipes so when you search it can search on tags
 auto complete for recipes

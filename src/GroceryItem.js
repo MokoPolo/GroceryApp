@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input, ListGroup, ListGroupItem } from 'reactstrap';
+import { Input, ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
 
 class GroceryItem extends Component {
     constructor() {
@@ -53,9 +53,9 @@ console.log(booboo);
         const itemClass = "TransparentBackground NoBorders " + strikeclassname;
 
         return (
-            <ListGroupItem key={this.state.ingredient.Id} className={itemClass}>
+            <ListGroupItemText key={this.state.ingredient.Id} className={itemClass}>
                 <Input type="checkbox" defaultChecked={this.state.ingredient.Done} onChange={this.toggle.bind(this)} /> {this.state.ingredient.Name}
-            </ListGroupItem>)
+            </ListGroupItemText>)
     }
 }
 
