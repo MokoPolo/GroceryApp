@@ -4,6 +4,7 @@ import GroceryItems from './GroceryItems';
 import { Card, CardBody, CardText, CardHeader, Row, Col, Button } from 'reactstrap';
 import './App.css';
 import appConfig from './settings.json';
+import GroceryAddItem from './GroceryAddItem';
 
 class GroceryContainer extends Component {
     constructor() {
@@ -109,6 +110,9 @@ class GroceryContainer extends Component {
                     <CardBody>
                         <CardText>
                             <Row>
+                                <GroceryAddItem />
+                            </Row>
+                            <Row>
                                 <Col sm="4">
                                     <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
                                 </Col>
@@ -120,9 +124,9 @@ class GroceryContainer extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm="7">
+                                <Col sm="6">
                                 </Col>
-                                <Col sm="4" className="float-right">
+                                <Col sm="6" className="float-right">
                                     <Button>Add reoccurring items</Button>
                                     <Button onClick={this.clearListHandler.bind(this)}>Clear list</Button>
                                 </Col>

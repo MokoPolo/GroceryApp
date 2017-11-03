@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input, ListGroup, ListGroupItem, ListGroupItemText } from 'reactstrap';
+import { Input, ListGroupItemText } from 'reactstrap';
 
 class GroceryItem extends Component {
     constructor() {
@@ -18,7 +18,6 @@ class GroceryItem extends Component {
             ingredient: {...this.state.ingredient},Done:!this.state.ingredient.Done
         }
 
-console.log(booboo);
 /*         this.setState((previousState) => {
             return {
                 ingredient: {...this.prevstate.ingredient},Done:!this.prevstate.ingredient.Done
