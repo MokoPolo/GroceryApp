@@ -32,15 +32,15 @@ class App extends Component {
     const settings = appConfig;
 
     // Post to service. Add recipe ingredients to grocery list
-    fetch(settings.RestServerLocation + "/Api/grocery", {
+    fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
       method: "POST",
-      headers: {
+/*       headers: {
         "Accept": 'application/JSON',
         "Content-Type": "application/JSON"
       },
       body: JSON.stringify(
         id
-      )
+      ) */
     }).then(result => {
 
       // Get updated grocery list

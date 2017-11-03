@@ -40,10 +40,12 @@ namespace GroceryAppService.Controllers
         //    return "value";
         //}
 
-        // Need to be able to add ingredient id
-
-        // POST: api/Grocery
-        public IHttpActionResult Post([FromBody]int id)
+        /// <summary>
+        /// Take a recipe id and add all ingredients to grocery list
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IHttpActionResult Post(int id)
         {
             var recipeId = id;
             using (var context = new MarcDbEntities())
@@ -54,6 +56,7 @@ namespace GroceryAppService.Controllers
 
                 var groceryList = context.GroceryLists.FirstOrDefault();
 
+                // Loop through all ingredients and if it doesn't exist add it
                 foreach (var ingredient in ingredients)
                 {
                     if (!groceryList.GroceryIngredients.Any(i => i.Ingredient.Id == ingredient.Id))
@@ -100,6 +103,70 @@ namespace GroceryAppService.Controllers
             }
         }
 
+        /// <summary>
+        /// Take an ingredient and add it to grocery list
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public IHttpActionResult Post([FromBody]SimpleIngredient value)
+        {
+            // Add by ID
+            // Add by name if no ID present
+            using (var context = new MarcDbEntities())
+            {
+                // Let's try by id first then name
+                if (value.Id != -1)
+                {
+                    var groceryIngredients = context.GroceryIngredients.Where(g => g.IngredientId == value.Id);
+
+                    if (!groceryIngredients.Any())
+                    {
+                        var ingredient = context.Ingredients.FirstOrDefault(i => i.Id == value.Id);
+                        context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
+
+                        context.SaveChanges();
+
+                        return Ok();
+                    }
+                    else
+                    {
+                        // Already exists
+                        return Ok();
+                    }
+                }
+                else
+                {
+                    var groceryIngredients = context.GroceryIngredients.Where(g => g.Ingredient.Name == value.Name);
+
+                    if (!groceryIngredients.Any())
+                    {
+                        Ingredient ingredient = context.Ingredients.FirstOrDefault(i => i.Name == value.Name);
+                        
+                        if (ingredient != null)
+                        {
+                            context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
+                        }
+                        else
+                        {
+                            // Created ingredient
+                            ingredient = context.Ingredients.Add(new Ingredient { Name = value.Name });
+                        }
+
+                        context.SaveChanges();
+
+                        return Ok();
+                    }
+                    else
+                    {
+                        // Already exists
+                        return Ok();
+                    }
+                }
+                
+
+
+            }
+        }
         // DELETE: api/Grocery/5
         public IHttpActionResult Delete(int id)
         {
