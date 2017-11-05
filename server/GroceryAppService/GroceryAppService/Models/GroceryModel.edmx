@@ -27,6 +27,14 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="IngredientCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="IngredientCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -67,6 +75,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Ingredient_IngredientCategory">
+          <End Role="IngredientCategory" Type="Self.IngredientCategory" Multiplicity="0..1" />
+          <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IngredientCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IngredientCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_RecipeIngredient_Ingredient">
           <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="1" />
           <End Role="RecipeIngredient" Type="Self.RecipeIngredient" Multiplicity="*" />
@@ -95,6 +115,7 @@
           <EntitySet Name="GroceryIngredient" EntityType="Self.GroceryIngredient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroceryList" EntityType="Self.GroceryList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IngredientCategory" EntityType="Self.IngredientCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipeIngredient" EntityType="Self.RecipeIngredient" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_GroceryIngredient_GroceryList" Association="Self.FK_GroceryIngredient_GroceryList">
@@ -104,6 +125,10 @@
           <AssociationSet Name="FK_GroceryIngredient_Ingredient" Association="Self.FK_GroceryIngredient_Ingredient">
             <End Role="Ingredient" EntitySet="Ingredient" />
             <End Role="GroceryIngredient" EntitySet="GroceryIngredient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingredient_IngredientCategory" Association="Self.FK_Ingredient_IngredientCategory">
+            <End Role="IngredientCategory" EntitySet="IngredientCategory" />
+            <End Role="Ingredient" EntitySet="Ingredient" />
           </AssociationSet>
           <AssociationSet Name="FK_RecipeIngredient_Ingredient" Association="Self.FK_RecipeIngredient_Ingredient">
             <End Role="Ingredient" EntitySet="Ingredient" />
@@ -145,6 +170,8 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GroceryIngredients" Relationship="MarcDbModel.FK_GroceryIngredient_Ingredient" FromRole="Ingredient" ToRole="GroceryIngredient" />
           <NavigationProperty Name="RecipeIngredients" Relationship="MarcDbModel.FK_RecipeIngredient_Ingredient" FromRole="Ingredient" ToRole="RecipeIngredient" />
+          <Property Name="IngredientCategoryId" Type="Int32" />
+          <NavigationProperty Name="IngredientCategory" Relationship="MarcDbModel.FK_Ingredient_IngredientCategory" FromRole="Ingredient" ToRole="IngredientCategory" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -185,6 +212,11 @@
           <AssociationSet Name="FK_RecipeIngredient_Recipe" Association="MarcDbModel.FK_RecipeIngredient_Recipe">
             <End Role="Recipe" EntitySet="Recipes" />
             <End Role="RecipeIngredient" EntitySet="RecipeIngredients" />
+          </AssociationSet>
+          <EntitySet Name="IngredientCategories" EntityType="MarcDbModel.IngredientCategory" />
+          <AssociationSet Name="FK_Ingredient_IngredientCategory" Association="MarcDbModel.FK_Ingredient_IngredientCategory">
+            <End Role="IngredientCategory" EntitySet="IngredientCategories" />
+            <End Role="Ingredient" EntitySet="Ingredients" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_GroceryIngredient_GroceryList">
@@ -235,6 +267,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="IngredientCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ingredients" Relationship="MarcDbModel.FK_Ingredient_IngredientCategory" FromRole="IngredientCategory" ToRole="Ingredient" />
+        </EntityType>
+        <Association Name="FK_Ingredient_IngredientCategory">
+          <End Type="MarcDbModel.IngredientCategory" Role="IngredientCategory" Multiplicity="0..1" />
+          <End Type="MarcDbModel.Ingredient" Role="Ingredient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IngredientCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ingredient">
+              <PropertyRef Name="IngredientCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -262,6 +314,7 @@
           <EntitySetMapping Name="Ingredients">
             <EntityTypeMapping TypeName="MarcDbModel.Ingredient">
               <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="IngredientCategoryId" ColumnName="IngredientCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
@@ -281,6 +334,14 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
                 <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IngredientCategories">
+            <EntityTypeMapping TypeName="MarcDbModel.IngredientCategory">
+              <MappingFragment StoreEntitySet="IngredientCategory">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

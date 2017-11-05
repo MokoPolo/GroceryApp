@@ -59,6 +59,44 @@ class GroceryContainer extends Component {
             console.log(err);
         });
     }
+    groceryAddItemClickHandler = (name) => {
+        console.log("in groceryAddItemClickHandler");
+
+        const settings = appConfig;
+
+        // Post to service. Add recipe ingredients to grocery list
+        fetch(settings.RestServerLocation + "/Api/grocery", {
+            method: "POST",
+            headers: {
+                "Accept": 'application/JSON',
+                "Content-Type": "application/JSON"
+            },
+            body:
+            JSON.stringify({
+                "Name": name,
+                "Id": -1,
+                "Done": false
+
+            })
+
+
+        }).then(() => {
+            fetch(settings.RestServerLocation + "/Api/grocery")
+                .then(result => {
+                    return result.json();
+                })
+                .then(data => {
+                    const arr = data.Ingredients;
+                    this.setState({ Ingredients: arr })
+                }
+                ).catch(err => {
+                    console.log(err);
+                });
+        })
+            .catch(err => {
+                console.log(err);
+            });
+    }
     clearListHandler = () => {
         console.log("in clearListHandler");
 
@@ -110,23 +148,23 @@ class GroceryContainer extends Component {
                     <CardBody>
                         <CardText>
                             <Row>
-                                <GroceryAddItem />
+                                <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
                             </Row>
                             <Row>
-                                <Col sm="4">
-                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
+                                <Col md="4" xs="12" sm="12">
+                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category === "Meat")} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
                                 </Col>
-                                <Col sm="4">
-                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Fruits/Vegetables"/>
+                                <Col md="4" xs="12" sm="12">
+                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category === "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Fruits/Vegetables" />
                                 </Col>
-                                <Col sm="4">
-                                    <GroceryItems ingredients={this.state.Ingredients} toggleItemClick={() => this.groceryItemClickHandler} title="Other"/>
+                                <Col md="4" xs="12" sm="12">
+                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category !== "Meat" && i.Category !== "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Other" />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col sm="6">
+                                <Col md="6" xs="6">
                                 </Col>
-                                <Col sm="6" className="float-right">
+                                <Col md="6" xs="6" className="float-right">
                                     <Button>Add reoccurring items</Button>
                                     <Button onClick={this.clearListHandler.bind(this)}>Clear list</Button>
                                 </Col>

@@ -27,7 +27,8 @@ namespace GroceryAppService.Controllers
                                 {
                                     Id = i.Ingredient.Id,
                                     Name = i.Ingredient.Name,
-                                    Done = i.Done.HasValue ? i.Done.Value : false
+                                    Done = i.Done.HasValue ? i.Done.Value : false,
+                                    Category = i.Ingredient.IngredientCategory.Category
                                 })
                     })).FirstOrDefault();
                 return Ok(data);
@@ -48,6 +49,7 @@ namespace GroceryAppService.Controllers
         public IHttpActionResult Post(int id)
         {
             var recipeId = id;
+            var groceryId = 1;
             using (var context = new MarcDbEntities())
             {
                 var recipe = context.Recipes.FirstOrDefault(r => r.Id == recipeId);
@@ -59,7 +61,7 @@ namespace GroceryAppService.Controllers
                 // Loop through all ingredients and if it doesn't exist add it
                 foreach (var ingredient in ingredients)
                 {
-                    if (!groceryList.GroceryIngredients.Any(i => i.Ingredient.Id == ingredient.Id))
+                    if (!groceryList.GroceryIngredients.Any(i => i.Ingredient.Id == ingredient.Id && i.GroceryId == groceryId))
                     {
                         groceryList.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
                     }
@@ -138,19 +140,20 @@ namespace GroceryAppService.Controllers
                 {
                     var groceryIngredients = context.GroceryIngredients.Where(g => g.Ingredient.Name == value.Name);
 
+                    // If this ingredient in the grocery list?
                     if (!groceryIngredients.Any())
                     {
+                        // No it's not see if the ingredient actually exists
                         Ingredient ingredient = context.Ingredients.FirstOrDefault(i => i.Name == value.Name);
                         
-                        if (ingredient != null)
-                        {
-                            context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
-                        }
-                        else
+                        if (ingredient == null)
                         {
                             // Created ingredient
                             ingredient = context.Ingredients.Add(new Ingredient { Name = value.Name });
+                            context.SaveChanges();
                         }
+
+                        context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient, GroceryId = 1 });
 
                         context.SaveChanges();
 

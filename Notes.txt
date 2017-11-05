@@ -20,11 +20,22 @@ TODO
 12) grocery list -- done
 13) add items to grocery list -- done
 14) clear button on form -- done
-15) separate by meat/fruits/veggies/and other stuff
+15) separate by meat/fruits/veggies/and other stuff -- done
     -in db
     -on grocery list
-16) Be able to add items
+16) Be able to add items -- done
 17) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
+
+??) Filter on done
+??) Show grocery totals
+??) Click on item on grocerylist and a popup will show letting me categorize it
+??) Take a break and cleanup. Add air bnb lint
+
+
+
+??) See if I need redux
+??) Clean up code
+??) Use async await?
 ??) Add tags next to ingredients which will be what recipe it belongs to
 ??) work on UI, put gradients etc
 filter on dept and can combine filters

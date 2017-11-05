@@ -21,5 +21,7 @@ namespace GroceryAppService.Models
         public string Name { get; set; }
 
         public bool Done { get; set; }
+
+        public string Category { get; set; }
     }
 }

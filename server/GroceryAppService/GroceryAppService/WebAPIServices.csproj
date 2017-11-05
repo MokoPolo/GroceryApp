@@ -224,6 +224,9 @@
     <Compile Include="Models\Ingredient.cs">
       <DependentUpon>GroceryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IngredientCategory.cs">
+      <DependentUpon>GroceryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Recipe.cs">
       <DependentUpon>GroceryModel.tt</DependentUpon>
     </Compile>

@@ -12,23 +12,18 @@ namespace GroceryAppService.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Ingredient
+    public partial class IngredientCategory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ingredient()
+        public IngredientCategory()
         {
-            this.GroceryIngredients = new HashSet<GroceryIngredient>();
-            this.RecipeIngredients = new HashSet<RecipeIngredient>();
+            this.Ingredients = new HashSet<Ingredient>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Nullable<int> IngredientCategoryId { get; set; }
+        public string Category { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GroceryIngredient> GroceryIngredients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
-        public virtual IngredientCategory IngredientCategory { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
     }
 }

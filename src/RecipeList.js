@@ -13,7 +13,12 @@ class RecipeList extends Component {
 
     componentDidMount() {
         const settings = appConfig;
-        fetch(settings.RestServerLocation + "/Api/recipe")
+        fetch(settings.RestServerLocation + "/Api/recipe", {
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+               }    
+        })
             .then(result => {
                 return result.json();
             })

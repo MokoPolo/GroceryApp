@@ -3,43 +3,37 @@ import React, { Component } from 'react';
 import { InputGroup, InputGroupButton, Input, Button } from 'reactstrap';
 import './App.css';
 import appConfig from './settings.json';
+import PropTypes from 'prop-types';
 
 class GroceryAddItem extends Component {
+    constructor(props) {
+        super (props);
+        this.state = {
+            inputValue: ''
+        }
+    }
 
-    addItemClickHandler = (name) => {
+    addItemClickHandler = () => {
         // Call service with string name
         console.log("addItemClickHandler");
         debugger;
-        const settings = appConfig;
 
-        // Post to service. Add recipe ingredients to grocery list
-        /*             fetch(settings.RestServerLocation + "/Api/grocery", {
-                      method: "POST",
-                      headers: {
-                        "Accept": 'application/JSON',
-                        "Content-Type": "application/JSON"
-                      },
-                      body: JSON.stringify(
-                        name
-                      )
-                    }).then(result => {
-                
-                      // Clear control
-                      // Fire itemCreated event 
-                    }) */
-
+        this.props.addItemClick(this.state.inputValue);
     }
 
     onChangeClickHandler = (e) => {
         // Maybe do auto complete here
         console.log("onChangeClickHandler");
+        this.setState({
+            inputValue: e.target.value
+        })
     }
 
     render() {
         return (
             <div>
                 <InputGroup>
-                    <Input onChange={this.onChangeClickHandler} />&nbsp;
+                    <Input onChange={this.onChangeClickHandler} value={this.state.inputValue} />&nbsp;
                     <InputGroupButton><Button onClick={this.addItemClickHandler}>Add item</Button></InputGroupButton>
                 </InputGroup>
             </div>
@@ -47,5 +41,9 @@ class GroceryAddItem extends Component {
     }
 };
 
+GroceryAddItem.propTypes = {
+    addItemClick: PropTypes.func
+
+};
 
 export default GroceryAddItem;
