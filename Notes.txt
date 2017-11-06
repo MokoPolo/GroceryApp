@@ -24,13 +24,14 @@ TODO
     -in db
     -on grocery list
 16) Be able to add items -- done
-17) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
 
-??) Filter on done
+17) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
+    - actually show modal window. give option to click add. when they hit add do spinning thing. once added put a checkmark for that item
+??) Filter on done -- done
 ??) Show grocery totals
 ??) Click on item on grocerylist and a popup will show letting me categorize it
 ??) Take a break and cleanup. Add air bnb lint
-
+??) Figure a more efficient way to deploy. Maybe use CI on azure
 
 
 ??) See if I need redux

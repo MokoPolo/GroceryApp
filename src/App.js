@@ -55,9 +55,6 @@ class App extends Component {
           this.setState({ Ingredients: data.Ingredients });
         });
     })
-
-
-
   }
 
   recipeListViewClickHandler = (id) => {

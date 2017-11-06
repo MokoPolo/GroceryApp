@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Card, CardBody, CardText, CardHeader } from 'reactstrap';
+import { Button, Card, CardBody, CardText, CardHeader, Col } from 'reactstrap';
 import appConfig from './settings.json';
 
 class RecipeList extends Component {
@@ -30,9 +30,12 @@ class RecipeList extends Component {
     render() {
         const recipeListItems = this.state.Names.map((recipeName) =>
 
-            <li key={recipeName.Name.toString()} item={recipeName.Name}>
-                {recipeName.Name}
-                <Button size="sm" onClick={() => (this.props.addclick(recipeName.Id))}>Add to grocery list</Button><Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
+            <li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
+                <Col xs="12" md="6">{recipeName.Name}</Col>
+                <Col xs="12" md="6">
+                    <Button size="sm" onClick={() => (this.props.addclick(recipeName.Id))}>Add to grocery list</Button>
+                    <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
+                </Col>
             </li>
         );
         return (

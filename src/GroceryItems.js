@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import GroceryItem from './GroceryItem';
 
-const GroceryItems = ({ toggleItemClick, ingredients, title }) => {
+const GroceryItems = ({ toggleItemClick, ingredients, title, showDone }) => {
 
     const GroceryItems2 = ingredients.map((ingredient) => {
         return (
-            <GroceryItem key={ingredient.Id} ingredient={ingredient} toggleItemClick={toggleItemClick()} />
+            <GroceryItem key={ingredient.Id} showDone={showDone} ingredient={ingredient} toggleItemClick={toggleItemClick()} />
         )
     });
     return (
@@ -26,8 +26,8 @@ const GroceryItems = ({ toggleItemClick, ingredients, title }) => {
 GroceryItems.propTypes = {
     ingredients: PropTypes.array,
     toggleItemClick: PropTypes.func,
-    title: PropTypes.string
-
+    title: PropTypes.string,
+    showDone: PropTypes.bool
 };
 
 export default GroceryItems;

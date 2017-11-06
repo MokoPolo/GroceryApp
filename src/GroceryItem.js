@@ -6,7 +6,7 @@ class GroceryItem extends Component {
     constructor() {
         super();
         this.state = {
-            ingredient: null
+            ingredient: null,
         };
     }
 
@@ -44,7 +44,14 @@ class GroceryItem extends Component {
         }
 
         if (this.state.ingredient.Done === true) {
+            if (this.props.showDone === true)
+            {
             strikeclassname = "strike";
+            }
+            else
+            {
+                return null;
+            }
         }
         else {
             strikeclassname = "nostrike";
@@ -60,7 +67,8 @@ class GroceryItem extends Component {
 
 GroceryItem.propTypes = {
     ingredient: PropTypes.object,
-    toggleItemClick: PropTypes.func
+    toggleItemClick: PropTypes.func,
+    showDone: PropTypes.bool
 };
 
 export default GroceryItem;

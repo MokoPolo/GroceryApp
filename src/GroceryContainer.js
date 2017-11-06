@@ -10,7 +10,8 @@ class GroceryContainer extends Component {
     constructor() {
         super();
         this.state = {
-            Ingredients: []
+            Ingredients: [],
+            showDone: true
         };
 
 
@@ -30,20 +31,13 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
-    groceryItemClickHandler = (id, isDone) => {
+    toggleViewItemsClickHandler = (id, isDone) => {
         console.log("in groceryclickhandler");
 
-
-        /*         fetch(settings.RestServerLocation + "/Api/grocery", {
-                    method: "POST",
-                    headers: {
-                      "Accept": 'application/JSON',
-                      "Content-Type": "application/JSON"
-                    },
-                    body: JSON.stringify(
-                      id
-                    ) */
-
+        this.setState({"showDone": !this.state.showDone});
+    }
+    groceryItemClickHandler = (id, isDone) => {
+        console.log("in groceryclickhandler");
 
         const settings = appConfig;
         fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
@@ -100,18 +94,6 @@ class GroceryContainer extends Component {
     clearListHandler = () => {
         console.log("in clearListHandler");
 
-
-        /*         fetch(settings.RestServerLocation + "/Api/grocery", {
-                    method: "POST",
-                    headers: {
-                      "Accept": 'application/JSON',
-                      "Content-Type": "application/JSON"
-                    },
-                    body: JSON.stringify(
-                      id
-                    ) */
-
-
         const settings = appConfig;
         const id = 9999;
         fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
@@ -144,7 +126,7 @@ class GroceryContainer extends Component {
         return (
             <div>
                 <Card className="card-modified">
-                    <CardHeader >Grocery List</CardHeader>
+                    <CardHeader >Grocery List <Button onClick={this.toggleViewItemsClickHandler}>View All</Button></CardHeader>
                     <CardBody>
                         <CardText>
                             <Row>
@@ -152,13 +134,13 @@ class GroceryContainer extends Component {
                             </Row>
                             <Row>
                                 <Col md="4" xs="12" sm="12">
-                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category === "Meat")} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
+                                    <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === "Meat")} toggleItemClick={() => this.groceryItemClickHandler} title="Meat/Chicken" />
                                 </Col>
                                 <Col md="4" xs="12" sm="12">
-                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category === "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Fruits/Vegetables" />
+                                    <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Fruits/Vegetables" />
                                 </Col>
                                 <Col md="4" xs="12" sm="12">
-                                    <GroceryItems ingredients={this.state.Ingredients.filter(i => i.Category !== "Meat" && i.Category !== "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Other" />
+                                    <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category !== "Meat" && i.Category !== "Fresh Produce")} toggleItemClick={() => this.groceryItemClickHandler} title="Other" />
                                 </Col>
                             </Row>
                             <Row>
