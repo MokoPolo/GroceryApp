@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GroceryItems from './GroceryItems';
-import { Card, CardBody, CardText, CardHeader, Row, Col, Button } from 'reactstrap';
+import { Card, CardBody, CardText, CardHeader, Row, Col, Button, ButtonGroup } from 'reactstrap';
 import './App.css';
 import appConfig from './settings.json';
 import GroceryAddItem from './GroceryAddItem';
@@ -119,6 +119,10 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
+    checkBoxButtonClickHandler = (index) => {
+        console.log("checkBoxButtonClickHandler");
+        this.setState({ "selectedItem": index });
+    }
     render() {
         if (this.state.Ingredients === 0) {
             return <div>Loading...</div>
@@ -126,7 +130,15 @@ class GroceryContainer extends Component {
         return (
             <div>
                 <Card className="card-modified">
-                    <CardHeader >Grocery List <Button onClick={this.toggleViewItemsClickHandler}>View All</Button></CardHeader>
+                    <CardHeader >Grocery List 
+                        <Button onClick={this.toggleViewItemsClickHandler}>View All</Button>
+                        <ButtonGroup>
+                            <Button active={this.state.selectedItem === 1}>
+                            </Button>
+                            <Button active={this.state.selectedItem === 2}>
+                            </Button>
+                        </ButtonGroup>
+                    </CardHeader>
                     <CardBody>
                         <CardText>
                             <Row>
