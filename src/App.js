@@ -11,7 +11,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      Recipe: null
+      Recipe: null,
+      LoadingMessage: ""
     };
   }
   componentDidMount() {
@@ -30,7 +31,7 @@ class App extends Component {
   recipeListAddClickHandler = (id) => {
 
     const settings = appConfig;
-
+    this.setState({ LoadingMessage: "loading..."});
     // Post to service. Add recipe ingredients to grocery list
     fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
       method: "POST",
@@ -42,7 +43,7 @@ class App extends Component {
         id
       ) */
     }).then(result => {
-
+      this.setState({ LoadingMessage: "Complete"});
       // Get updated grocery list
       fetch(settings.RestServerLocation + "/Api/grocery")
         .then(result => {
@@ -57,9 +58,10 @@ class App extends Component {
     })
   }
 
-  recipeListViewClickHandler = (w, id) => {
+  recipeListViewClickHandler = (id) => {
     const settings = appConfig;
-    w.state.loadingMessage = "loading..."
+    
+
     fetch(settings.RestServerLocation + "/Api/recipe/" + id)
       .then(result => {
         return result.json();
@@ -68,7 +70,7 @@ class App extends Component {
         console.log(data);
         //const foo = data;
         this.setState({ Recipe: data })
-        w.state.loadingMessage = "complete";
+        
       }
       )
       .catch(e => {
@@ -91,7 +93,7 @@ class App extends Component {
           </Row>
            <Row>
             <Col xs="0" lg="2"></Col>
-            <Col xs="12" lg="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} /></Col>
+            <Col xs="12" lg="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} loadingMessage={this.state.LoadingMessage} /></Col>
             <Col xs="0" lg="2"></Col>
           </Row>
           <Row>

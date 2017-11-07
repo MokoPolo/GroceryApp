@@ -30,9 +30,10 @@ class RecipeList extends Component {
 
             <li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
                 <Col xs="12" md="6">{recipeName.Name}</Col>
-                <Col xs="12" md="6">{this.state.loadingMessage}
+                <Col xs="12" md="6">
                     <Button size="sm" onClick={() => this.props.addclick(recipeName.Id)}>Add to grocery list</Button>
-                    <Button size="sm" onClick={() => this.props.viewclick(this, recipeName.Id)}>View recipe</Button>
+                    <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
+                    
                 </Col>
             </li>
         );
@@ -42,6 +43,7 @@ class RecipeList extends Component {
                     <CardHeader>Recipe List</CardHeader>
                     <CardBody>
                         <CardText>
+                        {this.props.loadingMessage}
                             <ul>
                                 {recipeListItems}
                             </ul>
@@ -56,7 +58,8 @@ class RecipeList extends Component {
 RecipeList.propTypes = {
     listofRecipes: PropTypes.array,
     addclick: PropTypes.func,
-    viewclick: PropTypes.func
+    viewclick: PropTypes.func,
+    loadingMessage: PropTypes.string
 };
 
 export default RecipeList;
