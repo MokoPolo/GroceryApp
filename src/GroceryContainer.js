@@ -16,21 +16,27 @@ class GroceryContainer extends Component {
 
 
     }
-    componentWillReceiveProps() {
+
+    refreshList = () => {
         const settings = appConfig;
 
         fetch(settings.RestServerLocation + "/Api/grocery")
-            .then(result => {
-                return result.json();
-            })
-            .then(data => {
-                const arr = data.Ingredients;
-                this.setState({ Ingredients: arr })
-            }
-            ).catch(err => {
-                console.log(err);
-            });
+        .then(result => {
+            return result.json();
+        })
+        .then(data => {
+            const arr = data.Ingredients;
+            this.setState({ Ingredients: arr })
+        }
+        ).catch(err => {
+            console.log(err);
+        });
     }
+
+    componentWillReceiveProps() {
+         this.refreshList();
+    }
+
     toggleViewItemsClickHandler = (id, isDone) => {
         console.log("in groceryclickhandler");
 
@@ -75,17 +81,7 @@ class GroceryContainer extends Component {
 
 
         }).then(() => {
-            fetch(settings.RestServerLocation + "/Api/grocery")
-                .then(result => {
-                    return result.json();
-                })
-                .then(data => {
-                    const arr = data.Ingredients;
-                    this.setState({ Ingredients: arr })
-                }
-                ).catch(err => {
-                    console.log(err);
-                });
+            this.refreshList();
         })
             .catch(err => {
                 console.log(err);
@@ -103,21 +99,14 @@ class GroceryContainer extends Component {
                 "Content-Type": "application/JSON"
             }
         }).then(() => {
-            fetch(settings.RestServerLocation + "/Api/grocery")
-                .then(result => {
-                    return result.json();
-                })
-                .then(data => {
-                    const arr = data.Ingredients;
-                    this.setState({ Ingredients: arr })
-                }
-                ).catch(err => {
-                    console.log(err);
-                });
+            this.refreshList();
         })
             .catch(err => {
                 console.log(err);
             });
+    }
+    refreshListClickHandler = () => {
+        this.refreshList();
     }
     checkBoxButtonClickHandler = (index) => {
         console.log("checkBoxButtonClickHandler");
@@ -131,13 +120,14 @@ class GroceryContainer extends Component {
             <div>
                 <Card className="card-modified">
                     <CardHeader >Grocery List 
-                        <Button onClick={this.toggleViewItemsClickHandler}>View All</Button>
-                        <ButtonGroup>
-                            <Button active={this.state.selectedItem === 1}>
+                        <Button onClick={() => this.toggleViewItemsClickHandler}>View All</Button>
+                        <Button onClick={() => this.refreshListClickHandler}>Refresh</Button>
+{/*                         <ButtonGroup>
+                            <Button color="primary" onClick={() => this.checkBoxButtonClickHandler(1)} active={this.state.selectedItem === 1}>View Completed
                             </Button>
-                            <Button active={this.state.selectedItem === 2}>
+                            <Button color="primary" onClick={() => this.checkBoxButtonClickHandler(2)} active={this.state.selectedItem === 2}>Hide Completed
                             </Button>
-                        </ButtonGroup>
+                        </ButtonGroup> */}
                     </CardHeader>
                     <CardBody>
                         <CardText>

@@ -6,10 +6,8 @@ import appConfig from './settings.json';
 class RecipeList extends Component {
     constructor() {
         super();
-        this.state = { Names: [] };
+        this.state = { Names: [], loadingMessage: "" };
     }
-
-
 
     componentDidMount() {
         const settings = appConfig;
@@ -32,9 +30,9 @@ class RecipeList extends Component {
 
             <li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
                 <Col xs="12" md="6">{recipeName.Name}</Col>
-                <Col xs="12" md="6">
-                    <Button size="sm" onClick={() => (this.props.addclick(recipeName.Id))}>Add to grocery list</Button>
-                    <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
+                <Col xs="12" md="6">{this.state.loadingMessage}
+                    <Button size="sm" onClick={() => this.props.addclick(recipeName.Id)}>Add to grocery list</Button>
+                    <Button size="sm" onClick={() => this.props.viewclick(this, recipeName.Id)}>View recipe</Button>
                 </Col>
             </li>
         );
@@ -44,7 +42,6 @@ class RecipeList extends Component {
                     <CardHeader>Recipe List</CardHeader>
                     <CardBody>
                         <CardText>
-
                             <ul>
                                 {recipeListItems}
                             </ul>

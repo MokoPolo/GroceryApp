@@ -57,8 +57,9 @@ class App extends Component {
     })
   }
 
-  recipeListViewClickHandler = (id) => {
+  recipeListViewClickHandler = (w, id) => {
     const settings = appConfig;
+    w.state.loadingMessage = "loading..."
     fetch(settings.RestServerLocation + "/Api/recipe/" + id)
       .then(result => {
         return result.json();
@@ -67,6 +68,7 @@ class App extends Component {
         console.log(data);
         //const foo = data;
         this.setState({ Recipe: data })
+        w.state.loadingMessage = "complete";
       }
       )
       .catch(e => {
