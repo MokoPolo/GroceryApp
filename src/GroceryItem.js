@@ -18,12 +18,12 @@ class GroceryItem extends Component {
       ingredient: { ...this.state.ingredient }, Done: !this.state.ingredient.Done,
     };
 
-/*         this.setState((previousState) => {
+    /*         this.setState((previousState) => {
             return {
                 ingredient: {...this.prevstate.ingredient},Done:!this.prevstate.ingredient.Done
             }
         }); */
-/*         this.setState((previousState) => {
+    /*         this.setState((previousState) => {
             return {
                 ingredient: {
                     ingredient: {...this.state.ingredient},Done:!this.state.ingredient.Done

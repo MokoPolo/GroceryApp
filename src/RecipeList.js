@@ -17,24 +17,16 @@ class RecipeList extends Component {
         Accept: 'application/json',
       },
     })
-            .then(result => result.json())
-            .then((data) => {
-              this.setState({ Names: data });
-            });
+      .then(result => result.json())
+      .then((data) => {
+        this.setState({ Names: data });
+      });
   }
 
   render() {
-    const recipeListItems = this.state.Names.map(recipeName =>
-
-      (<li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
-        <Col xs="12" md="6">{recipeName.Name}</Col>
-        <Col xs="12" md="6">
-          <Button size="sm" onClick={() => this.props.addclick(recipeName.Id)}>Add to grocery list</Button>
-          <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
-
-        </Col>
-      </li>),
-        );
+      const recipeListItems = this.state.Names.map((name) => 
+        <RecipeListItem Name={name.Name} key={name.Id} addclick={this.props.addclick} viewclick={this.props.viewclick} />
+      );
     return (
       <div>
         <Card className="card-modified">
@@ -43,26 +35,7 @@ class RecipeList extends Component {
             <CardText>
               {this.props.loadingMessage}
               <ul>
-                {
-                                this.state.Names.map((recipeName) => {
-                                  <RecipeListItem addclick={this.props.addclick} viewclick={this.props.viewclick} />;
-                                })
-                            }
-              </ul>
-            </CardText>
-          </CardBody>
-        </Card>
-      </div>
-    );
-    return (
-      <div>
-        <Card className="card-modified">
-          <CardHeader>Recipe List</CardHeader>
-          <CardBody>
-            <CardText>
-              {this.props.loadingMessage}
-              <ul>
-                {recipeListItems}
+                { recipeListItems }
               </ul>
             </CardText>
           </CardBody>
@@ -73,10 +46,12 @@ class RecipeList extends Component {
 }
 
 class RecipeListItem extends Component {
+  
   render() {
+    debugger;
     return (
-      <li key={recipeName.Name.toString()}className="row" item={this.props.Name}>
-        <Col xs="12" md="6">{recipeName.Name}</Col>
+      <li key={this.props.Name.toString()} className="row" item={this.props.Name}>
+        <Col xs="12" md="6">{this.props.Name}</Col>
         <Col xs="12" md="6">
           <Button size="sm" onClick={() => this.props.addclick(this.props.Id)}>Add to grocery list</Button>
           <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>

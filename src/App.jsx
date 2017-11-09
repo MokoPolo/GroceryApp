@@ -28,21 +28,21 @@ class App extends Component {
       });
   }
 
-  recipeListAddClickHandler = (id) => {
+  recipeListAddClickHandler(id) {
     const settings = appConfig;
-    this.setState({ LoadingMessage: "loading..."});
+    this.setState({ LoadingMessage: "loading..." });
     // Post to service. Add recipe ingredients to grocery list
     fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
       method: "POST",
-/*       headers: {
-        "Accept": 'application/JSON',
-        "Content-Type": "application/JSON"
-      },
-      body: JSON.stringify(
-        id
-      ) */
+      /*       headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(
+              id
+            ) */
     }).then(result => {
-      this.setState({ LoadingMessage: "Complete"});
+      this.setState({ LoadingMessage: "Complete" });
       // Get updated grocery list
       fetch(settings.RestServerLocation + "/Api/grocery")
         .then(result => {
@@ -54,12 +54,12 @@ class App extends Component {
           debugger;
           this.setState({ Ingredients: data.Ingredients });
         });
-    })
+    });
   }
 
-  recipeListViewClickHandler = (id) => {
+  recipeListViewClickHandler(id) {
     const settings = appConfig;
-    
+
 
     fetch(settings.RestServerLocation + "/Api/recipe/" + id)
       .then(result => {
@@ -69,11 +69,10 @@ class App extends Component {
         console.log(data);
         //const foo = data;
         this.setState({ Recipe: data })
-        
       }
       )
       .catch(e => {
-        console.log(e)
+        console.log(e);
         return e;
       });
   }
@@ -86,28 +85,23 @@ class App extends Component {
         </Jumbotron>
         <Container fluid>
           <Row>
-            <Col xs="0" lg="2"></Col>
+            <Col xs="0" lg="2" />
             <Col xs="12" lg="8"><GroceryContainer groceryList={this.state.Ingredients} /></Col>
-            <Col xs="0" lg="2"></Col>
-          </Row>
-           <Row>
-            <Col xs="0" lg="2"></Col>
-            <Col xs="12" lg="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} loadingMessage={this.state.LoadingMessage} /></Col>
-            <Col xs="0" lg="2"></Col>
+            <Col xs="0" lg="2" />
           </Row>
           <Row>
-            <Col xs="0" lg="2"></Col>
+            <Col xs="0" lg="2" />
+            <Col xs="12" lg="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} loadingMessage={this.state.LoadingMessage} /></Col>
+            <Col xs="0" lg="2" />
+          </Row>
+          <Row>
+            <Col xs="0" lg="2" />
             <Col xs="12" lg="8"><RecipeContainer recipe={this.state.Recipe} /></Col>
-            <Col xs="0" lg="2"></Col>
+            <Col xs="0" lg="2" />
           </Row>
         </Container>
-
-
-
       </div>
     );
   }
-
-};
-
+}
 export default App;

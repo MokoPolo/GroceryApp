@@ -1,3 +1,3 @@
 {
-    "RestServerLocation" : "http://webapiservices20171007063236.azurewebsites.net"
+    "RestServerLocation" : "http://localhost:64755/"
 }

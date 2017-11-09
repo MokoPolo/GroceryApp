@@ -87,3 +87,4 @@ color scheme
 #FFCE00
 
 node_modules/.bin/eslint --ext=js --ext=jsx --fix src/**
+node_modules/.bin/eslint ./src/app.jsx
