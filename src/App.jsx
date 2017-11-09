@@ -29,7 +29,6 @@ class App extends Component {
   }
 
   recipeListAddClickHandler = (id) => {
-
     const settings = appConfig;
     this.setState({ LoadingMessage: "loading..."});
     // Post to service. Add recipe ingredients to grocery list

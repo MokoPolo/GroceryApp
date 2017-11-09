@@ -86,3 +86,4 @@ color scheme
 #E73E51
 #FFCE00
 
+node_modules/.bin/eslint --ext=js --ext=jsx --fix src/**

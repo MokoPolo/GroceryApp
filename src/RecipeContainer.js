@@ -4,36 +4,35 @@ import RecipeItems from './RecipeItems';
 import { Card, CardBody, CardText, CardHeader } from 'reactstrap';
 
 class RecipeContainer extends Component {
-    constructor() {
-        super();
-        this.state = {
-        };
+  constructor() {
+    super();
+    this.state = {
+    };
+  }
+
+  render() {
+    if (this.props.recipe) {
+      return (
+        <div>
+          <Card className="card-modified">
+            <CardHeader >Recipe name: {this.props.recipe.Name}</CardHeader>
+            <CardBody>
+              <CardText>
+                <RecipeItems ingredients={this.props.recipe.Ingredients} />
+              </CardText>
+            </CardBody>
+          </Card>
+        </div>);
     }
 
-    render() {
-        if (this.props.recipe) {
-            return (
-                <div>
-                <Card className="card-modified">
-                    <CardHeader >Recipe name: {this.props.recipe.Name}</CardHeader>
-                    <CardBody>
-                        <CardText>
-                        <RecipeItems ingredients={this.props.recipe.Ingredients} />
-                        </CardText>
-                    </CardBody>
-                </Card>
-                </div>);
-        }
-        else {
-            return (
-                <div></div>
-            )
-        }
-    }
+    return (
+      <div />
+    );
+  }
 }
 
 RecipeContainer.propTypes = {
-    recipe: PropTypes.object
+  recipe: PropTypes.object,
 };
 
 export default RecipeContainer;
