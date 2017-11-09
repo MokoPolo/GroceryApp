@@ -26,14 +26,33 @@ class RecipeList extends Component {
   render() {
     const recipeListItems = this.state.Names.map(recipeName =>
 
-          (<li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
-            <Col xs="12" md="6">{recipeName.Name}</Col>
-            <Col xs="12" md="6">
-              <Button size="sm" onClick={() => this.props.addclick(recipeName.Id)}>Add to grocery list</Button>
-              <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
-
-            </Col>
-          </li>),
+            <li key={recipeName.Name.toString()}className="row" item={recipeName.Name}>
+                <Col xs="12" md="6">{recipeName.Name}</Col>
+                <Col xs="12" md="6">
+                    <Button size="sm" onClick={() => this.props.addclick(recipeName.Id)}>Add to grocery list</Button>
+                    <Button size="sm" onClick={() => this.props.viewclick(recipeName.Id)}>View recipe</Button>
+                    
+                </Col>
+            </li>
+        );
+        return (
+            <div>
+                <Card className="card-modified">
+                    <CardHeader>Recipe List</CardHeader>
+                    <CardBody>
+                        <CardText>
+                        {this.props.loadingMessage}
+                            <ul>
+                            {
+                                this.state.Names.map((recipeName) => {
+                                    <RecipeListItem  addclick={this.props.addclick} viewclick={this.props.viewclick}/>
+                                })
+                            }
+                            </ul>
+                        </CardText>
+                    </CardBody>
+                </Card>
+            </div>
         );
     return (
       <div>
@@ -53,11 +72,30 @@ class RecipeList extends Component {
   }
 }
 
+class RecipeListItem extends Component {
+    render() {
+        return(
+        <li key={recipeName.Name.toString()}className="row" item={this.props.Name}>
+        <Col xs="12" md="6">{recipeName.Name}</Col>
+        <Col xs="12" md="6">
+            <Button size="sm" onClick={() => this.props.addclick(this.props.Id)}>Add to grocery list</Button>
+            <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>
+            
+        </Col>
+    </li>);
+    }
+}
+
 RecipeList.propTypes = {
   listofRecipes: PropTypes.array,
   addclick: PropTypes.func,
   viewclick: PropTypes.func,
   loadingMessage: PropTypes.string,
 };
-
+RecipeListItem.propTypes = {
+    addclick: PropTypes.func,
+    viewclick: PropTypes.func,
+    Id: PropTypes.number,
+    Name: PropTypes.string
+};
 export default RecipeList;
