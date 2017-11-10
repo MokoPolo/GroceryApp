@@ -6,13 +6,11 @@ import { Jumbotron, Container, Row, Col } from 'reactstrap';
 import './App.css';
 import appConfig from './settings.json';
 
-// Stateless component
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      Recipe: null,
-      LoadingMessage: ""
+      Recipe: null
     };
   }
   componentDidMount() {
@@ -30,36 +28,21 @@ class App extends Component {
 
   recipeListAddClickHandler(id) {
     const settings = appConfig;
-    this.setState({ LoadingMessage: "loading..." });
-    // Post to service. Add recipe ingredients to grocery list
-    fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
-      method: "POST",
-      /*       headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify(
-              id
-            ) */
-    }).then(result => {
-      this.setState({ LoadingMessage: "Complete" });
-      // Get updated grocery list
-      fetch(settings.RestServerLocation + "/Api/grocery")
-        .then(result => {
-          console.log(result);
-          return result.json();
-        })
-        .then(data => {
-          console.log(data);
-          debugger;
-          this.setState({ Ingredients: data.Ingredients });
-        });
+
+    fetch(settings.RestServerLocation + "/Api/grocery")
+    .then(result => {
+      console.log(result);
+      return result.json();
+    })
+    .then(data => {
+      console.log(data);
+      debugger;
+      this.setState({ Ingredients: data.Ingredients });
     });
   }
 
   recipeListViewClickHandler(id) {
     const settings = appConfig;
-
 
     fetch(settings.RestServerLocation + "/Api/recipe/" + id)
       .then(result => {

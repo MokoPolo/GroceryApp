@@ -6,7 +6,7 @@ import appConfig from './settings.json';
 class RecipeList extends Component {
   constructor() {
     super();
-    this.state = { Names: [], loadingMessage: '' };
+    this.state = { Names: [] };
   }
 
   componentDidMount() {
@@ -25,7 +25,7 @@ class RecipeList extends Component {
 
   render() {
       const recipeListItems = this.state.Names.map((name) => 
-        <RecipeListItem Name={name.Name} key={name.Id} addclick={this.props.addclick} viewclick={this.props.viewclick} />
+        <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={(id) => this.props.addclick(id)} viewclick={(id) => this.props.viewclick(id)} />
       );
     return (
       <div>
@@ -33,7 +33,6 @@ class RecipeList extends Component {
           <CardHeader>Recipe List</CardHeader>
           <CardBody>
             <CardText>
-              {this.props.loadingMessage}
               <ul>
                 { recipeListItems }
               </ul>
@@ -46,16 +45,37 @@ class RecipeList extends Component {
 }
 
 class RecipeListItem extends Component {
-  
+  constructor() {
+    super();
+    this.state = { LoadingMessage: "" };
+  }
+
+  recipeListAddClickHandler(id) {
+    const settings = appConfig;
+    this.setState({ LoadingMessage: "loading..." });
+    // Post to service. Add recipe ingredients to grocery list
+    fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
+      method: "POST",
+      /*       headers: {
+              "Accept": 'application/JSON',
+              "Content-Type": "application/JSON"
+            },
+            body: JSON.stringify(
+              id
+            ) */
+    }).then(result => {
+      this.setState({ LoadingMessage: "Complete" });
+      this.props.addclick(id);
+    });
+  }
   render() {
-    debugger;
     return (
       <li key={this.props.Name.toString()} className="row" item={this.props.Name}>
         <Col xs="12" md="6">{this.props.Name}</Col>
         <Col xs="12" md="6">
-          <Button size="sm" onClick={() => this.props.addclick(this.props.Id)}>Add to grocery list</Button>
-          <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>
-
+          <Button size="sm" onClick={() => this.recipeListAddClickHandler(this.props.Id)}>Add to grocery list</Button>
+          <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>{ this.props.Id }
+          { this.state.LoadingMessage }
         </Col>
       </li>);
   }
@@ -64,8 +84,7 @@ class RecipeListItem extends Component {
 RecipeList.propTypes = {
   listofRecipes: PropTypes.array,
   addclick: PropTypes.func,
-  viewclick: PropTypes.func,
-  loadingMessage: PropTypes.string,
+  viewclick: PropTypes.func
 };
 RecipeListItem.propTypes = {
   addclick: PropTypes.func,
