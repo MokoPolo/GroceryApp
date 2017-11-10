@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import GroceryItem from './GroceryItem';
-
+import GroceryReoccurringModal from './GroceryReoccurringModal';
 const GroceryItems = ({
   toggleItemClick, ingredients, title, showDone,
 }) => {

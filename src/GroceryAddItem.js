@@ -16,9 +16,10 @@ class GroceryAddItem extends Component {
     addItemClickHandler = () => {
         // Call service with string name
         console.log("addItemClickHandler");
-        debugger;
+        
 
         this.props.addItemClick(this.state.inputValue);
+        this.setState({inputValue: ""})
     }
 
     onChangeClickHandler = (e) => {

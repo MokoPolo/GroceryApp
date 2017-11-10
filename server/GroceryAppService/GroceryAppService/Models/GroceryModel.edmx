@@ -28,6 +28,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="IngredientCategoryId" Type="int" />
+          <Property Name="Reoccurring" Type="bit" />
         </EntityType>
         <EntityType Name="IngredientCategory">
           <Key>
@@ -172,6 +173,7 @@
           <NavigationProperty Name="RecipeIngredients" Relationship="MarcDbModel.FK_RecipeIngredient_Ingredient" FromRole="Ingredient" ToRole="RecipeIngredient" />
           <Property Name="IngredientCategoryId" Type="Int32" />
           <NavigationProperty Name="IngredientCategory" Relationship="MarcDbModel.FK_Ingredient_IngredientCategory" FromRole="Ingredient" ToRole="IngredientCategory" />
+          <Property Name="Reoccurring" Type="Boolean" />
         </EntityType>
         <EntityType Name="Recipe">
           <Key>
@@ -314,6 +316,7 @@
           <EntitySetMapping Name="Ingredients">
             <EntityTypeMapping TypeName="MarcDbModel.Ingredient">
               <MappingFragment StoreEntitySet="Ingredient">
+                <ScalarProperty Name="Reoccurring" ColumnName="Reoccurring" />
                 <ScalarProperty Name="IngredientCategoryId" ColumnName="IngredientCategoryId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

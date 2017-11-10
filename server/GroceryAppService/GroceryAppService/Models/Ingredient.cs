@@ -24,6 +24,7 @@ namespace GroceryAppService.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> IngredientCategoryId { get; set; }
+        public Nullable<bool> Reoccurring { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroceryIngredient> GroceryIngredients { get; set; }

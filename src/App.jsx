@@ -74,7 +74,7 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs="0" lg="2" />
-            <Col xs="12" lg="8"><RecipeList addclick={this.recipeListAddClickHandler} viewclick={this.recipeListViewClickHandler} loadingMessage={this.state.LoadingMessage} /></Col>
+            <Col xs="12" lg="8"><RecipeList addclick={(e) => this.recipeListAddClickHandler(e)} viewclick={(e) => this.recipeListViewClickHandler(e)} /></Col>
             <Col xs="0" lg="2" />
           </Row>
           <Row>

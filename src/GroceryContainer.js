@@ -5,6 +5,7 @@ import { Card, CardBody, CardText, CardHeader, Row, Col, Button, ButtonGroup } f
 import './App.css';
 import appConfig from './settings.json';
 import GroceryAddItem from './GroceryAddItem';
+import GroceryReoccurringModal from './GroceryReoccurringModal';
 
 class GroceryContainer extends Component {
     constructor() {
@@ -17,7 +18,7 @@ class GroceryContainer extends Component {
 
     }
 
-    refreshList = () => {
+    refreshList() {
         const settings = appConfig;
 
         fetch(settings.RestServerLocation + "/Api/grocery")
@@ -37,7 +38,7 @@ class GroceryContainer extends Component {
          this.refreshList();
     }
 
-    toggleViewItemsClickHandler = (id, isDone) => {
+    toggleViewItemsClickHandler(id, isDone) {
         console.log("in groceryclickhandler");
 
         this.setState({"showDone": !this.state.showDone});
@@ -59,7 +60,7 @@ class GroceryContainer extends Component {
             console.log(err);
         });
     }
-    groceryAddItemClickHandler = (name) => {
+    groceryAddItemClickHandler(name) {
         console.log("in groceryAddItemClickHandler");
 
         const settings = appConfig;
@@ -87,7 +88,10 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
-    clearListHandler = () => {
+    groceryReoccurringModalHandler() {
+        this.setState({modal: true})
+    }
+    clearListHandler() {
         console.log("in clearListHandler");
 
         const settings = appConfig;
@@ -105,7 +109,7 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
-    refreshListClickHandler = () => {
+    refreshListClickHandler() {
         this.refreshList();
     }
     checkBoxButtonClickHandler = (index) => {
@@ -120,8 +124,8 @@ class GroceryContainer extends Component {
             <div>
                 <Card className="card-modified">
                     <CardHeader >Grocery List 
-                        <Button onClick={() => this.toggleViewItemsClickHandler}>View All</Button>
-                        <Button onClick={() => this.refreshListClickHandler}>Refresh</Button>
+                        <Button onClick={this.toggleViewItemsClickHandler.bind(this)}>View All</Button>
+                        <Button onClick={this.refreshListClickHandler.bind(this)}>Refresh</Button>
 {/*                         <ButtonGroup>
                             <Button color="primary" onClick={() => this.checkBoxButtonClickHandler(1)} active={this.state.selectedItem === 1}>View Completed
                             </Button>
@@ -132,7 +136,7 @@ class GroceryContainer extends Component {
                     <CardBody>
                         <CardText>
                             <Row>
-                                <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
+                                <GroceryAddItem addItemClick={this.groceryAddItemClickHandler.bind(this)} />
                             </Row>
                             <Row>
                                 <Col md="4" xs="12" sm="12">
@@ -149,14 +153,14 @@ class GroceryContainer extends Component {
                                 <Col md="6" xs="6">
                                 </Col>
                                 <Col md="6" xs="6" className="float-right">
-                                    <Button>Add reoccurring items</Button>
+                                    <Button onClick={this.groceryReoccurringModalHandler.bind(this)}>Add reoccurring items</Button>
                                     <Button onClick={this.clearListHandler.bind(this)}>Clear list</Button>
                                 </Col>
                             </Row>
                         </CardText>
                     </CardBody>
                 </Card>
-
+                <GroceryReoccurringModal modal={this.state.modal} /> 
             </div >);
     }
 }

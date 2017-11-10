@@ -74,7 +74,7 @@ class RecipeListItem extends Component {
         <Col xs="12" md="6">{this.props.Name}</Col>
         <Col xs="12" md="6">
           <Button size="sm" onClick={() => this.recipeListAddClickHandler(this.props.Id)}>Add to grocery list</Button>
-          <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>{ this.props.Id }
+          <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>
           { this.state.LoadingMessage }
         </Col>
       </li>);
