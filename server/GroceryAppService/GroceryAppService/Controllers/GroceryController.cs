@@ -65,6 +65,12 @@ namespace GroceryAppService.Controllers
                     {
                         groceryList.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
                     }
+                    else
+                    {
+                        // It's in the grocery list change the done status no matter what
+                        var groceryIngredient = groceryList.GroceryIngredients.FirstOrDefault(i => i.Ingredient.Id == ingredient.Id && i.GroceryId == groceryId);
+                        groceryIngredient.Done = false;
+                    }
 
                 }
 
@@ -124,7 +130,7 @@ namespace GroceryAppService.Controllers
                     if (!groceryIngredients.Any())
                     {
                         var ingredient = context.Ingredients.FirstOrDefault(i => i.Id == value.Id);
-                        context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient });
+                        context.GroceryIngredients.Add(new GroceryIngredient() { Ingredient = ingredient, GroceryId = 1 });
 
                         context.SaveChanges();
 

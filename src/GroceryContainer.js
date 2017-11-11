@@ -12,7 +12,8 @@ class GroceryContainer extends Component {
         super();
         this.state = {
             Ingredients: [],
-            showDone: true
+            showDone: true,
+            modal: false
         };
 
 
@@ -109,6 +110,9 @@ class GroceryContainer extends Component {
                 console.log(err);
             });
     }
+    closeClickHandler() {
+        this.state.modal = false;
+    }
     refreshListClickHandler() {
         this.refreshList();
     }
@@ -160,7 +164,7 @@ class GroceryContainer extends Component {
                         </CardText>
                     </CardBody>
                 </Card>
-                <GroceryReoccurringModal modal={this.state.modal} /> 
+                <GroceryReoccurringModal modal={this.state.modal} closeClick={this.closeClickHandler.bind(this)} />
             </div >);
     }
 }
