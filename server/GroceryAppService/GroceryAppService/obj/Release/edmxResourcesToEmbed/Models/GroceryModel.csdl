@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MarcDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GroceryIngredient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroceryId" Type="Int32" Nullable="false" />
+    <Property Name="IngredientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GroceryList" Relationship="MarcDbModel.FK_GroceryIngredient_GroceryList" FromRole="GroceryIngredient" ToRole="GroceryList" />
+    <NavigationProperty Name="Ingredient" Relationship="MarcDbModel.FK_GroceryIngredient_Ingredient" FromRole="GroceryIngredient" ToRole="Ingredient" />
+    <Property Name="Done" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="GroceryList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GroceryIngredients" Relationship="MarcDbModel.FK_GroceryIngredient_GroceryList" FromRole="GroceryList" ToRole="GroceryIngredient" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GroceryIngredients" Relationship="MarcDbModel.FK_GroceryIngredient_Ingredient" FromRole="Ingredient" ToRole="GroceryIngredient" />
+    <NavigationProperty Name="RecipeIngredients" Relationship="MarcDbModel.FK_RecipeIngredient_Ingredient" FromRole="Ingredient" ToRole="RecipeIngredient" />
+    <Property Name="IngredientCategoryId" Type="Int32" />
+    <NavigationProperty Name="IngredientCategory" Relationship="MarcDbModel.FK_Ingredient_IngredientCategory" FromRole="Ingredient" ToRole="IngredientCategory" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="RecipeIngredients" Relationship="MarcDbModel.FK_RecipeIngredient_Recipe" FromRole="Recipe" ToRole="RecipeIngredient" />
+  </EntityType>
+  <EntityType Name="RecipeIngredient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="IngredientId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Ingredient" Relationship="MarcDbModel.FK_RecipeIngredient_Ingredient" FromRole="RecipeIngredient" ToRole="Ingredient" />
+    <NavigationProperty Name="Recipe" Relationship="MarcDbModel.FK_RecipeIngredient_Recipe" FromRole="RecipeIngredient" ToRole="Recipe" />
+  </EntityType>
+  <EntityContainer Name="MarcDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GroceryIngredients" EntityType="Self.GroceryIngredient" />
+    <EntitySet Name="GroceryLists" EntityType="Self.GroceryList" />
+    <EntitySet Name="Ingredients" EntityType="Self.Ingredient" />
+    <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+    <EntitySet Name="RecipeIngredients" EntityType="Self.RecipeIngredient" />
+    <AssociationSet Name="FK_GroceryIngredient_GroceryList" Association="MarcDbModel.FK_GroceryIngredient_GroceryList">
+      <End Role="GroceryList" EntitySet="GroceryLists" />
+      <End Role="GroceryIngredient" EntitySet="GroceryIngredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroceryIngredient_Ingredient" Association="MarcDbModel.FK_GroceryIngredient_Ingredient">
+      <End Role="Ingredient" EntitySet="Ingredients" />
+      <End Role="GroceryIngredient" EntitySet="GroceryIngredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeIngredient_Ingredient" Association="MarcDbModel.FK_RecipeIngredient_Ingredient">
+      <End Role="Ingredient" EntitySet="Ingredients" />
+      <End Role="RecipeIngredient" EntitySet="RecipeIngredients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeIngredient_Recipe" Association="MarcDbModel.FK_RecipeIngredient_Recipe">
+      <End Role="Recipe" EntitySet="Recipes" />
+      <End Role="RecipeIngredient" EntitySet="RecipeIngredients" />
+    </AssociationSet>
+    <EntitySet Name="IngredientCategories" EntityType="MarcDbModel.IngredientCategory" />
+    <AssociationSet Name="FK_Ingredient_IngredientCategory" Association="MarcDbModel.FK_Ingredient_IngredientCategory">
+      <End Role="IngredientCategory" EntitySet="IngredientCategories" />
+      <End Role="Ingredient" EntitySet="Ingredients" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_GroceryIngredient_GroceryList">
+    <End Type="MarcDbModel.GroceryList" Role="GroceryList" Multiplicity="1" />
+    <End Type="MarcDbModel.GroceryIngredient" Role="GroceryIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroceryList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroceryIngredient">
+        <PropertyRef Name="GroceryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroceryIngredient_Ingredient">
+    <End Type="MarcDbModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+    <End Type="MarcDbModel.GroceryIngredient" Role="GroceryIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroceryIngredient">
+        <PropertyRef Name="IngredientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeIngredient_Ingredient">
+    <End Type="MarcDbModel.Ingredient" Role="Ingredient" Multiplicity="1" />
+    <End Type="MarcDbModel.RecipeIngredient" Role="RecipeIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecipeIngredient">
+        <PropertyRef Name="IngredientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeIngredient_Recipe">
+    <End Type="MarcDbModel.Recipe" Role="Recipe" Multiplicity="1" />
+    <End Type="MarcDbModel.RecipeIngredient" Role="RecipeIngredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecipeIngredient">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="IngredientCategory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ingredients" Relationship="MarcDbModel.FK_Ingredient_IngredientCategory" FromRole="IngredientCategory" ToRole="Ingredient" />
+  </EntityType>
+  <Association Name="FK_Ingredient_IngredientCategory">
+    <End Type="MarcDbModel.IngredientCategory" Role="IngredientCategory" Multiplicity="0..1" />
+    <End Type="MarcDbModel.Ingredient" Role="Ingredient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IngredientCategory">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ingredient">
+        <PropertyRef Name="IngredientCategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
