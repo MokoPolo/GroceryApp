@@ -95,3 +95,4 @@ color scheme
 
 node_modules/.bin/eslint --ext=js --ext=jsx --fix src/**
 node_modules/.bin/eslint ./src/app.jsx
+node_modules/.bin/esw --watch --ext .jsx ./src/app.jsx
