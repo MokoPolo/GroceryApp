@@ -19,8 +19,7 @@ class App extends Component {
     fetch(`${settings.RestServerLocation}/Api/grocery`)
       .then(result => result.json())
       .then(data =>
-        this.setState({ Ingredients: data.Ingredients }),
-    );
+        this.setState({ Ingredients: data.Ingredients }));
   }
 
   recipeListAddClickHandler() {
@@ -40,8 +39,7 @@ class App extends Component {
       .then(result => result.json())
       .then((data) => {
         this.setState({ Recipe: data });
-      },
-    );
+      });
   }
   render() {
     return (
@@ -53,7 +51,7 @@ class App extends Component {
           </p>
         </Jumbotron>
         <Container fluid>
-        <Row>
+          <Row>
             <Col xs="0" lg="2" />
             <Col xs="12" lg="8">alalala<Example /></Col>
             <Col xs="0" lg="2" />

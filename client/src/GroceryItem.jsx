@@ -14,11 +14,11 @@ class GroceryItem extends Component {
     this.setState({ ingredient: this.props.ingredient });
   }
   toggle() {
-         const newIngredient = { ...this.state.ingredient };
-        newIngredient.Done = !this.state.ingredient.Done; // change done status
-        this.setState({ ingredient: newIngredient }); // set new state 
+    const newIngredient = { ...this.state.ingredient };
+    newIngredient.Done = !this.state.ingredient.Done; // change done status
+    this.setState({ ingredient: newIngredient }); // set new state
 
-/*     this.setState(prevState => {
+    /*     this.setState(prevState => {
       return {ingredient: { ...prevState.ingredient }, Done: !prevState.ingredient.Done};
     }, () => {
       this.props.toggleItemClick(this.state.ingredient.Id, this.state.ingredient.Done);

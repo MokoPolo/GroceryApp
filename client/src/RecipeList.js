@@ -24,9 +24,8 @@ class RecipeList extends Component {
   }
 
   render() {
-      const recipeListItems = this.state.Names.map((name) => 
-        <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={(id) => this.props.addclick(id)} viewclick={(id) => this.props.viewclick(id)} />
-      );
+    const recipeListItems = this.state.Names.map(name =>
+      <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={id => this.props.addclick(id)} viewclick={id => this.props.viewclick(id)} />);
     return (
       <div>
         <Card className="card-modified">
@@ -47,15 +46,15 @@ class RecipeList extends Component {
 class RecipeListItem extends Component {
   constructor() {
     super();
-    this.state = { LoadingMessage: "" };
+    this.state = { LoadingMessage: '' };
   }
 
   recipeListAddClickHandler(id) {
     const settings = appConfig;
-    this.setState({ LoadingMessage: "loading..." });
+    this.setState({ LoadingMessage: 'loading...' });
     // Post to service. Add recipe ingredients to grocery list
-    fetch(settings.RestServerLocation + "/Api/grocery/" + id, {
-      method: "POST",
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
+      method: 'POST',
       /*       headers: {
               "Accept": 'application/JSON',
               "Content-Type": "application/JSON"
@@ -63,8 +62,8 @@ class RecipeListItem extends Component {
             body: JSON.stringify(
               id
             ) */
-    }).then(result => {
-      this.setState({ LoadingMessage: "Complete" });
+    }).then((result) => {
+      this.setState({ LoadingMessage: 'Complete' });
       this.props.addclick(id);
     });
   }
@@ -84,7 +83,7 @@ class RecipeListItem extends Component {
 RecipeList.propTypes = {
   listofRecipes: PropTypes.array,
   addclick: PropTypes.func,
-  viewclick: PropTypes.func
+  viewclick: PropTypes.func,
 };
 RecipeListItem.propTypes = {
   addclick: PropTypes.func,

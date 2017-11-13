@@ -32,7 +32,7 @@ class GroceryContainer extends Component {
   groceryAddItemClickHandler(name) {
     const settings = appConfig;
 
-        // Post to service. Add recipe ingredients to grocery list
+    // Post to service. Add recipe ingredients to grocery list
     fetch(`${settings.RestServerLocation}/Api/grocery`, {
       method: 'POST',
       headers: {
@@ -79,11 +79,11 @@ class GroceryContainer extends Component {
     const settings = appConfig;
 
     fetch(`${settings.RestServerLocation}/Api/grocery`)
-            .then(result => result.json())
-            .then((data) => {
-              const arr = data.Ingredients;
-              this.setState({ Ingredients: arr });
-            });
+      .then(result => result.json())
+      .then((data) => {
+        const arr = data.Ingredients;
+        this.setState({ Ingredients: arr });
+      });
   }
   render() {
     if (this.state.Ingredients === 0) {
