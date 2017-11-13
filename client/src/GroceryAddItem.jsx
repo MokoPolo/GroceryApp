@@ -10,6 +10,9 @@ class GroceryAddItem extends Component {
     this.state = {
       inputValue: '',
     };
+
+    this.onChangeClickHandler = this.onChangeClickHandler.bind(this);
+    this.addItemClickHandler = this.addItemClickHandler.bind(this);
   }
 
   onChangeClickHandler(e) {

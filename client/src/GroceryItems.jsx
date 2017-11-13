@@ -7,22 +7,28 @@ import appConfig from './settings.json';
 class GroceryItems extends Component {
   constructor() {
     super();
-    this.groceryItemClickHandler.bind(this);
+    this.groceryItemClickHandler = this.groceryItemClickHandler.bind(this);
   }
 
-  groceryItemClickHandler() {
+  groceryItemClickHandler(id, isDone) {
     const settings = appConfig;
-    fetch(`${settings.RestServerLocation}/Api/grocery/${this.id}`, {
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/JSON',
         'Content-Type': 'application/JSON',
       },
       body: JSON.stringify(
-        this.isDone,
-      ),
+        isDone,
+      )
+    }).then((result) => {
+      console.log("hi");
+    }).catch((err) => {
+      console.log("bad");
     });
+
   }
+
   render() {
     const GroceryItems2 = this.props.ingredients.map(ingredient => (
       <GroceryItem
