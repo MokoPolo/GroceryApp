@@ -5,6 +5,7 @@ import GroceryContainer from './GroceryContainer';
 import RecipeList from './RecipeList';
 import './App.css';
 import appConfig from './settings.json';
+import Example from './AutoComplete';
 
 class App extends Component {
   constructor() {
@@ -52,6 +53,11 @@ class App extends Component {
           </p>
         </Jumbotron>
         <Container fluid>
+        <Row>
+            <Col xs="0" lg="2" />
+            <Col xs="12" lg="8">alalala<Example /></Col>
+            <Col xs="0" lg="2" />
+          </Row>
           <Row>
             <Col xs="0" lg="2" />
             <Col xs="12" lg="8"><GroceryContainer groceryList={this.state.Ingredients} /></Col>
@@ -71,6 +77,11 @@ class App extends Component {
             <Col xs="0" lg="2" />
             <Col xs="12" lg="8"><RecipeContainer recipe={this.state.Recipe} /></Col>
             <Col xs="0" lg="2" />
+          </Row>
+          <Row>
+            <Col xs="12">
+              <div>ffses asdasadsfasadsdds</div>
+            </Col>
           </Row>
         </Container>
       </div>

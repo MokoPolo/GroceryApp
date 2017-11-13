@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0-beta",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.16",
     "reactstrap": "^5.0.0-alpha.3"
