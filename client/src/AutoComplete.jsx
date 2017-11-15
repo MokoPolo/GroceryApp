@@ -112,8 +112,8 @@ const languages = [
           this.input = autosuggest.input;
         }
       };
-    onSuggestionSelected = () => {
-
+    onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
+      console.log(suggestionValue);
     }
     render() {
       const { value, suggestions } = this.state;

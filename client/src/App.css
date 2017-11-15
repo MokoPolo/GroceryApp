@@ -55,8 +55,15 @@ body {
 }
 .jumbotron {
   margin:0 !important;
-  background-color: rgba(90, 90, 82, 0.4) !important;
+  background-color: rgba(80,83,84, 0.4) !important;
   color: white;
+}
+.react-autosuggest__suggestion{
+  color:black;
+  background-color: white;
+}
+.react-autosuggest__suggestions-list{
+  list-style-type: none;
 }
 .color1 {
   background-color: #CF0A2C !important;
@@ -68,12 +75,12 @@ body {
   background-color: #FFCE00 !important;
 }
 .card-modified {
-  background-color: rgba(100, 87, 50, 0.6) !important;
+  background-color: rgba(80,83,84, 1) !important;
   color: white;
 }
 .TransparentBackground
 {
-  background-color: rgba(100, 87, 50, 0.2) !important;
+  background-color: rgba(80,83,84, 1) !important;
 }
 .NoBorders {
   border: none !important;
