@@ -18,8 +18,7 @@ class App extends Component {
     fetch(`${settings.RestServerLocation}/Api/grocery`)
       .then(result => result.json())
       .then(data =>
-        this.setState({ Ingredients: data.Ingredients }),
-    );
+        this.setState({ Ingredients: data.Ingredients }));
   }
 
   recipeListAddClickHandler() {
@@ -39,8 +38,7 @@ class App extends Component {
       .then(result => result.json())
       .then((data) => {
         this.setState({ Recipe: data });
-      },
-    );
+      });
   }
   render() {
     return (

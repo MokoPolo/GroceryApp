@@ -18,15 +18,12 @@ class GroceryItems extends Component {
         Accept: 'application/JSON',
         'Content-Type': 'application/JSON',
       },
-      body: JSON.stringify(
-        isDone,
-      )
+      body: JSON.stringify(isDone),
     }).then((result) => {
-      console.log("hi");
+      console.log('hi');
     }).catch((err) => {
-      console.log("bad");
+      console.log('bad');
     });
-
   }
 
   render() {

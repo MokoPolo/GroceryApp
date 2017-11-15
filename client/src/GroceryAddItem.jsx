@@ -18,7 +18,7 @@ class GroceryAddItem extends Component {
   }
 
   onChangeClickHandler(e) {
-        // Maybe do auto complete here
+    // Maybe do auto complete here
     this.setState({
       inputValue: e.target.value,
     });
