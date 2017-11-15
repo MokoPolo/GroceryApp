@@ -30,25 +30,7 @@ class GroceryContainer extends Component {
     this.setState({ showDone: !this.state.showDone });
   }
   groceryAddItemClickHandler(name) {
-    const settings = appConfig;
-
-        // Post to service. Add recipe ingredients to grocery list
-    fetch(`${settings.RestServerLocation}/Api/grocery`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/JSON',
-        'Content-Type': 'application/JSON',
-      },
-      body:
-            JSON.stringify({
-              Name: name,
-              Id: -1,
-              Done: false,
-
-            }),
-    }).then(() => {
       this.refreshList();
-    });
   }
   groceryReoccurringModalHandler() {
     this.setState({ modal: true });

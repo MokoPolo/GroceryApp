@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { InputGroup, InputGroupButton, Input, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './App.css';
+import Example from './AutoComplete';
+import appConfig from './settings.json';
 
 class GroceryAddItem extends Component {
   constructor(props) {
@@ -23,13 +25,33 @@ class GroceryAddItem extends Component {
   }
   addItemClickHandler() {
         // Call service with string name
-    this.props.addItemClick(this.state.inputValue);
-    this.setState({ inputValue: '' });
+        const settings = appConfig;
+        
+                // Post to service. Add recipe ingredients to grocery list
+            fetch(`${settings.RestServerLocation}/Api/grocery`, {
+              method: 'POST',
+              headers: {
+                Accept: 'application/JSON',
+                'Content-Type': 'application/JSON',
+              },
+              body:
+                    JSON.stringify({
+                      Name: this.state.inputValue,
+                      Id: -1,
+                      Done: false,
+        
+                    }),
+            }).then(() => {
+              this.props.addItemClick(this.state.inputValue);
+              this.setState({ inputValue: '' });
+            });
+
   }
   render() {
     return (
       <div>
         <InputGroup>
+        <Example />
           <Input onChange={this.onChangeClickHandler} value={this.state.inputValue} />&nbsp;
           <InputGroupButton>
             <Button onClick={this.addItemClickHandler}>Add item</Button>

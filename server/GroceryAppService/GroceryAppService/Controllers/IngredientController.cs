@@ -30,5 +30,22 @@ namespace GroceryAppService.Controllers
                 return Ok(data);
             }
         }
+        public IHttpActionResult Get(string filter)
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var data = (context.Ingredients
+                    .Where(i => i.Name.Contains(filter))
+                    .Select(i => new SimpleIngredient
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Category = i.IngredientCategory.Category,
+                        Reoccurring = i.Reoccurring.HasValue ? i.Reoccurring.Value : false
+                    })
+                    ).ToList();
+                return Ok(data);
+            }
+        }
     }
 }
