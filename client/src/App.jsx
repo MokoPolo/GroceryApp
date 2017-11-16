@@ -70,11 +70,6 @@ class App extends Component {
             <Col xs="12" lg="8"><RecipeContainer recipe={this.state.Recipe} /></Col>
             <Col xs="0" lg="2" />
           </Row>
-          <Row>
-            <Col xs="12">
-              <div>ffses asdasadsfasadsdds</div>
-            </Col>
-          </Row>
         </Container>
       </div>
     );

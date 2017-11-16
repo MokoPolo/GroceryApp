@@ -30,7 +30,10 @@ html{
   height:100%;
 }
 body {
-
+  background: #40E0D0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FF0080, #FF8C00, #40E0D0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FF0080, #FF8C00, #40E0D0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   height: 100%;
   }
 .Main {
@@ -40,6 +43,10 @@ body {
   -o-background-size: cover;
   background-size: cover;
   min-height: 2000px;
+  background: #40E0D0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #FF0080, #FF8C00, #40E0D0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #FF0080, #FF8C00, #40E0D0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
 }
 .borderless{
   border: none !important;
@@ -75,12 +82,12 @@ body {
   background-color: #FFCE00 !important;
 }
 .card-modified {
-  background-color: rgba(80,83,84, 1) !important;
+  background-color: rgba(80,83,84, 0.6) !important;
   color: white;
 }
 .TransparentBackground
 {
-  background-color: rgba(80,83,84, 1) !important;
+  background-color: rgba(80,83,84, 0.1) !important;
 }
 .NoBorders {
   border: none !important;
