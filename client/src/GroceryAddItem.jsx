@@ -118,6 +118,12 @@ onChange = (event, { newValue }) => {
   this.setState({
     value: newValue
   });
+  this.setState({
+    inputValue: {
+      Id: -1,
+      Name: newValue
+    }
+  });
 };
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -189,6 +195,8 @@ onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, s
         // Call service with string name
         const settings = appConfig;
         console.log("1 " + this.state.inputValue);
+        if (this.state.inputValue === '') 
+          return;
                 // Post to service. Add recipe ingredients to grocery list
             fetch(`${settings.RestServerLocation}/Api/grocery`, {
               method: 'POST',
