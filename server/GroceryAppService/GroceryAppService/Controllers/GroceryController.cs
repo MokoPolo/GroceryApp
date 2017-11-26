@@ -28,7 +28,8 @@ namespace GroceryAppService.Controllers
                                     Id = i.Ingredient.Id,
                                     Name = i.Ingredient.Name,
                                     Done = i.Done.HasValue ? i.Done.Value : false,
-                                    Category = i.Ingredient.IngredientCategory.Category
+                                    Category = i.Ingredient.IngredientCategory.Category,
+                                    Quantity = i.Quantity.HasValue ? i.Quantity.Value : 1
                                 })
                     })).FirstOrDefault();
                 return Ok(data);
@@ -139,6 +140,26 @@ namespace GroceryAppService.Controllers
                 {
                     return NotFound();
                 }
+            }
+        }
+        [Route("api/grocery/ingredient/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetGroceryIngredient(int id)
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var data = (context.GroceryIngredients
+                    .Where(i => i.GroceryId == 1 && i.IngredientId == id)
+                    .Select(i => new SimpleIngredient
+                    {
+                        Id = i.IngredientId,
+                        Name = i.Ingredient.Name,
+                        Category = i.Ingredient.IngredientCategory.Category,
+                        Reoccurring = i.Ingredient.Reoccurring.HasValue ? i.Ingredient.Reoccurring.Value : false,
+                        Quantity = i.Quantity.HasValue ? i.Quantity.Value : 1
+                    })
+                    ).FirstOrDefault();
+                return Ok(data);
             }
         }
         /// <summary>

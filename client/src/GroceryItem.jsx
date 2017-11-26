@@ -14,6 +14,9 @@ class GroceryItem extends Component {
   componentWillMount() {
     this.setState({ ingredient: this.props.ingredient });
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ ingredient: nextProps.ingredient });
+}
   groceryEditItemModalHandler() {
     this.props.editItemClick(this.state.ingredient.Id);
   }
@@ -54,7 +57,7 @@ class GroceryItem extends Component {
           defaultChecked={this.state.ingredient.Done}
           onChange={this.toggle}
         />
-        {this.state.ingredient.Name}
+        {this.state.ingredient.Name} (Qty:{this.state.ingredient.Quantity})
         <Button onClick={this.groceryEditItemModalHandler} >Edit item</Button>
       </ListGroupItemText>);
   }
@@ -65,6 +68,7 @@ GroceryItem.propTypes = {
     Id: PropTypes.number,
     Done: PropTypes.bool,
     Name: PropTypes.string,
+    Quantity: PropTypes.number
   }).isRequired,
   showDone: PropTypes.bool,
   editItemClick: PropTypes.func,

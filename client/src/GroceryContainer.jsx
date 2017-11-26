@@ -41,6 +41,7 @@ class GroceryContainer extends Component {
   }
   groceryEditItemModalHandler(selectedId) {
     console.log('in groceryEditItemModalHandler ' + selectedId);
+    this.setState({ selectedGroceryItemId: selectedId });
     this.setState({ modalEdit: true });
   }
   clearListHandler() {
@@ -128,6 +129,7 @@ class GroceryContainer extends Component {
         <GroceryEditItemModal
           modal={this.state.modalEdit}
           closeClick={this.closeModalEditClickHandler}
+          id={this.state.selectedGroceryItemId}
         />
       </div >);
   }
