@@ -24,12 +24,6 @@ class GroceryReoccurringModal extends Component {
   componentWillReceiveProps(nextProps) {
     this.setState({ modal: nextProps.modal });
   }
-  componentWillMount() {
-    // this.setState({ modal: this.props.modal });
-  }
-  componentDidUpdate() {
-    // console.log("componentDidUpdate");
-  }
   componentDidMount() {
     const settings = appConfig;
     fetch(`${settings.RestServerLocation}/Api/ingredient?reoccurringItems=True`)
@@ -45,9 +39,9 @@ class GroceryReoccurringModal extends Component {
       <div>
         {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Add Reoccurring Items</ModalHeader>
+        <ModalHeader toggle={this.toggle}>Add Reoccurring Items</ModalHeader>
           <ModalBody>
-            {listItems}
+          {listItems}
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Close</Button>{' '}

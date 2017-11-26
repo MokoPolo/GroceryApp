@@ -5,6 +5,7 @@ import appConfig from './settings.json';
 import GroceryAddItem from './GroceryAddItem';
 import GroceryReoccurringModal from './GroceryReoccurringModal';
 import GroceryItems from './GroceryItems';
+import GroceryEditItemModal from './GroceryItemEditModal';
 
 class GroceryContainer extends Component {
   constructor() {
@@ -12,7 +13,8 @@ class GroceryContainer extends Component {
     this.state = {
       Ingredients: [],
       showDone: true,
-      modal: false,
+      modalReoccurring: false,
+      modalEdit: false,
     };
     this.toggleViewItemsClickHandler = this.toggleViewItemsClickHandler.bind(this);
     this.refreshListClickHandler = this.refreshListClickHandler.bind(this);
@@ -20,6 +22,8 @@ class GroceryContainer extends Component {
     this.groceryReoccurringModalHandler = this.groceryReoccurringModalHandler.bind(this);
     this.clearListHandler = this.clearListHandler.bind(this);
     this.closeClickHandler = this.closeClickHandler.bind(this);
+    this.closeModalEditClickHandler = this.closeModalEditClickHandler.bind(this);
+    this.groceryEditItemModalHandler = this.groceryEditItemModalHandler.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -33,7 +37,11 @@ class GroceryContainer extends Component {
       this.refreshList();
   }
   groceryReoccurringModalHandler() {
-    this.setState({ modal: true });
+    this.setState({ modalReoccurring: true });
+  }
+  groceryEditItemModalHandler(selectedId) {
+    console.log('in groceryEditItemModalHandler ' + selectedId);
+    this.setState({ modalEdit: true });
   }
   clearListHandler() {
     const settings = appConfig;
@@ -49,7 +57,10 @@ class GroceryContainer extends Component {
     });
   }
   closeClickHandler() {
-    this.setState({ modal: false });
+    this.setState({ modalReoccurring: false });
+  }
+  closeModalEditClickHandler() {
+    this.setState({ modalEdit: false });
   }
   refreshListClickHandler() {
     this.refreshList();
@@ -87,13 +98,13 @@ class GroceryContainer extends Component {
               </Row>
               <Row>
                 <Col md="4" xs="12" sm="12">
-                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Meat')} title="Meat/Chicken" />
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
                 </Col>
                 <Col md="4" xs="12" sm="12">
-                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Fresh Produce')} title="Fruits/Vegetables" />
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Fruits/Vegetables" />
                 </Col>
                 <Col md="4" xs="12" sm="12">
-                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} title="Other" />
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Other" />
                 </Col>
               </Row>
               <Row>
@@ -111,8 +122,12 @@ class GroceryContainer extends Component {
           </CardBody>
         </Card>
         <GroceryReoccurringModal
-          modal={this.state.modal}
+          modal={this.state.modalReoccurring}
           closeClick={this.closeClickHandler}
+        />
+        <GroceryEditItemModal
+          modal={this.state.modalEdit}
+          closeClick={this.closeModalEditClickHandler}
         />
       </div >);
   }

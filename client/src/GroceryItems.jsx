@@ -8,6 +8,7 @@ class GroceryItems extends Component {
   constructor() {
     super();
     this.groceryItemClickHandler = this.groceryItemClickHandler.bind(this);
+    this.groceryEditItemModalHandler = this.groceryEditItemModalHandler.bind(this);
   }
 
   groceryItemClickHandler(id, isDone) {
@@ -19,13 +20,11 @@ class GroceryItems extends Component {
         'Content-Type': 'application/JSON',
       },
       body: JSON.stringify(isDone),
-    }).then((result) => {
-      console.log('hi');
-    }).catch((err) => {
-      console.log('bad');
     });
   }
-
+  groceryEditItemModalHandler(selectedId) {
+    this.props.editItemClick(selectedId);
+  }
   render() {
     const GroceryItems2 = this.props.ingredients.map(ingredient => (
       <GroceryItem
@@ -33,6 +32,7 @@ class GroceryItems extends Component {
         showDone={this.props.showDone}
         ingredient={ingredient}
         toggleItemClick={this.groceryItemClickHandler}
+        editItemClick={this.groceryEditItemModalHandler}
       />
     ));
     return (
@@ -52,10 +52,12 @@ GroceryItems.propTypes = {
   ingredients: (PropTypes.arrayOf).isRequired,
   title: (PropTypes.string).isRequired,
   showDone: PropTypes.bool,
+  editItemClick: PropTypes.func,
 };
 
 GroceryItems.defaultProps = {
   showDone: false,
+  editItemClick: null,
 };
 
 export default GroceryItems;

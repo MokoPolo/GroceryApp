@@ -8,6 +8,7 @@
     <Property Name="GroceryId" Type="int" Nullable="false" />
     <Property Name="IngredientId" Type="int" Nullable="false" />
     <Property Name="Done" Type="bit" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="GroceryList">
     <Key>

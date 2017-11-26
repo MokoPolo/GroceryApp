@@ -13,6 +13,7 @@
           <Property Name="GroceryId" Type="int" Nullable="false" />
           <Property Name="IngredientId" Type="int" Nullable="false" />
           <Property Name="Done" Type="bit" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="GroceryList">
           <Key>
@@ -154,6 +155,7 @@
           <NavigationProperty Name="GroceryList" Relationship="MarcDbModel.FK_GroceryIngredient_GroceryList" FromRole="GroceryIngredient" ToRole="GroceryList" />
           <NavigationProperty Name="Ingredient" Relationship="MarcDbModel.FK_GroceryIngredient_Ingredient" FromRole="GroceryIngredient" ToRole="Ingredient" />
           <Property Name="Done" Type="Boolean" />
+          <Property Name="Quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="GroceryList">
           <Key>
@@ -298,6 +300,7 @@
           <EntitySetMapping Name="GroceryIngredients">
             <EntityTypeMapping TypeName="MarcDbModel.GroceryIngredient">
               <MappingFragment StoreEntitySet="GroceryIngredient">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Done" ColumnName="Done" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="GroceryId" ColumnName="GroceryId" />

@@ -112,6 +112,36 @@ namespace GroceryAppService.Controllers
         }
 
         /// <summary>
+        /// Change the quantity of a grocery ingredient.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [Route("api/grocery/{id}/{quantity}")]
+        [HttpPut]
+        public IHttpActionResult ModifyGroceryIngredientQuantity(int id, int quantity)
+        {
+            var recipeId = id;
+            using (var context = new MarcDbEntities())
+            {
+                var groceryIngredients = context.GroceryIngredients.Where(g => g.GroceryId == 1);
+
+                if (groceryIngredients.Any())
+                {
+                    var ingredient = groceryIngredients.FirstOrDefault(i => i.IngredientId == id);
+                    ingredient.Quantity = quantity;
+
+                    context.SaveChanges();
+
+                    return Ok();
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+        /// <summary>
         /// Take an ingredient and add it to grocery list
         /// </summary>
         /// <param name="value"></param>
@@ -183,12 +213,16 @@ namespace GroceryAppService.Controllers
             {
                 using (var context = new MarcDbEntities())
                 {
-                    var ids = context.GroceryIngredients.Where(g => g.GroceryId == 1).Select(g => g.Id).ToList();
+                    context.GroceryIngredients.RemoveRange(context.GroceryIngredients.Where(i => i.GroceryId == 1));
+                    //db.People.RemoveRange(db.People.Where(x => x.State == "CA"));
 
-                    foreach (var tempId in ids)
-                    {
-                        context.GroceryIngredients.Remove(context.GroceryIngredients.FirstOrDefault(r => r.Id == tempId));
-                    }
+
+                    //var ids = context.GroceryIngredients.Where(g => g.GroceryId == 1).Select(g => g.Id).ToList();
+
+                    //foreach (var tempId in ids)
+                    //{
+                    //    context.GroceryIngredients.Remove(context.GroceryIngredients.FirstOrDefault(r => r.Id == tempId));
+                    //}
 
                     context.SaveChanges();
                 }

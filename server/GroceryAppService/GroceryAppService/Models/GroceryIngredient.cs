@@ -18,6 +18,7 @@ namespace GroceryAppService.Models
         public int GroceryId { get; set; }
         public int IngredientId { get; set; }
         public Nullable<bool> Done { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual GroceryList GroceryList { get; set; }
         public virtual Ingredient Ingredient { get; set; }

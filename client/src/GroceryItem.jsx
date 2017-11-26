@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Input, ListGroupItemText } from 'reactstrap';
+import { Input, ListGroupItemText, Button } from 'reactstrap';
 
 class GroceryItem extends Component {
   constructor() {
@@ -9,9 +9,13 @@ class GroceryItem extends Component {
       ingredient: null,
     };
     this.toggle = this.toggle.bind(this);
+    this.groceryEditItemModalHandler = this.groceryEditItemModalHandler.bind(this);
   }
   componentWillMount() {
     this.setState({ ingredient: this.props.ingredient });
+  }
+  groceryEditItemModalHandler() {
+    this.props.editItemClick(this.state.ingredient.Id);
   }
   toggle() {
     const newIngredient = { ...this.state.ingredient };
@@ -51,6 +55,7 @@ class GroceryItem extends Component {
           onChange={this.toggle}
         />
         {this.state.ingredient.Name}
+        <Button onClick={this.groceryEditItemModalHandler} >Edit item</Button>
       </ListGroupItemText>);
   }
 }
@@ -62,12 +67,15 @@ GroceryItem.propTypes = {
     Name: PropTypes.string,
   }).isRequired,
   showDone: PropTypes.bool,
+  editItemClick: PropTypes.func,
   toggleItemClick: PropTypes.func,
+  fuckyou: PropTypes.string
 };
 
 GroceryItem.defaultProps = {
   showDone: false,
   toggleItemClick: null,
+  editItemClick: null,
 };
 
 export default GroceryItem;

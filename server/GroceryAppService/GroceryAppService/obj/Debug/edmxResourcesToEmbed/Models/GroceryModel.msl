@@ -4,6 +4,7 @@
     <EntitySetMapping Name="GroceryIngredients">
       <EntityTypeMapping TypeName="MarcDbModel.GroceryIngredient">
         <MappingFragment StoreEntitySet="GroceryIngredient">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Done" ColumnName="Done" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="GroceryId" ColumnName="GroceryId" />
