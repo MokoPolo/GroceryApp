@@ -27,21 +27,29 @@ TODO
 
 17) Have reoccurring items on grocery list. Once you hit button it will ask if you want something and if you click ok it will add it
     - actually show modal window. give option to click add. when they hit add do spinning thing. once added put a checkmark for that item --done
-??) Filter on done -- done
-??) Add air bnb lint --done
-??) Figure a more efficient way to deploy. Maybe use CI on azure --done
-??) Show quantity on recipes
-??) Create unit of measurement table and use unit of measurements on recipe
-??) Show quantities on grocery page. Can show different quantities (don't have to combine)
-??) Auto complete when adding groceries
+18) Filter on done -- done
+19) Add air bnb lint --done
+20) Figure a more efficient way to deploy. Maybe use CI on azure --done
+21) Show quantity on recipes -- won't do
+22) Create unit of measurement table and use unit of measurements on recipe -- won't do
+23) Show quantities on grocery page. Can show different quantities (don't have to combine) -- done
+24) Auto complete when adding groceries -- done
 
-??) Show grocery totals
+new todo <-------------
+air bnb everything
+redux
+clean code
+styling
+categorization
+
+??) Show grocery totals -- won't do
 ??) Click on item on grocerylist and a popup will show letting me categorize it
 ??) Take a break and cleanup. 
 ??) Recipe page so can add new recipes and edit recipes
 
 
-??) See if I need redux
+
+??) See if I need redux (I do need it)
 ??) Clean up code
 ??) Use async await?
 ??) Add tags next to ingredients which will be what recipe it belongs to
