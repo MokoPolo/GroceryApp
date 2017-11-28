@@ -39,9 +39,9 @@ class GroceryReoccurringModal extends Component {
       <div>
         {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-        <ModalHeader toggle={this.toggle}>Add Reoccurring Items</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Add Reoccurring Items</ModalHeader>
           <ModalBody>
-          {listItems}
+            {listItems}
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={this.toggle}>Close</Button>{' '}

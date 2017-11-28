@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Card, CardBody, CardText, CardHeader, Col } from 'reactstrap';
 import appConfig from './settings.json';
 import FontAwesome from 'react-fontawesome';
+
 class RecipeList extends Component {
   constructor() {
     super();
@@ -46,7 +47,7 @@ class RecipeList extends Component {
 class RecipeListItem extends Component {
   constructor() {
     super();
-    this.state = { loading: false, };
+    this.state = { loading: false };
   }
 
   recipeListAddClickHandler(id) {
@@ -69,9 +70,8 @@ class RecipeListItem extends Component {
   }
   render() {
     let spinner = '';
-    if (this.state.loading)
-    {
-        spinner = <FontAwesome name='spinner' spin />;
+    if (this.state.loading) {
+      spinner = <FontAwesome name="spinner" spin />;
     }
     return (
       <li key={this.props.Name.toString()} className="row" item={this.props.Name}>
