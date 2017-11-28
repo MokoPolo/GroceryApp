@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Input, ListGroupItemText, Button } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 class GroceryItem extends Component {
   constructor() {
@@ -16,7 +17,7 @@ class GroceryItem extends Component {
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ ingredient: nextProps.ingredient });
-}
+  }
   groceryEditItemModalHandler() {
     this.props.editItemClick(this.state.ingredient.Id);
   }
@@ -52,14 +53,22 @@ class GroceryItem extends Component {
 
     return (
       <ListGroupItemText key={this.state.ingredient.Id} className={itemClass}>
-        <Input
-          type="checkbox"
-          defaultChecked={this.state.ingredient.Done}
-          onChange={this.toggle}
-        />
-        {this.state.ingredient.Name} (Qty:{this.state.ingredient.Quantity})
-        <Button onClick={this.groceryEditItemModalHandler} >Edit item</Button>
-      </ListGroupItemText>);
+        <Row>
+          <Col xs="1" lg="1" className="align-middle">
+            <Input
+              type="checkbox"
+              defaultChecked={this.state.ingredient.Done}
+              onChange={this.toggle}
+            /></Col>
+          <Col xs="10" lg="8">
+            {this.state.ingredient.Name} (Qty:{this.state.ingredient.Quantity})
+            </Col>
+          <Col xs="1" lg="3">
+            <Button onClick={this.groceryEditItemModalHandler} >Edit item</Button>
+          </Col>
+        </Row>
+      </ListGroupItemText>
+    );
   }
 }
 

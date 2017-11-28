@@ -38,7 +38,7 @@ class GroceryReoccurringModal extends Component {
     return (
       <div>
         {/* <Button color="danger" onClick={this.toggle}>{this.props.buttonLabel}</Button> */}
-        <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
         <ModalHeader toggle={this.toggle}>Add Reoccurring Items</ModalHeader>
           <ModalBody>
           {listItems}
@@ -64,11 +64,6 @@ class ReoccurringListItem extends Component {
     const settings = appConfig;
     this.setState({ LoadingMessage: 'loading...' });
     // Post to service. Add recipe ingredients to grocery list
-    const ingredient = {
-      Id: id,
-      Name: 'Foo',
-      Done: false,
-    };
     fetch(`${settings.RestServerLocation}/Api/grocery/`, {
       method: 'POST',
       headers: {

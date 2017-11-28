@@ -46,7 +46,7 @@ class App extends Component {
         <Jumbotron>
           <h1 className="display-3">Hello</h1>
           <p className="lead">
-            Welcome to my site where you can build recipes and create grocery lists.
+            Welcome to my site where you can build recipes and create grocery lists
           </p>
         </Jumbotron>
         <Container fluid>

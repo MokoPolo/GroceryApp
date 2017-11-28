@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText, CardHeader, Row, Col, Button } from 'reactstrap';
+import FontAwesome from 'react-fontawesome';
 import './App.css';
 import appConfig from './settings.json';
 import GroceryAddItem from './GroceryAddItem';
@@ -15,6 +16,8 @@ class GroceryContainer extends Component {
       showDone: true,
       modalReoccurring: false,
       modalEdit: false,
+      clearing: false,
+      refreshing: false,
     };
     this.toggleViewItemsClickHandler = this.toggleViewItemsClickHandler.bind(this);
     this.refreshListClickHandler = this.refreshListClickHandler.bind(this);
@@ -34,7 +37,7 @@ class GroceryContainer extends Component {
     this.setState({ showDone: !this.state.showDone });
   }
   groceryAddItemClickHandler(name) {
-      this.refreshList();
+    this.refreshList();
   }
   groceryReoccurringModalHandler() {
     this.setState({ modalReoccurring: true });
@@ -47,6 +50,7 @@ class GroceryContainer extends Component {
   clearListHandler() {
     const settings = appConfig;
     const id = 9999;
+    this.setState({ clearing: true });
     fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
       method: 'DELETE',
       headers: {
@@ -54,6 +58,7 @@ class GroceryContainer extends Component {
         'Content-Type': 'application/JSON',
       },
     }).then(() => {
+      this.setState({ clearing: false });
       this.refreshList();
     });
   }
@@ -71,31 +76,44 @@ class GroceryContainer extends Component {
   }
   refreshList() {
     const settings = appConfig;
-
+    this.setState({ refreshing: true });
     fetch(`${settings.RestServerLocation}/Api/grocery`)
       .then(result => result.json())
       .then((data) => {
         const arr = data.Ingredients;
         this.setState({ Ingredients: arr });
+        this.setState({ refreshing: false });
       });
   }
   render() {
     if (this.state.Ingredients === 0) {
       return <div>Loading...</div>;
     }
+    let spinnerClearList = '';
+    let spinnerRefreshList = '';
+    if (this.state.clearing)
+    {
+      spinnerClearList = <FontAwesome name='spinner' spin />;
+    }
+    if (this.state.refreshing)
+    {
+      spinnerRefreshList = <FontAwesome name='spinner' spin />;
+    }
     return (
       <div>
         <Card className="card-modified">
           <CardHeader>Grocery List
             <Button onClick={this.toggleViewItemsClickHandler}>
-                            View All
+              View All
             </Button>
-            <Button onClick={this.refreshListClickHandler}>Refresh</Button>
+            <Button onClick={this.refreshListClickHandler}>Refresh</Button> { spinnerRefreshList }
           </CardHeader>
           <CardBody>
             <CardText>
               <Row>
-                <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
+                <Col md="4" xs="12" sm="12" lg="12">
+                  <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
+                </Col>
               </Row>
               <Row>
                 <Col md="4" xs="12" sm="12">
@@ -112,11 +130,11 @@ class GroceryContainer extends Component {
                 <Col md="6" xs="6" />
                 <Col md="6" xs="6" className="float-right">
                   <Button onClick={this.groceryReoccurringModalHandler}>
-                                        Add reoccurring items
+                    Add reoccurring items
                   </Button>
                   <Button onClick={this.clearListHandler}>
-                                        Clear list
-                  </Button>
+                    Clear list
+                  </Button> { spinnerClearList }
                 </Col>
               </Row>
             </CardText>

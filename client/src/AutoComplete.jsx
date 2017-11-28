@@ -171,24 +171,19 @@ class Example extends React.Component {
     });
   };
   storeInputReference = autosuggest => {
-    console.log("storeInputReference");
     if (autosuggest !== null) {
       this.input = autosuggest.input;
     }
   };
   onSuggestionSelected = (event, { suggestion, suggestionValue, suggestionIndex, sectionIndex, method }) => {
 
-    // Update DB here
-    console.log('onSuggestionSelected yo');
-    console.log(this.state);
-    console.log(suggestionValue);
   }
   render() {
     const { value, suggestions } = this.state;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Type a programming language',
+      placeholder: 'Type a grocery item to add to list',
       value,
       onChange: this.onChange
     };

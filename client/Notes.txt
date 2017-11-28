@@ -41,6 +41,8 @@ redux
 clean code
 styling
 categorization
+find elegant way to reference font awesome in project. so far I included it in index.html
+
 
 ??) Show grocery totals -- won't do
 ??) Click on item on grocerylist and a popup will show letting me categorize it
@@ -104,3 +106,6 @@ color scheme
 node_modules/.bin/eslint --ext=js --ext=jsx --fix src/**
 node_modules/.bin/eslint ./src/app.jsx
 node_modules/.bin/esw --watch --ext .jsx ./src/app.jsx
+
+font awesome
+https://github.com/danawoodman/react-fontawesome/blob/master/api.md

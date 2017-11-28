@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 import appConfig from './settings.json';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class GroceryItemEditModal extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class GroceryItemEditModal extends Component {
             modal: false,
             ingredient: null,
             id: -1,
+            modifying: false
         };
         this.toggle = this.toggle.bind(this);
         this.addItem = this.addItem.bind(this);
@@ -30,7 +32,7 @@ class GroceryItemEditModal extends Component {
     addItem() {
         const settings = appConfig;
         const quanity = this.state.ingredient.Quantity + 1;
-        console.log(`${settings.RestServerLocation}/api/grocery/${this.state.ingredient.Id}/${quanity}`);
+        this.setState({ modifying: true });
         fetch(`${settings.RestServerLocation}/api/grocery/${this.state.ingredient.Id}/${quanity}`, {
             method: 'PUT',
             /*           headers: {
@@ -38,7 +40,8 @@ class GroceryItemEditModal extends Component {
                         'Content-Type': 'application/JSON',
                       }, */
         }).then((response) => {
-            this.refreshData(this.state.ingredient.Id)
+            this.refreshData(this.state.ingredient.Id);
+            this.setState({ modifying: false });
         });
 
 
@@ -46,7 +49,7 @@ class GroceryItemEditModal extends Component {
     removeItem() {
         const settings = appConfig;
         const quanity = this.state.ingredient.Quantity - 1;
-        console.log(`${settings.RestServerLocation}/api/grocery/${this.state.ingredient.Id}/${quanity}`);
+        this.setState({ modifying: true });
         fetch(`${settings.RestServerLocation}/api/grocery/${this.state.ingredient.Id}/${quanity}`, {
             method: 'PUT',
             /*           headers: {
@@ -54,7 +57,8 @@ class GroceryItemEditModal extends Component {
                         'Content-Type': 'application/JSON',
                       }, */
         }).then((response) => {
-            this.refreshData(this.state.ingredient.Id)
+            this.refreshData(this.state.ingredient.Id);
+            this.setState({ modifying: false });
         });
     }
     componentWillReceiveProps(nextProps) {
@@ -63,7 +67,6 @@ class GroceryItemEditModal extends Component {
         this.refreshData(nextProps.id);
     }
     componentDidMount() {
-        const settings = appConfig;
         console.log('id: ' + this.props.id);
         this.refreshData(this.props.id);
 
@@ -81,6 +84,11 @@ class GroceryItemEditModal extends Component {
         if (!this.state.ingredient) {
             return <div></div>;
         }
+        let spinner = '';
+        if (this.state.modifying)
+        {
+          spinner = <FontAwesome name='spinner' spin />;
+        }
         return (
             <div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
@@ -92,6 +100,7 @@ class GroceryItemEditModal extends Component {
                         {this.state.ingredient.Quantity}
                         <Button color="primary" onClick={this.addItem}>+
                         </Button>
+                        { spinner }
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.toggle}>Close</Button>{' '}
