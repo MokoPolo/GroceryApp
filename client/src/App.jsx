@@ -11,6 +11,7 @@ class App extends Component {
     super();
     this.state = {
       Recipe: null,
+      Ingredients: []
     };
   }
   componentDidMount() {

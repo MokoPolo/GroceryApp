@@ -31,7 +31,7 @@ class RecipeList extends Component {
         <Card className="card-modified">
           <CardHeader>Recipe List</CardHeader>
           <CardBody>
-            <CardText>
+            <CardText tag="div">
               <ul>
                 { recipeListItems }
               </ul>

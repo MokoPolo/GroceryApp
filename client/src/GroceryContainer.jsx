@@ -109,7 +109,7 @@ class GroceryContainer extends Component {
             <Button onClick={this.refreshListClickHandler}>Refresh</Button> { spinnerRefreshList }
           </CardHeader>
           <CardBody>
-            <CardText>
+            <CardText tag="div">
               <Row>
                 <Col md="4" xs="12" sm="12" lg="12">
                   <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
@@ -119,7 +119,7 @@ class GroceryContainer extends Component {
                 <Col md="4" xs="12" sm="12">
                   <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
                 </Col>
-                <Col md="4" xs="12" sm="12">
+                 <Col md="4" xs="12" sm="12">
                   <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category === 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Fruits/Vegetables" />
                 </Col>
                 <Col md="4" xs="12" sm="12">

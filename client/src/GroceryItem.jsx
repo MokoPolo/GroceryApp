@@ -52,7 +52,7 @@ class GroceryItem extends Component {
     const itemClass = `TransparentBackground NoBorders ${strikeclassname}`;
 
     return (
-      <ListGroupItemText key={this.state.ingredient.Id} className={itemClass}>
+      <ListGroupItemText key={this.state.ingredient.Id} className={itemClass} tag="div">
         <Row>
           <Col xs="1" lg="1" className="align-middle">
             <Input
@@ -82,7 +82,6 @@ GroceryItem.propTypes = {
   showDone: PropTypes.bool,
   editItemClick: PropTypes.func,
   toggleItemClick: PropTypes.func,
-  fuckyou: PropTypes.string
 };
 
 GroceryItem.defaultProps = {

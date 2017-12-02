@@ -35,21 +35,26 @@ class GroceryItems extends Component {
         editItemClick={this.groceryEditItemModalHandler}
       />
     ));
-    return (
-      <div>
-        <ListGroup className="TransparentBackground">
-          <ListGroupItem className="TransparentBackground">
-            <ListGroupItemHeading>{this.props.title}</ListGroupItemHeading>
-            {GroceryItems2}
-          </ListGroupItem>
-        </ListGroup>
-      </div>
-    );
+    if (GroceryItems2.length === 0) {
+      return <div />;
+    }
+    else {
+      return (
+        <div>
+          <ListGroup className="TransparentBackground">
+            <ListGroupItem className="TransparentBackground">
+              <ListGroupItemHeading>{this.props.title}</ListGroupItemHeading>
+              {GroceryItems2}
+            </ListGroupItem>
+          </ListGroup>
+        </div>
+      );
+    }
   }
 }
 
 GroceryItems.propTypes = {
-  ingredients: (PropTypes.arrayOf).isRequired,
+  ingredients: (PropTypes.array).isRequired,
   title: (PropTypes.string).isRequired,
   showDone: PropTypes.bool,
   editItemClick: PropTypes.func,
@@ -58,6 +63,7 @@ GroceryItems.propTypes = {
 GroceryItems.defaultProps = {
   showDone: false,
   editItemClick: null,
+  ingredients: []
 };
 
 export default GroceryItems;

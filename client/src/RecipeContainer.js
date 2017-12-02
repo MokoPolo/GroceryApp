@@ -17,7 +17,7 @@ class RecipeContainer extends Component {
           <Card className="card-modified">
             <CardHeader >Recipe name: {this.props.recipe.Name}</CardHeader>
             <CardBody>
-              <CardText>
+              <CardText tag="div">
                 <RecipeItems ingredients={this.props.recipe.Ingredients} />
               </CardText>
             </CardBody>

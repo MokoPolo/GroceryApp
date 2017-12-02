@@ -67,7 +67,6 @@ class GroceryItemEditModal extends Component {
         this.refreshData(nextProps.id);
     }
     componentDidMount() {
-        console.log('id: ' + this.props.id);
         this.refreshData(this.props.id);
 
     }
