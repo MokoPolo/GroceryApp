@@ -43,7 +43,7 @@ class GroceryContainer extends Component {
     this.setState({ modalReoccurring: true });
   }
   groceryEditItemModalHandler(selectedId) {
-    console.log('in groceryEditItemModalHandler ' + selectedId);
+    console.log(`in groceryEditItemModalHandler ${selectedId}`);
     this.setState({ selectedGroceryItemId: selectedId });
     this.setState({ modalEdit: true });
   }
@@ -91,13 +91,11 @@ class GroceryContainer extends Component {
     }
     let spinnerClearList = '';
     let spinnerRefreshList = '';
-    if (this.state.clearing)
-    {
-      spinnerClearList = <FontAwesome name='spinner' spin />;
+    if (this.state.clearing) {
+      spinnerClearList = <FontAwesome name="spinner" spin />;
     }
-    if (this.state.refreshing)
-    {
-      spinnerRefreshList = <FontAwesome name='spinner' spin />;
+    if (this.state.refreshing) {
+      spinnerRefreshList = <FontAwesome name="spinner" spin />;
     }
     return (
       <div>

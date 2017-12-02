@@ -77,7 +77,7 @@ GroceryItem.propTypes = {
     Id: PropTypes.number,
     Done: PropTypes.bool,
     Name: PropTypes.string,
-    Quantity: PropTypes.number
+    Quantity: PropTypes.number,
   }).isRequired,
   showDone: PropTypes.bool,
   editItemClick: PropTypes.func,
