@@ -125,7 +125,7 @@ class GroceryContainer extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md="6" xs="6" />
+                <Col md="5" xs="5" />
                 <Col md="6" xs="6" className="float-right">
                   <Button onClick={this.groceryReoccurringModalHandler}>
                     Add reoccurring items
@@ -134,6 +134,7 @@ class GroceryContainer extends Component {
                     Clear list
                   </Button> { spinnerClearList }
                 </Col>
+                <Col md="1" xs="1" />
               </Row>
             </CardText>
           </CardBody>
