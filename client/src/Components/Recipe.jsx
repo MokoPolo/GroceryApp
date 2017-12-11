@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Card, CardBody, CardText, CardHeader } from 'reactstrap';
 import RecipeItems from './RecipeItems';
 
-const RecipeContainer = ({ recipe }) => {
-  if (recipe !== null) {
+const Recipe = ({ recipe }) => {
+  if (recipe) {
     return (
       <div>
         <Card className="card-modified">
@@ -22,7 +22,7 @@ const RecipeContainer = ({ recipe }) => {
   );
 };
 
-RecipeContainer.propTypes = {
+Recipe.propTypes = {
   recipe: PropTypes.shape({
     Id: PropTypes.number,
     Name: PropTypes.string,
@@ -30,4 +30,4 @@ RecipeContainer.propTypes = {
   }).isRequired,
 };
 
-export default RecipeContainer;
+export default Recipe;

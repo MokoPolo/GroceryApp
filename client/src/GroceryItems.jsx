@@ -38,18 +38,17 @@ class GroceryItems extends Component {
     if (GroceryItems2.length === 0) {
       return <div />;
     }
-    else {
-      return (
-        <div>
-          <ListGroup className="TransparentBackground">
-            <ListGroupItem className="TransparentBackground">
-              <ListGroupItemHeading>{this.props.title}</ListGroupItemHeading>
-              {GroceryItems2}
-            </ListGroupItem>
-          </ListGroup>
-        </div>
-      );
-    }
+
+    return (
+      <div>
+        <ListGroup className="TransparentBackground">
+          <ListGroupItem className="TransparentBackground">
+            <ListGroupItemHeading>{this.props.title}</ListGroupItemHeading>
+            {GroceryItems2}
+          </ListGroupItem>
+        </ListGroup>
+      </div>
+    );
   }
 }
 
@@ -63,7 +62,7 @@ GroceryItems.propTypes = {
 GroceryItems.defaultProps = {
   showDone: false,
   editItemClick: null,
-  ingredients: []
+  ingredients: [],
 };
 
 export default GroceryItems;

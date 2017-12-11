@@ -107,5 +107,8 @@ node_modules/.bin/eslint --ext=js --ext=jsx --fix src/**
 node_modules/.bin/eslint ./src/app.jsx
 node_modules/.bin/esw --watch --ext .jsx ./src/app.jsx
 
+watch only jsx files 
+node_modules/.bin/esw --watch --ext .jsx --fix
+
 font awesome
 https://github.com/danawoodman/react-fontawesome/blob/master/api.md

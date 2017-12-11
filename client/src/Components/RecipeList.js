@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, CardBody, CardText, CardHeader, Col } from 'reactstrap';
-import appConfig from './settings.json';
+import appConfig from '../settings.json';
 import FontAwesome from 'react-fontawesome';
 
 class RecipeList extends Component {
@@ -9,24 +9,16 @@ class RecipeList extends Component {
     super();
     this.state = { Names: [] };
   }
-
   componentDidMount() {
-    const settings = appConfig;
-    fetch(`${settings.RestServerLocation}/Api/recipe`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then(result => result.json())
-      .then((data) => {
-        this.setState({ Names: data });
-      });
+    this.props.getRecipeList();
   }
 
   render() {
-    const recipeListItems = this.state.Names.map(name =>
-      <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={id => this.props.addclick(id)} viewclick={id => this.props.viewclick(id)} />);
+    let recipeListItems;
+    if (this.props.RecipeList) {
+      recipeListItems = this.props.RecipeList.map(name =>
+        <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={id => this.props.addclick(id)} viewclick={id => this.props.viewclick(id)} />);
+    }
     return (
       <div>
         <Card className="card-modified">
@@ -34,7 +26,7 @@ class RecipeList extends Component {
           <CardBody>
             <CardText tag="div">
               <ul>
-                { recipeListItems }
+                {recipeListItems}
               </ul>
             </CardText>
           </CardBody>
@@ -79,14 +71,14 @@ class RecipeListItem extends Component {
         <Col xs="12" md="6">
           <Button size="sm" onClick={() => this.recipeListAddClickHandler(this.props.Id)}>Add to grocery list</Button>
           <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>
-          { spinner }
+          {spinner}
         </Col>
       </li>);
   }
 }
 
 RecipeList.propTypes = {
-  listofRecipes: PropTypes.array,
+  recipeList: PropTypes.array,
   addclick: PropTypes.func,
   viewclick: PropTypes.func,
 };

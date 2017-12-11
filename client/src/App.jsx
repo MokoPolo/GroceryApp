@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { Jumbotron, Container, Row, Col } from 'reactstrap';
-import RecipeContainer from './RecipeContainer';
-import GroceryContainer from './GroceryContainer';
-import RecipeList from './RecipeList';
+import { connect } from 'react-redux';
+import Recipe from './Components/Recipe';
+/* import GroceryContainer from './GroceryContainer';
+*/
 import './App.css';
 import appConfig from './settings.json';
+import RecipeListContainer from './Containers/RecipeListContainer';
+
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      Recipe: null,
-      Ingredients: []
+      Ingredients: [],
     };
   }
   componentDidMount() {
@@ -22,25 +24,7 @@ class App extends Component {
         this.setState({ Ingredients: data.Ingredients }));
   }
 
-  recipeListAddClickHandler() {
-    const settings = appConfig;
 
-    fetch(`${settings.RestServerLocation}/Api/grocery`)
-      .then(result => result.json())
-      .then((data) => {
-        this.setState({ Ingredients: data.Ingredients });
-      });
-  }
-
-  recipeListViewClickHandler(id) {
-    const settings = appConfig;
-
-    fetch(`${settings.RestServerLocation}/Api/recipe/${id}`)
-      .then(result => result.json())
-      .then((data) => {
-        this.setState({ Recipe: data });
-      });
-  }
   render() {
     return (
       <div className="Main">
@@ -53,22 +37,19 @@ class App extends Component {
         <Container fluid>
           <Row>
             <Col xs="0" lg="2" />
-            <Col xs="12" lg="8"><GroceryContainer groceryList={this.state.Ingredients} /></Col>
+            <Col xs="12" lg="8">{/* <GroceryContainer groceryList={this.state.Ingredients} /> */}</Col>
             <Col xs="0" lg="2" />
           </Row>
           <Row>
             <Col xs="0" lg="2" />
             <Col xs="12" lg="8">
-              <RecipeList
-                addclick={e => this.recipeListAddClickHandler(e)}
-                viewclick={e => this.recipeListViewClickHandler(e)}
-              />
+              <RecipeListContainer />
             </Col>
             <Col xs="0" lg="2" />
           </Row>
           <Row>
             <Col xs="0" lg="2" />
-            <Col xs="12" lg="8"><RecipeContainer recipe={this.state.Recipe} /></Col>
+            <Col xs="12" lg="8"><Recipe recipe={this.props.Recipe} /></Col>
             <Col xs="0" lg="2" />
           </Row>
         </Container>
@@ -76,4 +57,16 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+const mapStateToProps = state => ({
+  Recipe: state.recipeReducer.Recipe,
+});
+
+/* const App = connect(
+  mapStateToProps,
+  null,
+  )(App); */
+export default connect(
+  mapStateToProps,
+  null,
+  )(App);

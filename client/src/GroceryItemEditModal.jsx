@@ -54,22 +54,21 @@ class GroceryItemEditModal extends Component {
                         Accept: 'application/JSON',
                         'Content-Type': 'application/JSON',
                       }, */
-        }).then((response) => {
-            this.refreshData(this.state.ingredient.Id);
-            this.setState({ modifying: false });
-        });
-    }
-    componentWillReceiveProps(nextProps) {
-        this.setState({ modal: nextProps.modal });
-        this.setState({ id: nextProps.id });
-        this.refreshData(nextProps.id);
-    }
-    componentDidMount() {
-        this.refreshData(this.props.id);
-
-    }
-    refreshData(id) {
-        const settings = appConfig;
+    }).then((response) => {
+      this.refreshData(this.state.ingredient.Id);
+      this.setState({ modifying: false });
+    });
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ modal: nextProps.modal });
+    this.setState({ id: nextProps.id });
+    this.refreshData(nextProps.id);
+  }
+  componentDidMount() {
+    this.refreshData(this.props.id);
+  }
+  refreshData(id) {
+    const settings = appConfig;
 
     fetch(`${settings.RestServerLocation}/Api/grocery/ingredient/${id}`)
             .then(result => result.json())
