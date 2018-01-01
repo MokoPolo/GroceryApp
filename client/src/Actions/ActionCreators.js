@@ -1,7 +1,10 @@
 import {
   SELECT_RECIPE,
   ADD_RECIPE_INGREDIENTS_TO_GROCERYLIST,
-  GET_RECIPE_LIST
+  GET_RECIPE_LIST,
+  GET_REOCCURRING_GROCERY_LIST_ITEMS,
+  ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
+  REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
@@ -50,7 +53,7 @@ export const getRecipeList = id => {
     })
       .then(result => result.json())
       .then((data) => {
-        dispatch( {
+        dispatch({
           type: GET_RECIPE_LIST,
           RecipeList: data
         })
@@ -60,57 +63,66 @@ export const getRecipeList = id => {
 export const selectRecipe = id => {
   const settings = appConfig;
   return (dispatch) => {
-     fetch(`${settings.RestServerLocation}/Api/recipe/${id}`)
+    fetch(`${settings.RestServerLocation}/Api/recipe/${id}`)
       .then(result => result.json())
       .then((data) => {
         /* return {
           type: SELECT_RECIPE,
           Recipe: data
         } */
-        dispatch( {
+        dispatch({
           type: SELECT_RECIPE,
           Recipe: data
         })
-      }); 
+      });
   }
 }
-export const foofoo = id => {
+
+export const requestAddReoccurringItemToGroceryList = (id) => {
   return {
-    type: ADD_RECIPE_INGREDIENTS_TO_GROCERYLIST,
+    type: REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
     id
   }
 }
-    /*const settings = appConfig;
-
-     fetch(`${settings.RestServerLocation}/Api/recipe/${id}`)
+export const getReoccurringGroceryListItems = () => {
+  const settings = appConfig;
+  return (dispatch) => {
+    fetch(`${settings.RestServerLocation}/Api/ingredient?reoccurringItems=True`)
       .then(result => result.json())
       .then((data) => {
-        this.setState({ Recipe: data });
-      }); */
-
-/* Recipe: {
-  "Id": 5,
-  "Name": "Spaghetti (test)",
-  "Ingredients": [
-      {
-          "Id": 3,
-          "Name": "Tomato sauce",
-          "Done": false,
-          "Category": null,
-          "Reoccurring": false,
-          "Quantity": 0
+        dispatch({
+          type: GET_REOCCURRING_GROCERY_LIST_ITEMS,
+          ReoccurringIngredients: data
+        })
+      });
+  }
+}
+export const addReoccurringItemToGroceryList = (id) => {
+  const settings = appConfig;
+  // Post to service. Add recipe ingredients to grocery list
+  return (dispatch) => {
+    fetch(`${settings.RestServerLocation}/Api/grocery/`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/JSON',
+        'Content-Type': 'application/JSON',
       },
-      {
-          "Id": 4,
-          "Name": "Pasta",
-          "Done": false,
-          "Category": null,
-          "Reoccurring": false,
-          "Quantity": 0
-      }
-  ]
+      body: JSON.stringify({
+        Id: id,
+        Name: '',
+        Done: false,
+      }),
+    }).then((result) => {
+      dispatch({
+        type: ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
+        id
+      })
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+}
 
-} */
 export const addRecipeIngredientsToGroceryList = id => {
   return {
     type: ADD_RECIPE_INGREDIENTS_TO_GROCERYLIST,

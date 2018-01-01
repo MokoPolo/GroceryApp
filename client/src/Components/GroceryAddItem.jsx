@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { InputGroup, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import './App.css';
-import appConfig from './settings.json';
+import '../App.css';
+import appConfig from '../settings.json';
 import FontAwesome from 'react-fontawesome';
 
 /* const languages = [

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import GroceryItem from './GroceryItem';
-import appConfig from './settings.json';
+import appConfig from '../settings.json';
 
 class GroceryItems extends Component {
   constructor() {

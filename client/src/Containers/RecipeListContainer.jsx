@@ -4,7 +4,6 @@ import {
     selectRecipe,
     addRecipeIngredientsToGroceryList,
     getRecipeList,
-    changeboo
 } from '../Actions/ActionCreators';
 
 const recipeListAddClickHandler = () => {
@@ -29,8 +28,7 @@ const recipeListViewClickHandler = (id) => {
 
 const mapStateToProps = (state) => {
     return{
-        RecipeList: state.recipeReducer.RecipeList,
-        tempboo: state.recipeReducer.tempboo
+        RecipeList: state.recipeReducer.RecipeList
     }
 }
 
@@ -44,9 +42,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getRecipeList: () => {
         dispatch(getRecipeList());
     },
-    changeboo: () => {
-        dispatch(changeboo());
-    }
 })
 
 const RecipeListContainer = connect(

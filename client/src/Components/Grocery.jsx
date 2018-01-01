@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Card, CardBody, CardText, CardHeader, Row, Col, Button } from 'reactstrap';
 import FontAwesome from 'react-fontawesome';
-import './App.css';
-import appConfig from './settings.json';
+import '../App.css';
+import appConfig from '../settings.json';
 import GroceryAddItem from './GroceryAddItem';
 import GroceryReoccurringModal from './GroceryReoccurringModal';
 import GroceryItems from './GroceryItems';
 import GroceryEditItemModal from './GroceryItemEditModal';
 
-class GroceryContainer extends Component {
+class Grocery extends Component {
   constructor() {
     super();
     this.state = {
@@ -108,7 +108,7 @@ class GroceryContainer extends Component {
           </CardHeader>
           <CardBody>
             <CardText tag="div">
-              <Row>
+{/*               <Row>
                 <Col md="4" xs="12" sm="12" lg="12">
                   <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
                 </Col>
@@ -123,16 +123,16 @@ class GroceryContainer extends Component {
                 <Col md="4" xs="12" sm="12">
                   <GroceryItems showDone={this.state.showDone} ingredients={this.state.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Other" />
                 </Col>
-              </Row>
+              </Row> */}
               <Row>
                 <Col md="5" xs="5" />
                 <Col md="6" xs="6" className="float-right">
                   <Button onClick={this.groceryReoccurringModalHandler}>
                     Add reoccurring items
                   </Button>
-                  <Button onClick={this.clearListHandler}>
+{/*                   <Button onClick={this.clearListHandler}>
                     Clear list
-                  </Button> { spinnerClearList }
+                  </Button> { spinnerClearList } */}
                 </Col>
                 <Col md="1" xs="1" />
               </Row>
@@ -143,13 +143,13 @@ class GroceryContainer extends Component {
           modal={this.state.modalReoccurring}
           closeClick={this.closeClickHandler}
         />
-        <GroceryEditItemModal
+{/*         <GroceryEditItemModal
           modal={this.state.modalEdit}
           closeClick={this.closeModalEditClickHandler}
           id={this.state.selectedGroceryItemId}
-        />
+        /> */}
       </div >);
   }
 }
 
-export default GroceryContainer;
+export default Grocery;

@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Jumbotron, Container, Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import Recipe from './Components/Recipe';
-/* import GroceryContainer from './GroceryContainer';
-*/
 import './App.css';
 import appConfig from './settings.json';
 import RecipeListContainer from './Containers/RecipeListContainer';
-
+import GroceryContainer from './Containers/GroceryContainer';
 
 class App extends Component {
   constructor() {
@@ -37,7 +35,7 @@ class App extends Component {
         <Container fluid>
           <Row>
             <Col xs="0" lg="2" />
-            <Col xs="12" lg="8">{/* <GroceryContainer groceryList={this.state.Ingredients} /> */}</Col>
+            <Col xs="12" lg="8"><GroceryContainer groceryList={this.state.Ingredients} /></Col>
             <Col xs="0" lg="2" />
           </Row>
           <Row>
