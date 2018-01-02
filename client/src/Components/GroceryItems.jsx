@@ -35,6 +35,7 @@ class GroceryItems extends Component {
         editItemClick={this.groceryEditItemModalHandler}
       />
     ));
+    console.log("GroceryItems2.length: " + GroceryItems2.length);
     if (GroceryItems2.length === 0) {
       return <div />;
     }

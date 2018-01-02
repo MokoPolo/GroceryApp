@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import RecipeList from '../Components/RecipeList';
 import {
     selectRecipe,
-    addRecipeIngredientsToGroceryList,
+    addRecipeToGroceryList,
     getRecipeList,
+    getGroceryList,
 } from '../Actions/ActionCreators';
 
 const recipeListAddClickHandler = () => {
@@ -33,15 +34,18 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    addclick: (id) => {
-        dispatch(addRecipeIngredientsToGroceryList(id));
+    addRecipeToGroceryList: (id) => {
+        dispatch(addRecipeToGroceryList(id));
     },
-    viewclick: (id) => {
+    viewRecipeClick: (id) => {
         dispatch(selectRecipe(id));
     },
     getRecipeList: () => {
         dispatch(getRecipeList());
     },
+    getGroceryList: () => {
+        dispatch(getGroceryList());
+    }
 })
 
 const RecipeListContainer = connect(

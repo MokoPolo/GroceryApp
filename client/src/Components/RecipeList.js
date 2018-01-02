@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Card, CardBody, CardText, CardHeader, Col } from 'reactstrap';
 import appConfig from '../settings.json';
 import FontAwesome from 'react-fontawesome';
-
+import RecipeListItem from './RecipeListItem';
 class RecipeList extends Component {
-  constructor() {
-    super();
-    this.state = { Names: [] };
-  }
   componentDidMount() {
     this.props.getRecipeList();
   }
@@ -16,8 +12,8 @@ class RecipeList extends Component {
   render() {
     let recipeListItems;
     if (this.props.RecipeList) {
-      recipeListItems = this.props.RecipeList.map(name =>
-        <RecipeListItem Name={name.Name} Id={name.Id} key={name.Id} addclick={id => this.props.addclick(id)} viewclick={id => this.props.viewclick(id)} />);
+      recipeListItems = this.props.RecipeList.map(recipe =>
+        <RecipeListItem Name={recipe.Name} Id={recipe.Id} key={recipe.Id} Loading={recipe.isAddingToGroceryList} />);
     }
     return (
       <div>
@@ -36,56 +32,11 @@ class RecipeList extends Component {
   }
 }
 
-class RecipeListItem extends Component {
-  constructor() {
-    super();
-    this.state = { loading: false };
-  }
-
-  recipeListAddClickHandler(id) {
-    const settings = appConfig;
-    this.setState({ loading: true });
-    // Post to service. Add recipe ingredients to grocery list
-    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
-      method: 'POST',
-      /*       headers: {
-              "Accept": 'application/JSON',
-              "Content-Type": "application/JSON"
-            },
-            body: JSON.stringify(
-              id
-            ) */
-    }).then((result) => {
-      this.setState({ loading: false });
-      this.props.addclick(id);
-    });
-  }
-  render() {
-    let spinner = '';
-    if (this.state.loading) {
-      spinner = <FontAwesome name="spinner" spin />;
-    }
-    return (
-      <li key={this.props.Name.toString()} className="row" item={this.props.Name}>
-        <Col xs="12" md="6">{this.props.Name}</Col>
-        <Col xs="12" md="6">
-          <Button size="sm" onClick={() => this.recipeListAddClickHandler(this.props.Id)}>Add to grocery list</Button>
-          <Button size="sm" onClick={() => this.props.viewclick(this.props.Id)}>View recipe</Button>
-          {spinner}
-        </Col>
-      </li>);
-  }
-}
 
 RecipeList.propTypes = {
   recipeList: PropTypes.array,
   addclick: PropTypes.func,
   viewclick: PropTypes.func,
 };
-RecipeListItem.propTypes = {
-  addclick: PropTypes.func,
-  viewclick: PropTypes.func,
-  Id: PropTypes.number,
-  Name: PropTypes.string,
-};
+
 export default RecipeList;

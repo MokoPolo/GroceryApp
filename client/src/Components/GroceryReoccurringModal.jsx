@@ -20,7 +20,6 @@ class GroceryReoccurringModal extends Component {
   toggle() {
     this.setState(prevState => ({ modal: !prevState.modal }), () => {
       if (this.state.modal === false) {
-        // console.log("toggle callback");
         this.props.closeClick();
       }
     });
@@ -71,12 +70,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   getReoccurringGroceryListItems: () => {
       dispatch(getReoccurringGroceryListItems());
   },
-/*   addReoccurringItemToGroceryList: (id) => {
-      dispatch(addReoccurringItemToGroceryList(id));
-  },
-  requestAddReoccurringItemToGroceryList: (id) => {
-    dispatch(requestAddReoccurringItemToGroceryList(id));
-  }, */
 })
 
 export default connect(

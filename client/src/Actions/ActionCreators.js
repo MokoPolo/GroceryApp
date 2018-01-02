@@ -1,45 +1,20 @@
 import {
   SELECT_RECIPE,
-  ADD_RECIPE_INGREDIENTS_TO_GROCERYLIST,
+  ADD_RECIPE_TO_GROCERYLIST,
   GET_RECIPE_LIST,
   GET_REOCCURRING_GROCERY_LIST_ITEMS,
   ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
-  REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST
+  REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
+  REFRESH_GROCERY_LIST,
+  GET_GROCERY_LIST,
+  REQUEST_ADD_RECIPE_TO_GROCERYLIST
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
-/*export const selectRecipe = id => {
-   return {
-    type: SELECT_RECIPE,
-    Recipe: {
-      "Id": 5,
-      "Name": "Spaghetti (test)",
-      "Ingredients": [
-          {
-              "Id": 3,
-              "Name": "Tomato sauce",
-              "Done": false,
-              "Category": null,
-              "Reoccurring": false,
-              "Quantity": 0
-          },
-          {
-              "Id": 4,
-              "Name": "Pasta",
-              "Done": false,
-              "Category": null,
-              "Reoccurring": false,
-              "Quantity": 0
-          }
-      ]
-    
-    }
-  }
-} */
-export const changeboo = () => {
+export const refreshGroceryList = (refreshStatus) => {
   return {
-    type: 'change_bool',
-    asdf: 'asdf'
+    type: REFRESH_GROCERY_LIST,
+    refreshGroceryList: refreshStatus
   }
 }
 export const getRecipeList = id => {
@@ -77,10 +52,15 @@ export const selectRecipe = id => {
       });
   }
 }
-
 export const requestAddReoccurringItemToGroceryList = (id) => {
   return {
     type: REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
+    id
+  }
+}
+export const requestAddRecipeToGroceryList = (id) => {
+  return {
+    type: REQUEST_ADD_RECIPE_TO_GROCERYLIST,
     id
   }
 }
@@ -123,9 +103,34 @@ export const addReoccurringItemToGroceryList = (id) => {
   }
 }
 
-export const addRecipeIngredientsToGroceryList = id => {
-  return {
-    type: ADD_RECIPE_INGREDIENTS_TO_GROCERYLIST,
-    id
+export const addRecipeToGroceryList = id => {
+  const settings = appConfig;
+  return (dispatch) => {
+    dispatch({
+      type: REQUEST_ADD_RECIPE_TO_GROCERYLIST,
+      id: id,
+      status: true
+    });
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
+      method: 'POST',
+    }).then((result) => {
+      dispatch({
+        type: ADD_RECIPE_TO_GROCERYLIST,
+        id
+      })
+    });
+  }
+}
+export const getGroceryList = id => {
+  const settings = appConfig;
+  return (dispatch) => {
+    fetch(`${settings.RestServerLocation}/Api/grocery`)
+      .then(result => result.json())
+      .then((data) => {
+        dispatch({
+          type: GET_GROCERY_LIST,
+          groceryList: data.Ingredients
+        })
+      });
   }
 }
