@@ -7,7 +7,9 @@ import {
   REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
   REFRESH_GROCERY_LIST,
   GET_GROCERY_LIST,
-  REQUEST_ADD_RECIPE_TO_GROCERYLIST
+  REQUEST_ADD_RECIPE_TO_GROCERYLIST,
+  CLEAR_GROCERY_LIST,
+  TOGGLE_GROCERY_ITEM
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
@@ -96,7 +98,11 @@ export const addReoccurringItemToGroceryList = (id) => {
       dispatch({
         type: ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
         id
-      })
+      });
+      dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      });
     }).catch((err) => {
       console.log(err);
     });
@@ -118,10 +124,14 @@ export const addRecipeToGroceryList = id => {
         type: ADD_RECIPE_TO_GROCERYLIST,
         id
       })
+      dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      });
     });
   }
 }
-export const getGroceryList = id => {
+export const getGroceryList = () => {
   const settings = appConfig;
   return (dispatch) => {
     fetch(`${settings.RestServerLocation}/Api/grocery`)
@@ -131,6 +141,56 @@ export const getGroceryList = id => {
           type: GET_GROCERY_LIST,
           groceryList: data.Ingredients
         })
+        dispatch({
+          type: REFRESH_GROCERY_LIST,
+          refreshGroceryList: false
+        });
       });
   }
 }
+export const clearGroceryList = () => {
+  const settings = appConfig;
+  return (dispatch) => {
+    const settings = appConfig;
+    const id = 9999;
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/JSON',
+        'Content-Type': 'application/JSON',
+      },
+    }).then(() => {
+      dispatch({
+        type: CLEAR_GROCERY_LIST,
+      });
+      dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      });
+    });
+  }
+}
+export const toggleGroceryItem = (id, isDone) => {
+  const settings = appConfig;
+  return (dispatch) => {
+    const settings = appConfig;
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/JSON',
+        'Content-Type': 'application/JSON',
+      },
+      body: JSON.stringify(isDone),
+    }).then(() => {
+      dispatch({
+        type: TOGGLE_GROCERY_ITEM,
+        id
+      });
+      dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      });
+    });
+  }
+}
+

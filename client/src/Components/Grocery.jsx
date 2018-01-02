@@ -31,7 +31,10 @@ class Grocery extends Component {
   componentDidMount(){
     this.props.getGroceryList();
   }
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.refreshGroceryListStatus === true) {//&& (this.props.refreshGroceryListStatus !== nextProps.refreshGroceryListStatus)) {
+      this.props.getGroceryList();
+    }
     //this.props.getGroceryList();
   }
 
@@ -50,19 +53,11 @@ class Grocery extends Component {
     this.setState({ modalEdit: true });
   }
   clearListHandler() {
-/*     const settings = appConfig;
-    const id = 9999;
-    this.setState({ clearing: true });
-    fetch(`${settings.RestServerLocation}/Api/grocery/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/JSON',
-        'Content-Type': 'application/JSON',
-      },
-    }).then(() => {
-      this.setState({ clearing: false });
-      this.props.getGroceryList();
-    }); */
+    //this.props.refreshGroceryList(true);
+    this.props.clearGroceryList();//.then({
+      // Need a promise here
+    //}); 
+    //this.props.getGroceryList();
   }
   closeClickHandler() {
     this.setState({ modalReoccurring: false });
@@ -71,6 +66,7 @@ class Grocery extends Component {
     this.setState({ modalEdit: false });
   }
   refreshListClickHandler() {
+    this.props.refreshGroceryList(true);
     this.props.getGroceryList();
   }
   checkBoxButtonClickHandler(index) {
@@ -97,9 +93,13 @@ class Grocery extends Component {
     if (this.state.clearing) {
       spinnerClearList = <FontAwesome name="spinner" spin />;
     }
-    if (this.state.refreshing) {
+    if (this.props.refreshGroceryListStatus) {
+      //this.props.getGroceryList();
       spinnerRefreshList = <FontAwesome name="spinner" spin />;
     }
+    console.log(this.props.Ingredients.filter(i => i.Category === 'Meat'));
+    console.log(this.props.Ingredients.filter(i => i.Category === 'Fresh Produce'));
+    console.log(this.props.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce'));
     return (
       <div>
         <Card className="card-modified">
@@ -133,9 +133,9 @@ class Grocery extends Component {
                   <Button onClick={this.groceryReoccurringModalHandler}>
                     Add reoccurring items
                   </Button>
-{/*                   <Button onClick={this.clearListHandler}>
+                   <Button onClick={this.clearListHandler}>
                     Clear list
-                  </Button> { spinnerClearList } */}
+                  </Button> { spinnerClearList }
                 </Col>
                 <Col md="1" xs="1" />
               </Row>

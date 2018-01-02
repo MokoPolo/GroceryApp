@@ -1,46 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Input, ListGroupItemText, Button, Row, Col } from 'reactstrap';
+import {
+  toggleGroceryItem,
+} from '../Actions/ActionCreators';
 
-class GroceryItem extends Component {
-  constructor() {
-    super();
-    this.state = {
-      ingredient: null,
-    };
-    this.toggle = this.toggle.bind(this);
-    this.groceryEditItemModalHandler = this.groceryEditItemModalHandler.bind(this);
+const GroceryItem = ({ Id, Done, Name, Quantity, showDone, toggleGroceryItem, groceryEditItemModalHandler }) => {
+   if (!Id) {
+    return <div>Loading...</div>;
   }
-  componentWillMount() {
-    this.setState({ ingredient: this.props.ingredient });
-  }
-  componentWillReceiveProps(nextProps) {
-    this.setState({ ingredient: nextProps.ingredient });
-  }
-  groceryEditItemModalHandler() {
-    this.props.editItemClick(this.state.ingredient.Id);
-  }
-  toggle() {
-    const newIngredient = { ...this.state.ingredient };
-    newIngredient.Done = !this.state.ingredient.Done; // change done status
-    this.setState({ ingredient: newIngredient }); // set new state
-
-    /*     this.setState(prevState => {
-      return {ingredient: { ...prevState.ingredient }, Done: !prevState.ingredient.Done};
-    }, () => {
-      this.props.toggleItemClick(this.state.ingredient.Id, this.state.ingredient.Done);
-    }); */
-    this.props.toggleItemClick(newIngredient.Id, newIngredient.Done);
-  }
-  render() {
+  else {
     let strikeclassname;
-
-    if (!this.state.ingredient) {
-      return <div>Loading...</div>;
-    }
-
-    if (this.state.ingredient.Done === true) {
-      if (this.props.showDone === true) {
+    if (Done === true) {
+      if (showDone === true) {
         strikeclassname = 'strike';
       } else {
         return null;
@@ -51,19 +24,19 @@ class GroceryItem extends Component {
     const itemClass = `TransparentBackground NoBorders ${strikeclassname}`;
 
     return (
-      <ListGroupItemText key={this.state.ingredient.Id} className={itemClass} tag="div">
+      <ListGroupItemText key={Id} className={itemClass} tag="div">
         <Row>
           <Col xs="1" lg="1" className="align-middle">
             <Input
               type="checkbox"
-              defaultChecked={this.state.ingredient.Done}
-              onChange={this.toggle}
+              defaultChecked={Done}
+              onChange={() => toggleGroceryItem(Id, !Done)}
             /></Col>
           <Col xs="10" lg="8">
-            {this.state.ingredient.Name} (Qty:{this.state.ingredient.Quantity})
-            </Col>
+            {Name} (Qty:{Quantity})
+                  </Col>
           <Col xs="1" lg="3">
-            <Button onClick={this.groceryEditItemModalHandler} >Edit item</Button>
+            <Button onClick={() => groceryEditItemModalHandler(Id)} >Edit item</Button>
           </Col>
         </Row>
       </ListGroupItemText>
@@ -72,21 +45,24 @@ class GroceryItem extends Component {
 }
 
 GroceryItem.propTypes = {
-  ingredient: PropTypes.shape({
-    Id: PropTypes.number,
-    Done: PropTypes.bool,
-    Name: PropTypes.string,
-    Quantity: PropTypes.number,
-  }).isRequired,
+  Id: PropTypes.number,
+  Done: PropTypes.bool,
+  Name: PropTypes.string,
+  Quantity: PropTypes.number,
   showDone: PropTypes.bool,
-  editItemClick: PropTypes.func,
-  toggleItemClick: PropTypes.func,
 };
 
 GroceryItem.defaultProps = {
   showDone: false,
-  toggleItemClick: null,
-  editItemClick: null,
 };
 
-export default GroceryItem;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  toggleGroceryItem: (id, done) => {
+    dispatch(toggleGroceryItem(id, done));
+  },
+})
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(GroceryItem);

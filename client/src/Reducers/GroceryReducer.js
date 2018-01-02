@@ -4,11 +4,13 @@ import {
     REQUEST_ADD_REOCCURRING_ITEM_TO_GROCERYLIST,
     REFRESH_GROCERY_LIST,
     GET_GROCERY_LIST,
+    CLEAR_GROCERY_LIST,
 } from '../Actions/ActionTypes';
 let defaultState = {
     ReoccurringIngredients: [],
     isAddingIngredientToGroceryList: false,
-    groceryList: []
+    groceryList: [],
+    refreshGroceryList: false
 };
 
 const groceryReducer = (state = defaultState, action) => {
@@ -16,7 +18,7 @@ const groceryReducer = (state = defaultState, action) => {
         case GET_REOCCURRING_GROCERY_LIST_ITEMS:
             return {
                 ...state, ReoccurringIngredients: action.ReoccurringIngredients.map(ingredient =>
-                    ({...ingredient, isAddingIngredientToGroceryList: false})
+                    ({ ...ingredient, isAddingIngredientToGroceryList: false })
                 )
             };
         case ADD_REOCCURRING_ITEM_TO_GROCERYLIST:
@@ -42,6 +44,10 @@ const groceryReducer = (state = defaultState, action) => {
         case GET_GROCERY_LIST:
             return {
                 ...state, groceryList: action.groceryList
+            }
+        case CLEAR_GROCERY_LIST:
+            return {
+                ...state
             }
         default:
             return state;

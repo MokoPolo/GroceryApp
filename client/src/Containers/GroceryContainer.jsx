@@ -5,12 +5,15 @@ import {
     getReoccurringGroceryListItems,
     addReoccurringItemToGroceryList,
     getGroceryList,
+    refreshGroceryList,
+    clearGroceryList
 } from '../Actions/ActionCreators';
 
 const mapStateToProps = (state) => {
     return{
         RecipeList: state.recipeReducer.RecipeList,
-        Ingredients: state.groceryReducer.groceryList
+        Ingredients: state.groceryReducer.groceryList,
+        refreshGroceryListStatus: state.groceryReducer.refreshGroceryList
     }
 }
 
@@ -24,6 +27,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     getGroceryList: () => {
         dispatch(getGroceryList());
     },
+    refreshGroceryList: (status) => {
+        dispatch(refreshGroceryList(status));
+    },
+    clearGroceryList: () => {
+        dispatch(clearGroceryList());
+    }
 })
 
 const GroceryContainer = connect(
