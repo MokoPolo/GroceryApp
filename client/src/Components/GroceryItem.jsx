@@ -6,7 +6,7 @@ import {
   toggleGroceryItem,
 } from '../Actions/ActionCreators';
 
-const GroceryItem = ({ Id, Done, Name, Quantity, showDone, toggleGroceryItem, groceryEditItemModalHandler }) => {
+const GroceryItem = ({ Id, Done, Name, Quantity, showDone, toggleGroceryItem, editItemClick }) => {
    if (!Id) {
     return <div>Loading...</div>;
   }
@@ -36,7 +36,7 @@ const GroceryItem = ({ Id, Done, Name, Quantity, showDone, toggleGroceryItem, gr
             {Name} (Qty:{Quantity})
                   </Col>
           <Col xs="1" lg="3">
-            <Button onClick={() => groceryEditItemModalHandler(Id)} >Edit item</Button>
+            <Button onClick={() => editItemClick(Id)} >Edit item</Button>
           </Col>
         </Row>
       </ListGroupItemText>
@@ -50,6 +50,7 @@ GroceryItem.propTypes = {
   Name: PropTypes.string,
   Quantity: PropTypes.number,
   showDone: PropTypes.bool,
+  editItemClick: PropTypes.func,
 };
 
 GroceryItem.defaultProps = {

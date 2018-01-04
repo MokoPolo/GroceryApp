@@ -97,34 +97,31 @@ class Grocery extends Component {
       //this.props.getGroceryList();
       spinnerRefreshList = <FontAwesome name="spinner" spin />;
     }
-    console.log(this.props.Ingredients.filter(i => i.Category === 'Meat'));
-    console.log(this.props.Ingredients.filter(i => i.Category === 'Fresh Produce'));
-    console.log(this.props.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce'));
     return (
       <div>
         <Card className="card-modified">
           <CardHeader>Grocery List
             <Button onClick={this.toggleViewItemsClickHandler}>
-              View All
+              Toggle View All
             </Button>
             <Button onClick={this.refreshListClickHandler}>Refresh</Button> { spinnerRefreshList }
           </CardHeader>
           <CardBody>
             <CardText tag="div">
-{/*                 <Row>
+              <Row>
                 <Col md="4" xs="12" sm="12" lg="12">
                   <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
                 </Col>
-              </Row> */}
+              </Row>
               <Row>
                  <Col md="4" xs="12" sm="12">
-                  <GroceryItems /* showDone={this.state.showDone}*/  ingredients={this.props.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
+                  <GroceryItems showDone={this.state.showDone}  ingredients={this.props.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
                 </Col> 
                 <Col md="4" xs="12" sm="12">
-                  <GroceryItems /* showDone={this.state.showDone} */ ingredients={this.props.Ingredients.filter(i => i.Category === 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Fruits/Vegetables" />
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.props.Ingredients.filter(i => i.Category === 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Fruits/Vegetables" />
                 </Col>
                  <Col md="4" xs="12" sm="12">
-                  <GroceryItems /* showDone={this.state.showDone}*/ ingredients={this.props.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Other" />
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.props.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Other" />
                 </Col>
               </Row>
               <Row>
@@ -146,11 +143,11 @@ class Grocery extends Component {
           modal={this.state.modalReoccurring}
           closeClick={this.closeClickHandler}
         />
-{/*         <GroceryEditItemModal
+        <GroceryEditItemModal
           modal={this.state.modalEdit}
           closeClick={this.closeModalEditClickHandler}
           id={this.state.selectedGroceryItemId}
-        /> */}
+        />
       </div >);
   }
 }

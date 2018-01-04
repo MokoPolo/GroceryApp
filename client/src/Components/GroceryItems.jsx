@@ -4,7 +4,7 @@ import { ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 import GroceryItem from './GroceryItem';
 import appConfig from '../settings.json';
 
-const GroceryItems = ({groceryEditItemModalHandler, ingredients, title}) => {
+const GroceryItems = ({ingredients, title, editItemClick, showDone}) => {
   if (!ingredients || ingredients.length === 0){
     return null;
   }
@@ -12,8 +12,8 @@ const GroceryItems = ({groceryEditItemModalHandler, ingredients, title}) => {
     <GroceryItem
       key={ingredient.Id}
       {...ingredient}
-      showDone
-      editItemClick={() => this.props.editItemClick()}
+      showDone={showDone}
+      editItemClick={(id) => editItemClick(id)}
     />
   ));
   if (GroceryItems2.length === 0) {
