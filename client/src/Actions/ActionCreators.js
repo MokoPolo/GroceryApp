@@ -9,7 +9,12 @@ import {
   GET_GROCERY_LIST,
   REQUEST_ADD_RECIPE_TO_GROCERYLIST,
   CLEAR_GROCERY_LIST,
-  TOGGLE_GROCERY_ITEM
+  TOGGLE_GROCERY_ITEM,
+  EDIT_ITEM_REFRESH,
+  EDIT_ITEM_SET_QUANTITY,
+  EDIT_ITEM_TOGGLE_VISIBILITY,
+  EDIT_ITEM_LOAD,
+  REQUEST_MODIFYING_EDIT_ITEM
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
@@ -191,6 +196,79 @@ export const toggleGroceryItem = (id, isDone) => {
         refreshGroceryList: true
       });
     });
+  }
+}
+export const refreshEditItem = (refreshEditItem) => {
+  const settings = appConfig;
+  return (dispatch) => {
+      dispatch({
+        type: EDIT_ITEM_REFRESH,
+        refreshEditItem
+      });
+      //EDIT_ITEM_REFRESH
+      //this.setState({ selectedEditGroceryItem: data });
+  }
+}
+export const loadEditItem = (id) => {
+  const settings = appConfig;
+  return (dispatch) => {
+    fetch(`${settings.RestServerLocation}/Api/grocery/ingredient/${id}`)
+    .then(result => result.json())
+    .then((data) => {
+      dispatch({
+        type: EDIT_ITEM_LOAD,
+        selectedEditItem : data
+      });
+      dispatch({
+        type: EDIT_ITEM_REFRESH,
+        refreshEditItem: false
+      });  
+      //EDIT_ITEM_REFRESH
+      //this.setState({ selectedEditGroceryItem: data });
+    });
+  }
+}
+export const setEditItemQuantity = (id, quanity) => {
+  const settings = appConfig;
+  return (dispatch) => {
+    dispatch({
+      type: REQUEST_MODIFYING_EDIT_ITEM,
+      modifyingEditItem: true
+    });
+    fetch(`${settings.RestServerLocation}/api/grocery/${id}/${quanity}`, {
+      method: 'PUT',
+    })
+    .then(() => {
+       dispatch({
+        type: EDIT_ITEM_SET_QUANTITY,
+      }); 
+       dispatch({
+        type: REQUEST_MODIFYING_EDIT_ITEM,
+        modifyingEditItem: false
+      });
+/*       dispatch({
+        type: EDIT_ITEM_REFRESH,
+        refreshEditItem: true
+      });  */
+       dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      }); 
+    });
+  }
+}
+export const toggleEditItemVisibility = (showEditItem) => {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_ITEM_TOGGLE_VISIBILITY,
+      showEditItem
+    });
+  }
+}
+export const requestModifyingEditItem = (modifyingEditItem) => {
+  return {
+    type: REQUEST_MODIFYING_EDIT_ITEM,
+    modifyingEditItem
   }
 }
 

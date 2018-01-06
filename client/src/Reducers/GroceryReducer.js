@@ -5,12 +5,21 @@ import {
     REFRESH_GROCERY_LIST,
     GET_GROCERY_LIST,
     CLEAR_GROCERY_LIST,
+    EDIT_ITEM_REFRESH,
+    EDIT_ITEM_LOAD,
+    EDIT_ITEM_SET_QUANTITY,
+    EDIT_ITEM_TOGGLE_VISIBILITY,
+    REQUEST_MODIFYING_EDIT_ITEM
 } from '../Actions/ActionTypes';
 let defaultState = {
     ReoccurringIngredients: [],
     isAddingIngredientToGroceryList: false,
     groceryList: [],
-    refreshGroceryList: false
+    refreshGroceryList: false,
+    refreshEditItem: false,
+    selectedEditItem: null,
+    showEditItem: false,
+    modifyingEditItem: false
 };
 
 const groceryReducer = (state = defaultState, action) => {
@@ -49,6 +58,26 @@ const groceryReducer = (state = defaultState, action) => {
             return {
                 ...state
             }
+        case EDIT_ITEM_REFRESH:
+        return {
+            ...state, refreshEditItem: action.refreshEditItem
+        }
+        case EDIT_ITEM_LOAD:
+        return {
+            ...state, selectedEditItem: action.selectedEditItem
+        }
+        case EDIT_ITEM_SET_QUANTITY:
+        return {
+            ...state, refreshEditItem: true,
+        }
+        case EDIT_ITEM_TOGGLE_VISIBILITY:
+        return {
+            ...state, showEditItem: action.showEditItem
+        }
+        case REQUEST_MODIFYING_EDIT_ITEM:
+        return {
+            ...state, modifyingEditItem: action.modifyingEditItem
+        }
         default:
             return state;
     }
