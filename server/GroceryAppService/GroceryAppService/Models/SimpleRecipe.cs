@@ -24,6 +24,8 @@ namespace GroceryAppService.Models
 
         public string Category { get; set; }
 
+        public int CategoryId { get; set; }
+
         public bool Reoccurring { get; set; }
 
         public int Quantity { get; set; }

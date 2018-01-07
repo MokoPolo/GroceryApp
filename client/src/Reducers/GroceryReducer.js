@@ -9,7 +9,8 @@ import {
     EDIT_ITEM_LOAD,
     EDIT_ITEM_SET_QUANTITY,
     EDIT_ITEM_TOGGLE_VISIBILITY,
-    REQUEST_MODIFYING_EDIT_ITEM
+    REQUEST_MODIFYING_EDIT_ITEM,
+    EDIT_ITEM_SET_CATEGORY
 } from '../Actions/ActionTypes';
 let defaultState = {
     ReoccurringIngredients: [],
@@ -67,6 +68,10 @@ const groceryReducer = (state = defaultState, action) => {
             ...state, selectedEditItem: action.selectedEditItem
         }
         case EDIT_ITEM_SET_QUANTITY:
+        return {
+            ...state, refreshEditItem: true,
+        }
+        case EDIT_ITEM_SET_CATEGORY:
         return {
             ...state, refreshEditItem: true,
         }

@@ -14,7 +14,8 @@ import {
   EDIT_ITEM_SET_QUANTITY,
   EDIT_ITEM_TOGGLE_VISIBILITY,
   EDIT_ITEM_LOAD,
-  REQUEST_MODIFYING_EDIT_ITEM
+  REQUEST_MODIFYING_EDIT_ITEM,
+  EDIT_ITEM_SET_CATEGORY
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
@@ -246,10 +247,31 @@ export const setEditItemQuantity = (id, quanity) => {
         type: REQUEST_MODIFYING_EDIT_ITEM,
         modifyingEditItem: false
       });
-/*       dispatch({
-        type: EDIT_ITEM_REFRESH,
-        refreshEditItem: true
-      });  */
+       dispatch({
+        type: REFRESH_GROCERY_LIST,
+        refreshGroceryList: true
+      }); 
+    });
+  }
+}
+export const setEditItemCategory = (id, categoryId) => {
+  const settings = appConfig;
+  return (dispatch) => {
+    dispatch({
+      type: REQUEST_MODIFYING_EDIT_ITEM,
+      modifyingEditItem: true
+    });
+    fetch(`${settings.RestServerLocation}/api/grocery/ingredient/${id}/${categoryId}`, {
+      method: 'PUT',
+    })
+    .then(() => {
+       dispatch({
+        type: EDIT_ITEM_SET_CATEGORY,
+      }); 
+       dispatch({
+        type: REQUEST_MODIFYING_EDIT_ITEM,
+        modifyingEditItem: false
+      });
        dispatch({
         type: REFRESH_GROCERY_LIST,
         refreshGroceryList: true

@@ -122,7 +122,6 @@ namespace GroceryAppService.Controllers
         [HttpPut]
         public IHttpActionResult ModifyGroceryIngredientQuantity(int id, int quantity)
         {
-            var recipeId = id;
             using (var context = new MarcDbEntities())
             {
                 var groceryIngredients = context.GroceryIngredients.Where(g => g.GroceryId == 1);
@@ -156,10 +155,44 @@ namespace GroceryAppService.Controllers
                         Name = i.Ingredient.Name,
                         Category = i.Ingredient.IngredientCategory.Category,
                         Reoccurring = i.Ingredient.Reoccurring.HasValue ? i.Ingredient.Reoccurring.Value : false,
-                        Quantity = i.Quantity.HasValue ? i.Quantity.Value : 1
+                        Quantity = i.Quantity.HasValue ? i.Quantity.Value : 1,
+                        CategoryId = i.Ingredient.IngredientCategory.Id
                     })
                     ).FirstOrDefault();
                 return Ok(data);
+            }
+        }
+        [Route("api/grocery/ingredient/{id}/{categoryId}")]
+        [HttpPut]
+        public IHttpActionResult ModifyGroceryIngredientCategory(int id, int categoryId)
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var groceryIngredients = context.GroceryIngredients.Where(g => g.GroceryId == 1);
+
+                if (groceryIngredients.Any())
+                {
+                    var ingredient = groceryIngredients.FirstOrDefault(i => i.IngredientId == id).Ingredient;
+                    var category = context.IngredientCategories.FirstOrDefault(i => i.Id == categoryId);
+
+                    if (category != null)
+                    {
+                        ingredient.IngredientCategory = category;
+                        context.SaveChanges();
+                        return Ok();
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                    
+
+                    
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
         }
         /// <summary>

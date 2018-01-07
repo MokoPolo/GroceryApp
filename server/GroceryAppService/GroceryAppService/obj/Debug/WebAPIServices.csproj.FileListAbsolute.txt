@@ -80,4 +80,3 @@ C:\Dev\Repos\groceryapp\server\GroceryAppService\GroceryAppService\bin\System.We
 C:\Dev\Repos\groceryapp\server\GroceryAppService\GroceryAppService\bin\System.Web.Http.Cors.dll
 C:\Dev\Repos\groceryapp\server\GroceryAppService\GroceryAppService\bin\System.Web.Http.Cors.xml
 C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\WebAPIServices.csprojResolveAssemblyReference.cache
-C:\Dev\Repos\GroceryApp\server\GroceryAppService\GroceryAppService\obj\Debug\WebAPIServices.csproj.CoreCompileInputs.cache

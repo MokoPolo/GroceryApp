@@ -85,9 +85,9 @@ class Grocery extends Component {
       }); */
   }
   render() {
-    if (this.props.Ingredients.length === 0) {
+/*     if (this.props.Ingredients.length === 0) {
       return <div>Loading...</div>;
-    }
+    } */
     let spinnerClearList = '';
     let spinnerRefreshList = '';
     if (this.state.clearing) {
