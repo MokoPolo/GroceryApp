@@ -153,10 +153,10 @@ namespace GroceryAppService.Controllers
                     {
                         Id = i.IngredientId,
                         Name = i.Ingredient.Name,
-                        Category = i.Ingredient.IngredientCategory.Category,
+                        Category = i.Ingredient.IngredientCategory == null ? "Other" : i.Ingredient.IngredientCategory.Category,
                         Reoccurring = i.Ingredient.Reoccurring.HasValue ? i.Ingredient.Reoccurring.Value : false,
                         Quantity = i.Quantity.HasValue ? i.Quantity.Value : 1,
-                        CategoryId = i.Ingredient.IngredientCategory.Id
+                        CategoryId = i.Ingredient.IngredientCategory == null ? 0 : i.Ingredient.IngredientCategory.Id
                     })
                     ).FirstOrDefault();
                 return Ok(data);

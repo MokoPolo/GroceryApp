@@ -115,7 +115,7 @@ namespace GroceryAppService.Controllers
                 }
 
                 context.SaveChanges();
-
+                var category = context.IngredientCategories.FirstOrDefault(i => i.Id == 5);
                 foreach (var ingredient in recipe.Ingredients)
                 {
                     Ingredient ingredientInDB;
@@ -127,7 +127,7 @@ namespace GroceryAppService.Controllers
 
                         if (ingredientInDB == null)
                         {
-                            ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredient.Name });
+                            ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredient.Name, IngredientCategory = category });
                         }
                     }
                     else
@@ -137,7 +137,7 @@ namespace GroceryAppService.Controllers
 
                     if (ingredientInDB == null)
                     {
-                        ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredientInDB.Name });
+                        ingredientInDB = context.Ingredients.Add(new Ingredient() { Name = ingredientInDB.Name, IngredientCategory = category });
                     }
 
                     //if (!recipeInDB.RecipeIngredients.Any(i => i.IngredientId == ingredientInDB.Id))
