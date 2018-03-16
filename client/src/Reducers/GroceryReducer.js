@@ -10,10 +10,13 @@ import {
     EDIT_ITEM_SET_QUANTITY,
     EDIT_ITEM_TOGGLE_VISIBILITY,
     REQUEST_MODIFYING_EDIT_ITEM,
-    EDIT_ITEM_SET_CATEGORY
+    EDIT_ITEM_SET_CATEGORY,
+    GET_GROCERY_RELATED_RECIPE_LIST,
+    REFRESH_GROCERY_RECIPE_DESCRIPTION_DATA,
 } from '../Actions/ActionTypes';
 let defaultState = {
     ReoccurringIngredients: [],
+    RecipeDescriptionList: [],
     isAddingIngredientToGroceryList: false,
     groceryList: [],
     refreshGroceryList: false,
@@ -82,6 +85,14 @@ const groceryReducer = (state = defaultState, action) => {
         case REQUEST_MODIFYING_EDIT_ITEM:
         return {
             ...state, modifyingEditItem: action.modifyingEditItem
+        }
+        case GET_GROCERY_RELATED_RECIPE_LIST:
+        return {
+            ...state, recipeDescriptionList: action.RecipeDescriptionList
+        }
+        case REFRESH_GROCERY_RECIPE_DESCRIPTION_DATA:
+        return {
+            ...state, refreshGroceryRecipeDescriptionList: action.refreshGroceryRecipeDescriptionList
         }
         default:
             return state;

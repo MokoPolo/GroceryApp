@@ -15,7 +15,9 @@ import {
   EDIT_ITEM_TOGGLE_VISIBILITY,
   EDIT_ITEM_LOAD,
   REQUEST_MODIFYING_EDIT_ITEM,
-  EDIT_ITEM_SET_CATEGORY
+  EDIT_ITEM_SET_CATEGORY,
+  GET_GROCERY_RELATED_RECIPE_LIST,
+  REFRESH_GROCERY_RECIPE_DESCRIPTION_DATA,
 } from './ActionTypes';
 import appConfig from '../settings.json';
 
@@ -39,6 +41,24 @@ export const getRecipeList = id => {
         dispatch({
           type: GET_RECIPE_LIST,
           RecipeList: data
+        })
+      });
+  }
+}
+export const getGroceryRelatedRecipeList = id => {
+  const settings = appConfig;
+  return (dispatch) => {
+    fetch(`${settings.RestServerLocation}/Api/grocery/${id}/recipes`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then(result => result.ok ? result.json() : [])
+      .then((data) => {
+        dispatch({
+          type: GET_GROCERY_RELATED_RECIPE_LIST,
+          RecipeDescriptionList: data
         })
       });
   }
@@ -134,6 +154,10 @@ export const addRecipeToGroceryList = id => {
         type: REFRESH_GROCERY_LIST,
         refreshGroceryList: true
       });
+      dispatch({
+        type: REFRESH_GROCERY_RECIPE_DESCRIPTION_DATA,
+        refreshGroceryRecipeDescriptionList: true
+      });
     });
   }
 }
@@ -172,6 +196,10 @@ export const clearGroceryList = () => {
       dispatch({
         type: REFRESH_GROCERY_LIST,
         refreshGroceryList: true
+      });
+      dispatch({
+        type: REFRESH_GROCERY_RECIPE_DESCRIPTION_DATA,
+        refreshGroceryRecipeDescriptionList: true
       });
     });
   }

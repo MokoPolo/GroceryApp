@@ -9,13 +9,16 @@ import {
     clearGroceryList,
     toggleEditItemVisibility,
     loadEditItem,
+    getGroceryRelatedRecipeList,
 } from '../Actions/ActionCreators';
 
 const mapStateToProps = (state) => {
     return {
         RecipeList: state.recipeReducer.RecipeList,
         Ingredients: state.groceryReducer.groceryList,
-        refreshGroceryListStatus: state.groceryReducer.refreshGroceryList
+        refreshGroceryListStatus: state.groceryReducer.refreshGroceryList,
+        GroceryRelatedRecipeList: state.groceryReducer.recipeDescriptionList,
+        refreshGroceryRecipeDescriptionList: state.groceryReducer.refreshGroceryRecipeDescriptionList,
     }
 }
 
@@ -41,7 +44,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     loadEditItem: (id) => {
         dispatch(loadEditItem(id));
     },
-
+    getGroceryRelatedRecipeList: (id) => {
+        dispatch(getGroceryRelatedRecipeList(id));
+    },
 })
 
 const GroceryContainer = connect(

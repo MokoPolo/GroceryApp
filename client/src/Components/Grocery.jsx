@@ -30,10 +30,14 @@ class Grocery extends Component {
 
   componentDidMount(){
     this.props.getGroceryList();
+    let coo = this.props.getGroceryRelatedRecipeList(1);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.refreshGroceryListStatus === true) {//&& (this.props.refreshGroceryListStatus !== nextProps.refreshGroceryListStatus)) {
       this.props.getGroceryList();
+    }
+    if (nextProps.refreshGroceryRecipeDescriptionList === true) {
+      this.props.getGroceryRelatedRecipeList(1);
     }
     //this.props.getGroceryList();
   }
@@ -97,6 +101,11 @@ class Grocery extends Component {
       //this.props.getGroceryList();
       spinnerRefreshList = <FontAwesome name="spinner" spin />;
     }
+
+    let recipeDescriptions = '';
+    if (this.props.GroceryRelatedRecipeList) {
+      recipeDescriptions = this.props.GroceryRelatedRecipeList.map(i => <li>{i}</li>);
+    }
     return (
       <div>
         <Card className="card-modified">
@@ -105,6 +114,9 @@ class Grocery extends Component {
               Toggle View All
             </Button>
             <Button onClick={this.refreshListClickHandler}>Refresh</Button> { spinnerRefreshList }
+            <div>Recipes on this weeks grocery list:
+            <ul> { recipeDescriptions } </ul></div>
+            
           </CardHeader>
           <CardBody>
             <CardText tag="div">

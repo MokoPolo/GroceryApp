@@ -300,6 +300,7 @@ namespace GroceryAppService.Controllers
                 using (var context = new MarcDbEntities())
                 {
                     context.GroceryIngredients.RemoveRange(context.GroceryIngredients.Where(i => i.GroceryId == 1));
+                    context.GroceryRecipeLists.RemoveRange(context.GroceryRecipeLists.Where(i => i.GroceryId == 1));
                     //db.People.RemoveRange(db.People.Where(x => x.State == "CA"));
 
 
