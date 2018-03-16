@@ -17,6 +17,14 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="GroceryRecipeList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GroceryId" Type="int" Nullable="false" />
+    <Property Name="RecipeId" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Ingredient">
     <Key>
       <PropertyRef Name="Id" />
@@ -72,6 +80,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_GroceryRecipeList_GroceryList">
+    <End Role="GroceryList" Type="Self.GroceryList" Multiplicity="1" />
+    <End Role="GroceryRecipeList" Type="Self.GroceryRecipeList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroceryList">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroceryRecipeList">
+        <PropertyRef Name="GroceryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroceryRecipeList_Recipe">
+    <End Role="Recipe" Type="Self.Recipe" Multiplicity="1" />
+    <End Role="GroceryRecipeList" Type="Self.GroceryRecipeList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GroceryRecipeList">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ingredient_IngredientCategory">
     <End Role="IngredientCategory" Type="Self.IngredientCategory" Multiplicity="0..1" />
     <End Role="Ingredient" Type="Self.Ingredient" Multiplicity="*" />
@@ -111,6 +143,7 @@
   <EntityContainer Name="MarcDbModelStoreContainer">
     <EntitySet Name="GroceryIngredient" EntityType="Self.GroceryIngredient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="GroceryList" EntityType="Self.GroceryList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroceryRecipeList" EntityType="Self.GroceryRecipeList" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ingredient" EntityType="Self.Ingredient" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="IngredientCategory" EntityType="Self.IngredientCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Recipe" EntityType="Self.Recipe" Schema="dbo" store:Type="Tables" />
@@ -122,6 +155,14 @@
     <AssociationSet Name="FK_GroceryIngredient_Ingredient" Association="Self.FK_GroceryIngredient_Ingredient">
       <End Role="Ingredient" EntitySet="Ingredient" />
       <End Role="GroceryIngredient" EntitySet="GroceryIngredient" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroceryRecipeList_GroceryList" Association="Self.FK_GroceryRecipeList_GroceryList">
+      <End Role="GroceryList" EntitySet="GroceryList" />
+      <End Role="GroceryRecipeList" EntitySet="GroceryRecipeList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroceryRecipeList_Recipe" Association="Self.FK_GroceryRecipeList_Recipe">
+      <End Role="Recipe" EntitySet="Recipe" />
+      <End Role="GroceryRecipeList" EntitySet="GroceryRecipeList" />
     </AssociationSet>
     <AssociationSet Name="FK_Ingredient_IngredientCategory" Association="Self.FK_Ingredient_IngredientCategory">
       <End Role="IngredientCategory" EntitySet="IngredientCategory" />

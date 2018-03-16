@@ -16,6 +16,9 @@
         <AssociationConnector Association="MarcDbModel.FK_RecipeIngredient_Recipe" />
         <EntityTypeShape EntityType="MarcDbModel.IngredientCategory" Width="1.5" PointX="0.75" PointY="7" />
         <AssociationConnector Association="MarcDbModel.FK_Ingredient_IngredientCategory" />
+        <EntityTypeShape EntityType="MarcDbModel.GroceryRecipeList" Width="1.5" PointX="5" PointY="4.125" />
+        <AssociationConnector Association="MarcDbModel.FK_GroceryRecipeList_GroceryList" />
+        <AssociationConnector Association="MarcDbModel.FK_GroceryRecipeList_Recipe" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
