@@ -31,5 +31,6 @@ namespace GroceryAppService.Models
         public virtual DbSet<Recipe> Recipes { get; set; }
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         public virtual DbSet<IngredientCategory> IngredientCategories { get; set; }
+        public virtual DbSet<GroceryRecipeList> GroceryRecipeLists { get; set; }
     }
 }

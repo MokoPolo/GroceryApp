@@ -222,6 +222,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GroceryModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroceryRecipeList.cs">
+      <DependentUpon>GroceryModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ingredient.cs">
       <DependentUpon>GroceryModel.tt</DependentUpon>
     </Compile>

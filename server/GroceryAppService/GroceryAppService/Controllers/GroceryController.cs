@@ -59,6 +59,18 @@ namespace GroceryAppService.Controllers
 
                 var groceryList = context.GroceryLists.FirstOrDefault();
 
+                // Add recipe to db for tracking
+                if (!context.GroceryRecipeLists.Any(gr => gr.GroceryId == groceryList.Id && gr.RecipeId == id))
+                {
+                    var groceryRecipe = new GroceryRecipeList()
+                    {
+                        GroceryId = groceryList.Id,
+                        RecipeId = recipe.Id
+                    };
+
+                    context.GroceryRecipeLists.Add(groceryRecipe);
+                }
+
                 // Loop through all ingredients and if it doesn't exist add it
                 foreach (var ingredient in ingredients)
                 {
@@ -112,6 +124,26 @@ namespace GroceryAppService.Controllers
             }
         }
 
+        [Route("api/grocery/{id}/recipes")]
+        [HttpGet]
+        public IHttpActionResult GetRelatedRecipes(int id)
+        {
+            using (var context = new MarcDbEntities())
+            {
+                var recipes = context.GroceryRecipeLists.Where(g => g.GroceryId == id);
+
+                if (recipes.Any())
+                {
+                    var recipeList = recipes.Select(r => r.Recipe.Name).ToList();
+
+                    return Ok(recipeList);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
         /// <summary>
         /// Change the quantity of a grocery ingredient.
         /// </summary>

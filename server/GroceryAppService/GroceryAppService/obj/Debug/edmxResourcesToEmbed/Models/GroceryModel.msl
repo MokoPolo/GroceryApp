@@ -55,5 +55,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="GroceryRecipeLists">
+      <EntityTypeMapping TypeName="MarcDbModel.GroceryRecipeList">
+        <MappingFragment StoreEntitySet="GroceryRecipeList">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="GroceryId" ColumnName="GroceryId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

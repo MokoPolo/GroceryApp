@@ -18,6 +18,7 @@ namespace GroceryAppService.Models
         public Recipe()
         {
             this.RecipeIngredients = new HashSet<RecipeIngredient>();
+            this.GroceryRecipeLists = new HashSet<GroceryRecipeList>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace GroceryAppService.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecipeIngredient> RecipeIngredients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroceryRecipeList> GroceryRecipeLists { get; set; }
     }
 }
