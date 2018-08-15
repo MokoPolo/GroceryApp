@@ -69,6 +69,11 @@ show estimate for grocery cost
 ??) For recipe list you can put tags on recipes so when you search it can search on tags
 auto complete for recipes
 
+Aug 2018 TODO
+- Make UI size correctly on phone
+- Ability to add recipes
+- spinner on autocomplete goes in circles
+- Was decoupling components for best practices and making containers etc. Forgot where I left off. Stateless maybe?
 
 good todo sample
 https://scotch.io/tutorials/create-a-simple-to-do-app-with-react
