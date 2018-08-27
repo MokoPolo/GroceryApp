@@ -28,7 +28,7 @@ class Grocery extends Component {
     this.groceryEditItemModalHandler = this.groceryEditItemModalHandler.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.getGroceryList();
     let coo = this.props.getGroceryRelatedRecipeList(1);
   }
@@ -59,7 +59,7 @@ class Grocery extends Component {
   clearListHandler() {
     //this.props.refreshGroceryList(true);
     this.props.clearGroceryList();//.then({
-      // Need a promise here
+    // Need a promise here
     //}); 
     //this.props.getGroceryList();
   }
@@ -78,20 +78,20 @@ class Grocery extends Component {
   }
   refreshList() {
     this.props.getGroceryList();
-/*     const settings = appConfig;
-    this.setState({ refreshing: true });
-    fetch(`${settings.RestServerLocation}/Api/grocery`)
-      .then(result => result.json())
-      .then((data) => {
-        const arr = data.Ingredients;
-        this.setState({ Ingredients: arr });
-        this.setState({ refreshing: false });
-      }); */
+    /*     const settings = appConfig;
+        this.setState({ refreshing: true });
+        fetch(`${settings.RestServerLocation}/Api/grocery`)
+          .then(result => result.json())
+          .then((data) => {
+            const arr = data.Ingredients;
+            this.setState({ Ingredients: arr });
+            this.setState({ refreshing: false });
+          }); */
   }
   render() {
-/*     if (this.props.Ingredients.length === 0) {
-      return <div>Loading...</div>;
-    } */
+    /*     if (this.props.Ingredients.length === 0) {
+          return <div>Loading...</div>;
+        } */
     let spinnerClearList = '';
     let spinnerRefreshList = '';
     if (this.state.clearing) {
@@ -109,44 +109,53 @@ class Grocery extends Component {
     return (
       <div>
         <Card className="card-modified">
-          <CardHeader>Grocery List
-            <Button onClick={this.toggleViewItemsClickHandler}>
-              Toggle View All
-            </Button>
-            <Button onClick={this.refreshListClickHandler}>Refresh</Button> { spinnerRefreshList }
-            <div>Recipes on this weeks grocery list:
-            <ul> { recipeDescriptions } </ul></div>
-            
+          <CardHeader>
+            <Row>
+              <Col md="4" xs="12" sm="12">Grocery List
+              </Col>
+              <Col md="4" xs="12" sm="12">
+                <Button onClick={this.toggleViewItemsClickHandler}>
+                  Toggle View All
+                </Button>
+              </Col>
+              <Col md="4" xs="12" sm="12">
+                <Button onClick={this.refreshListClickHandler}>Refresh</Button> {spinnerRefreshList}
+              </Col>
+            </Row>
+            <Row>
+              <Col sm="12">
+                <div>Recipes on this weeks grocery list:
+              <ul> {recipeDescriptions} </ul></div>
+              </Col>
+            </Row>
           </CardHeader>
           <CardBody>
             <CardText tag="div">
               <Row>
-                <Col md="4" xs="12" sm="12" lg="12">
+                <Col md="4" xs="12" sm="12">
                   <GroceryAddItem addItemClick={this.groceryAddItemClickHandler} />
                 </Col>
               </Row>
               <Row>
-                 <Col md="4" xs="12" sm="12">
-                  <GroceryItems showDone={this.state.showDone}  ingredients={this.props.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
-                </Col> 
+                <Col md="4" xs="12" sm="12">
+                  <GroceryItems showDone={this.state.showDone} ingredients={this.props.Ingredients.filter(i => i.Category === 'Meat')} editItemClick={this.groceryEditItemModalHandler} title="Meat/Chicken" />
+                  </Col>
                 <Col md="4" xs="12" sm="12">
                   <GroceryItems showDone={this.state.showDone} ingredients={this.props.Ingredients.filter(i => i.Category === 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Fruits/Vegetables" />
-                </Col>
-                 <Col md="4" xs="12" sm="12">
+                  </Col>
+                <Col md="4" xs="12" sm="12">
                   <GroceryItems showDone={this.state.showDone} ingredients={this.props.Ingredients.filter(i => i.Category !== 'Meat' && i.Category !== 'Fresh Produce')} editItemClick={this.groceryEditItemModalHandler} title="Other" />
                 </Col>
               </Row>
               <Row>
-                <Col md="5" xs="5" />
-                <Col md="6" xs="6" className="float-right">
+                <Col md="12" xs="12">
                   <Button onClick={this.groceryReoccurringModalHandler}>
                     Add reoccurring items
                   </Button>
-                   <Button onClick={this.clearListHandler}>
+                  <Button onClick={this.clearListHandler}>
                     Clear list
-                  </Button> { spinnerClearList }
-                </Col>
-                <Col md="1" xs="1" />
+                  </Button> {spinnerClearList}
+                  </Col>
               </Row>
             </CardText>
           </CardBody>

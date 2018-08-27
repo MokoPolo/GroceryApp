@@ -102,6 +102,11 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross
 bootstrap
 https://reactstrap.github.io/
 
+To deploy
+npm run build
+copy all files and folders from C:\Dev\Repos\GroceryApp\client\build to azure 
+
+
 color scheme
 #682666
 #CF0A2C
@@ -120,5 +125,3 @@ https://github.com/danawoodman/react-fontawesome/blob/master/api.md
 
 Redux sample
 https://github.com/reactjs/redux/tree/master/examples/async/src
-
-test
