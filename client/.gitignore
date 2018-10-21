@@ -7,7 +7,6 @@ lib
 coverage
 es
 build
-obj
 bin/
 obj/
 ConnectionStrings.config
