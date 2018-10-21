@@ -1,16 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
-import { connect } from 'react-redux';
-import appConfig from '../settings.json';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Input, Label, Row, Col } from 'reactstrap';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import FontAwesome from "react-fontawesome";
+import { connect } from "react-redux";
+import appConfig from "../settings.json";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+  Col
+} from "reactstrap";
 import {
   refreshEditItem,
   loadEditItem,
   setEditItemQuantity,
   toggleEditItemVisibility,
-  setEditItemCategory,
-} from '../Actions/ActionCreators';
+  setEditItemCategory
+} from "../Actions/ActionCreators";
 
 class GroceryItemEditModal extends Component {
   constructor(props) {
@@ -28,17 +40,17 @@ class GroceryItemEditModal extends Component {
     if (nextProps.refreshEditItemData === true) {
       this.props.loadEditItem(this.props.selectedEditItem.Id);
     }
-    if (this.props.selectedEditItem !== null){
-    this.setState({foo: this.props.selectedEditItem.Quantity});
+    if (this.props.selectedEditItem !== null) {
+      this.setState({ foo: this.props.selectedEditItem.Quantity });
     }
   }
   componentDidMount() {
     if (this.props.selectedEditItem) {
       this.props.loadEditItem(this.props.selectedEditItem.Id);
     }
-    if (this.props.selectedEditItem !== null){
-      this.setState({foo: this.props.selectedEditItem.Quantity});
-      }
+    if (this.props.selectedEditItem !== null) {
+      this.setState({ foo: this.props.selectedEditItem.Quantity });
+    }
   }
   addItem() {
     const quantity = this.props.selectedEditItem.Quantity + 1;
@@ -72,20 +84,30 @@ class GroceryItemEditModal extends Component {
     if (!this.props.selectedEditItem) {
       return <div />;
     }
-    let spinner = '';
+    let spinner = "";
     if (this.props.modifyingEditItem) {
       spinner = <FontAwesome name="spinner" spin />;
     }
     return (
       <div>
-        <Modal isOpen={this.props.showEditItem} toggle={this.toggle} className={this.props.className}>
+        <Modal
+          isOpen={this.props.showEditItem}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
           <ModalHeader toggle={this.toggle}>Edit Grocery Item</ModalHeader>
           <ModalBody>
             <div>{this.props.selectedEditItem.Name}</div>
             <Form>
               <FormGroup>
                 <Label for="category">Select grocery category</Label>
-                <Input type="select" name="category" id="category" value={this.props.selectedEditItem.CategoryId} onChange={this.handleCategoryBlur}>
+                <Input
+                  type="select"
+                  name="category"
+                  id="category"
+                  value={this.props.selectedEditItem.CategoryId}
+                  onChange={this.handleCategoryBlur}
+                >
                   <option value="1">Fresh Produce</option>
                   <option value="2">Meat</option>
                   <option value="3">Dairy</option>
@@ -94,63 +116,62 @@ class GroceryItemEditModal extends Component {
                 </Input>
               </FormGroup>
               <FormGroup>
-                <Label for="blah">Quantity</Label>
-                <Row>
-                  <Col xs="1">
-                    <Button color="primary" onClick={this.removeItem}>-</Button>
-                  </Col>
-                  <Col xs="9">
-                    <Input name="selectedItemQty" id="selectedItemQty" value={this.props.selectedEditItem.Quantity} onChange={this.handleQuantityChange}></Input>
-                  </Col>
-                  <Col xs="1">
-                    <Button color="primary" onClick={this.addItem}>+</Button>
-                  </Col>
-                  <Col xs="1">
-                  </Col>
-                </Row>
-
-
-
+                <Label for="quantity">Quantity</Label>
+                <Input
+                  type="select"
+                  name="quantity"
+                  id="quantity"
+                  value={this.props.selectedEditItem.Quantity}
+                  onChange={this.handleQuantityBlur}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </Input>
               </FormGroup>
             </Form>
-
-
 
             {spinner}
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Close</Button>{' '}
+            <Button color="primary" onClick={this.toggle}>
+              Close
+            </Button>{" "}
           </ModalFooter>
         </Modal>
       </div>
     );
-
   }
-
 }
 GroceryItemEditModal.propTypes = {
   modal: PropTypes.bool,
-  closeClick: PropTypes.func,
+  closeClick: PropTypes.func
 };
 GroceryItemEditModal.defaultProps = {
-  modal: false,
+  modal: false
 };
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     refreshEditItemData: state.groceryReducer.refreshEditItem,
     selectedEditItem: state.groceryReducer.selectedEditItem,
     showEditItem: state.groceryReducer.showEditItem,
     modifyingEditItem: state.groceryReducer.modifyingEditItem
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   /*   refreshEditItem: () => {
       dispatch(refreshEditItem());
     }, */
-  loadEditItem: (id) => {
+  loadEditItem: id => {
     dispatch(loadEditItem(id));
   },
   setEditItemQuantity: (id, qty) => {
@@ -159,14 +180,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   setEditItemCategory: (id, categoryId) => {
     dispatch(setEditItemCategory(id, categoryId));
   },
-  toggleEditItemVisibility: (status) => {
+  toggleEditItemVisibility: status => {
     dispatch(toggleEditItemVisibility(status));
-  },
-})
+  }
+});
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(GroceryItemEditModal);
-
-
