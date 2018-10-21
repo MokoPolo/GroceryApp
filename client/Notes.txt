@@ -75,6 +75,16 @@ Aug 2018 TODO
 - spinner on autocomplete goes in circles
 - Was decoupling components for best practices and making containers etc. Forgot where I left off. Stateless maybe?
 
+Oct todo
+- Convert to aspnet core and have webapi in solution
+- Support users
+- Build admin Site
+- First thing from admin site delete recipe
+- Second thing from admin site add new recipe
+
+
+
+
 good todo sample
 https://scotch.io/tutorials/create-a-simple-to-do-app-with-react
 
