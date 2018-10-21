@@ -6,7 +6,8 @@ lib
 .nyc_output
 coverage
 es
-
+build
+obj
 bin/
 obj/
 ConnectionStrings.config
