@@ -115,3 +115,4 @@ C:\Dev\Repos\dd\groceryapp\server\GroceryAppService\UnitTestProject1\obj\Debug\U
 C:\Dev\Repos\groceryapp\server\GroceryAppService\UnitTestProject1\bin\Debug\System.Web.Http.Cors.dll
 C:\Dev\Repos\groceryapp\server\GroceryAppService\UnitTestProject1\bin\Debug\System.Web.Cors.dll
 C:\Dev\Repos\groceryapp\server\GroceryAppService\UnitTestProject1\bin\Debug\System.Web.Http.Cors.xml
+C:\Users\Marc\source\repos\Dev\groceryapp\server\GroceryAppService\UnitTestProject1\obj\Debug\UnitTestProject1.csproj.CoreCompileInputs.cache
